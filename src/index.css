@@ -5,9 +5,29 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden 
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+.notistack-SnackbarContainer {
+  z-index: 9999 !important
+}
+
+.highcharts-legend-item, .highcharts-credits, .highcharts-axis-title {
+  display: none !important;
 }

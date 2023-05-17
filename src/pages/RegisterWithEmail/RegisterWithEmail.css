@@ -1,0 +1,37 @@
+.colorSecondary[data-v-7ab8dd07] {
+    color: #fff!important;
+}
+.font-24[data-v-7ab8dd07] {
+    font-size: 24px;
+}
+.colorSecondary {
+    color: #fff!important;
+}
+
+.font-24 {
+    font-size: 24px;
+}
+.font-weight-bold {
+    font-weight: 700!important;
+}
+
+.colorSecondary[data-v-7ab8dd07] {
+    color: #fff!important;
+}
+
+.btn-resendemail[data-v-7ab8dd07] {
+    padding: 14px 2.5rem;
+    color: #fff;
+    font-weight: 700;
+    opacity: 1;
+    background: #813be8;
+    text-align: center;
+}
+button[data-v-7ab8dd07] {
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+}
+
+p[data-v-7ab8dd07] {
+    font-size: 14px;
+}

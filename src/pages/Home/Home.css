@@ -1,0 +1,240 @@
+.btn-start {
+    padding: 20px 45px;
+    color: #fff;
+    font-weight: 800!important;
+    font-size: 14px;
+    -webkit-transition: all .35s ease-in-out;
+    transition: all .35s ease-in-out;
+    border-radius: 8px;
+    margin-left: 0!important;
+}
+
+.button.primary.primary {
+    color: #fff!important;
+    background: -webkit-gradient(linear,left top,left bottom,from(#654aff),to(#d011a9))!important;
+    background: linear-gradient(#654aff,#d011a9)!important;
+    border: none!important;
+}
+
+.button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-weight: 700!important;
+    text-decoration: none;
+}
+
+.main-banner-image {
+
+}
+
+.introduce {
+    background-color: #10131c;
+    position: relative;
+    text-align: left!important;
+}
+
+.imgRight {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.introduce-content {
+    padding: 30px 0;
+    position: relative;
+    z-index: 2;
+    padding-left: 86px !important;
+    padding-right: 86px !important;
+
+}
+
+@media screen and (min-width: 1025px) {
+    .introduce-content {
+        padding-left: 86px;
+        padding-right: 86px;
+    }
+}
+
+.trade-faster-content {
+    padding: 0 86px 0 150px !important;
+    position: relative;
+    z-index: 2;
+}
+.highlight {
+    color: #813be8
+}
+.trade-faster-title {
+    font-size: 59px;
+    font-weight: 500;
+    line-height: 64px;
+    margin-bottom: 32px;
+}
+
+.trade-faster-text {
+    font-size: 18px;
+    line-height: 22px;
+    text-align: left;
+    color: #8b8d96;
+    opacity: .5;
+    max-width: 500px;
+}
+
+.trade-faster-img-left {
+    width: 853.59px;
+    position: absolute;
+    right: -280px;
+    top: -151px;
+    opacity: .3;
+}
+
+.trade-faster .row>div {
+    position: relative;
+}
+
+#fibowin-wrapper .trade-faster-img-wrapper {
+    text-align: right;
+}
+
+.joinfibowinNow {
+    background-image: url("https://fibowin.azureedge.net/home/section-4-bg.png?v=1");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    height: 372px;
+}
+
+.a-eae-a {
+    padding: 20px 45px !important;
+    color: #fff;
+    font-weight: 800!important;
+    font-size: 14px;
+    -webkit-transition: all .35s ease-in-out;
+    transition: all .35s ease-in-out;
+    border-radius: 8px;
+    margin-left: 0!important;
+    color: #011022!important;
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-weight: 700!important;
+    text-decoration: none;
+    background: #fff;
+    width: 240px;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 700;
+    line-height: 20px;
+    color: #fff;
+    border-radius: 8px;
+}
+
+.footerFAQs {
+    background-color: #131626;
+    padding: 0 86px !important;
+    padding-top: 40px !important;
+    display: block;
+    color: #fff;
+    background-color: #1d233b;
+    background: #011022!important;
+}
+
+.position-relative {
+    position: relative!important;
+}
+
+.blockRow {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-color: rgba(139,141,150,.28)!important;
+}
+
+.block.logo {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding-right: 20px;
+    position: relative;
+}
+
+.blockRow h4 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 8px;
+}
+
+.footerFAQs ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.dropdownMenuButton {
+    min-width: 160px;
+    min-height: 45px;
+    font-size: 14px;
+    text-align: left;
+    cursor: pointer;
+    background-color: #1d233b !important; 
+}
+
+.fullText {
+    padding-top: 20px!important;
+    color: #fff;
+    opacity: .6;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.blockRow ul li p {
+    margin-bottom: 10px;
+
+}
+
+.footerFAQs .blockRow ul li a {
+    color: #fff!important;
+    opacity: .6;
+    line-height: 30px;
+    text-decoration: none!important;
+}
+
+.footerFAQs .border-bottom {
+    border-color: rgba(139,141,150,.28)!important;
+}
+
+.txtContent.fullText {
+    font-size: 14px
+}
+
+.colorSecondary {
+    color: #fff !important;
+}
+
+.dropdownMenuButton {
+    min-width: 160px;
+    min-height: 45px;
+    font-size: 14px;
+    text-align: left;
+}
+.blockRow .block {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    padding-left: 1.5rem!important;
+}
+
+.contentAuthentication {
+    overflow: auto
+}
