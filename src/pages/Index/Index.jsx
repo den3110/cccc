@@ -4,15 +4,37 @@ import Highcharts from "highcharts/highstock";
 import borderRadius from "highcharts-border-radius";
 import b_price from "../../api/price/b_price";
 // import dataFake from "./a";
-// gửi stk a gửi trước cho vài tr
+
 borderRadius(Highcharts);
 function DynamicHorizontalLineChart() {
   const chartRef = useRef();
   const [data, setData] = useState([]);
+  const [startPoint, setStartPoint] = useState(10);
+  const [endPoint, setEndPoint] = useState(90);
+  // Hàm tính trung bình động
+  function calculateMovingAverage(data, period) {
+    const result = [];
+
+    for (let i = period - 1; i < data?.length; i++) {
+      const sum = data.slice(i - period + 1, i + 1).reduce((a, b) => a + b, 0);
+      const average = sum / period;
+      result.push(average);
+    }
+
+    return result;
+  }
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setStartPoint((prev) => parseInt(prev) + 1);
+      setEndPoint((prev) => parseInt(prev) + 1);
+    }, 5000);
+
+    return () => clearInterval(intervalId);
+  }, []);
   useEffect(() => {
     (async () => {
       try {
-        const result = b_price();
+        const result = await b_price();
         setData(result);
       } catch (error) {}
     })();
@@ -45,6 +67,7 @@ function DynamicHorizontalLineChart() {
     console.log(value);
     return value; // Giá trị ngẫu nhiên từ 0 đến 10
   };
+  console.log(data?.d?.slice(startPoint, endPoint)?.map(item=> item[2]))
 
   const chartOptions = {
     accessibility: {
@@ -85,12 +108,12 @@ function DynamicHorizontalLineChart() {
             // this.point.low
             `<div class="dataVolumeChart" style="font-size: 14px; border-radius: 10px; padding: 5px; background: rgba(0,0,0,0.2);
             background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%,  rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.2) 100%);">
-                <span style="margin-right: 10px;"><b>O</b>: 27018.23</span>
-                <span style="margin-right: 10px;"><b>C</b>: 27013.48</span>
+                <span style="margin-right: 10px;"><b>O</b>: ${this.point.open}</span>
+                <span style="margin-right: 10px;"><b>C</b>: ${this.point.close}</span>
                 <span>&nbsp;</span>
             <br>
-            <span style="margin-right: 10px;"><b>H</b>: 27018.23</span>
-            <span style="margin-right: 10px;"><b>L</b>: 27007.06</span>
+            <span style="margin-right: 10px;"><b>H</b>: ${this.point.high}</span>
+            <span style="margin-right: 10px;"><b>L</b>: ${this.point.low}</span>
             <span><b>Vol</b>: 2.46</span></div>`
           );
         }
@@ -99,13 +122,16 @@ function DynamicHorizontalLineChart() {
         }
       },
     },
+    rangeSelector: {
+      selected: 1,
+    },
     series: [
       {
         yAxis: 0,
         type: "spline",
         name: "",
         color: "#04c793",
-        data: data?.d?.slice(10, 90)?.map((item, key) => item[1]),
+        data: calculateMovingAverage(data?.d?.slice(startPoint, endPoint)?.map(item=> item[2]), 10),
         stepRadius: 10,
         lineWidth: 2,
         marker: {
@@ -118,7 +144,7 @@ function DynamicHorizontalLineChart() {
         name: "",
         color: "#fa4b62",
         lineWidth: 2,
-        data: data?.d?.slice(10, 90)?.map((item, key) => item[2]),
+        data: calculateMovingAverage(data?.d?.slice(startPoint, endPoint)?.map(item=> item[2]), 5),
         stepRadius: 10,
         marker: {
           radius: 0,
@@ -130,7 +156,7 @@ function DynamicHorizontalLineChart() {
         name: "",
         groupPadding: 0,
         pointPadding: 0.2,
-        data: data?.d?.slice(10, 90)?.map((item, key) => ({
+        data: data?.d?.slice(startPoint, endPoint)?.map((item, key) => ({
           x: parseInt(key),
           open: item[1],
           close: item[2],
@@ -144,7 +170,10 @@ function DynamicHorizontalLineChart() {
         yAxis: 1,
         inverted: false,
         name: "",
-        data: data?.d?.slice(10, 90)?.map((item, key) => item[5]), // Dữ liệu của biểu đồ cột
+        data: data?.d?.slice(startPoint, endPoint)?.map((item, key) => item[5]), // Dữ liệu của biểu đồ cột,
+        colors: data?.d
+          ?.slice(startPoint, endPoint)
+          ?.map((item, key) => (item[8] === 0 ? "#04c793" : "#fa4b62")),
       },
     ],
     xAxis: {
@@ -154,19 +183,9 @@ function DynamicHorizontalLineChart() {
       {
         showFirstLabel: false,
         showLastLabel: false,
-        tickPositions: [
-          undefined,
-          27000,
-          27025,
-          27050,
-          27075,
-          27100,
-          27125,
-          27150,
-          27175,
-        ],
         startOnTick: false,
         minPadding: 1,
+        tickAmount: 6,
         tickPixelInterval: 50,
         tickInterval: 25,
         lineColor: "#fff",
