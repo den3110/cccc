@@ -277,3 +277,142 @@ button[data-v-526f49c4] {
 .colorPrimary[data-v-14042e34] {
     color: #813be8;
 }
+
+.colorSecondary[data-v-0bf909cc] {
+    color: #fff!important;
+}
+
+.font-24[data-v-0bf909cc] {
+    font-size: 24px;
+}
+
+.font-weight-bold {
+    font-weight: 700!important;
+}
+
+.md-field[data-v-0bf909cc] {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.md-field:before {
+    height: 2px;
+    z-index: 2;
+    opacity: 0;
+    transform: scaleX(.12);
+}
+
+.md-field:after, .md-field:before {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    transition: border .3s cubic-bezier(.4,0,.2,1),opacity .3s cubic-bezier(.4,0,.2,1),transform 0s cubic-bezier(.4,0,.2,1) .3s;
+    will-change: border,opacity,transform;
+    content: " ";
+}
+
+form .md-field label[data-v-0bf909cc] {
+    color: #747680!important;
+}
+
+.md-field label[data-v-0bf909cc] {
+    padding: 0 5px;
+    color: #8b8d96;
+    position: static;
+    opacity: 1;
+}
+
+.md-input[data-v-0bf909cc] {
+    background-color: transparent!important;
+    border: 1px solid #4d505d!important;
+    color: #fff!important;
+}
+
+.boxFix .boxAuthentication form .md-input {
+    background-color: transparent!important;
+    border: 1px solid #4d505d!important;
+    color: #fff!important;
+}
+
+.paste[data-v-0bf909cc] {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    font-size: 14px;
+    color: #2177ff;
+    cursor: pointer;
+}
+
+.md-field:after {
+    height: 1px;
+}
+.md-field:after, .md-field:before {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    transition: border .3s cubic-bezier(.4,0,.2,1),opacity .3s cubic-bezier(.4,0,.2,1),transform 0s cubic-bezier(.4,0,.2,1) .3s;
+    will-change: border,opacity,transform;
+    content: " ";
+}
+
+.button.wbtn.btn-large[data-v-0bf909cc] {
+    padding: 11px 2.5rem;
+}
+
+.button.wbtn.btn-large {
+    padding: 11px 2.5rem;
+}
+.button.btn-radius[data-v-0bf909cc] {
+    border-radius: 6px;
+}
+.button.wbtn[data-v-0bf909cc] {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background-color: #813be8;
+    color: #fff;
+    font-weight: 400;
+}
+.button[data-v-0bf909cc]:disabled {
+    cursor: no-drop;
+}
+
+.md-field .md-input[data-v-0bf909cc], .md-field .md-textarea[data-v-0bf909cc], .winput[data-v-0bf909cc] {
+    width: 100%;
+    color: #333;
+    padding: 0 10px!important;
+    background: transparent;
+    border-radius: 4px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.siginButton[data-v-0bf909cc], .tab-last-result.nav .nav-link.active[data-v-0bf909cc]:after {
+    background: -webkit-gradient(linear,left top,left bottom,from(#654aff),to(#d011a9))!important;
+    background: linear-gradient(#654aff,#d011a9)!important;
+    border: none!important;
+}
+
+.button[data-v-0bf909cc] {
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-weight: 700!important;
+    text-decoration: none;
+}

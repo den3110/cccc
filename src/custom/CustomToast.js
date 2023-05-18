@@ -1,6 +1,6 @@
 import React from "react";
 import "./Custom.css"
-import { SnackbarContent } from 'notistack'
+import { SnackbarContent, useSnackbar } from 'notistack'
 
 const CustomToast = React.forwardRef((props, ref) => {const {
   // You have access to notistack props and options 👇🏼
@@ -10,6 +10,8 @@ const CustomToast = React.forwardRef((props, ref) => {const {
   allowDownload,
   ...other
 } = props
+
+  const {closeSnackbar }= useSnackbar()
   return (
     <SnackbarContent ref={ref} role="alert" {...other}>
       <div data-v-049fb53f id={9957851742} style={{marginRight: 20}}>
@@ -41,7 +43,7 @@ const CustomToast = React.forwardRef((props, ref) => {const {
               <div data-v-049fb53f className="ml-2">
                 <div data-v-049fb53f className="boxContent">
                   <span data-v-049fb53f className="message">
-                    Email hoặc mật khẩu sai. Vui lòng thử lại.
+                    {message}
                   </span>
                 </div>
               </div>
@@ -56,6 +58,7 @@ const CustomToast = React.forwardRef((props, ref) => {const {
                 className="close-notify"
               >
                 <g
+                  onClick={()=> closeSnackbar()}
                   data-v-049fb53f
                   id="Group_11134"
                   data-name="Group 11134"
