@@ -9,13 +9,13 @@ borderRadius(Highcharts);
 function DynamicHorizontalLineChart() {
   const chartRef = useRef();
   const [data, setData] = useState([]);
-  const [startPoint, setStartPoint] = useState(10);
-  const [endPoint, setEndPoint] = useState(90);
+  const [startPoint, setStartPoint] = useState(20);
+  const [endPoint, setEndPoint] = useState(100);
   // Hàm tính trung bình động
   function calculateMovingAverage(data, period) {
     const result = [];
 
-    for (let i = period - 1; i < data?.length; i++) {
+    for (let i = period - 1; i < parseInt(data?.length); i++) {
       const sum = data.slice(i - period + 1, i + 1).reduce((a, b) => a + b, 0);
       const average = sum / period;
       result.push(average);
@@ -23,14 +23,14 @@ function DynamicHorizontalLineChart() {
 
     return result;
   }
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setStartPoint((prev) => parseInt(prev) + 1);
-      setEndPoint((prev) => parseInt(prev) + 1);
-    }, 5000);
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     setStartPoint((prev) => parseInt(prev) + 1);
+  //     setEndPoint((prev) => parseInt(prev) + 1);
+  //   }, 5000);
 
-    return () => clearInterval(intervalId);
-  }, []);
+  //   return () => clearInterval(intervalId);
+  // }, []);
   useEffect(() => {
     (async () => {
       try {
@@ -67,7 +67,7 @@ function DynamicHorizontalLineChart() {
     console.log(value);
     return value; // Giá trị ngẫu nhiên từ 0 đến 10
   };
-  console.log(data?.d?.slice(startPoint, endPoint)?.map(item=> item[2]))
+  console.log(data?.d?.slice(startPoint, endPoint)?.map((item) => item[2]));
 
   const chartOptions = {
     accessibility: {
@@ -97,16 +97,7 @@ function DynamicHorizontalLineChart() {
       formatter: function () {
         const { series, point } = this;
         if (series.type === "candlestick") {
-          return (
-            // "O: " +
-            // this.point.open +
-            // " C: " +
-            // this.point.close +
-            // "<br />H: " +
-            // this.point.high +
-            // " L: " +
-            // this.point.low
-            `<div class="dataVolumeChart" style="font-size: 14px; border-radius: 10px; padding: 5px; background: rgba(0,0,0,0.2);
+          return `<div class="dataVolumeChart" style="font-size: 14px; border-radius: 10px; padding: 5px; background: rgba(0,0,0,0.2);
             background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%,  rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.2) 100%);">
                 <span style="margin-right: 10px;"><b>O</b>: ${this.point.open}</span>
                 <span style="margin-right: 10px;"><b>C</b>: ${this.point.close}</span>
@@ -114,8 +105,7 @@ function DynamicHorizontalLineChart() {
             <br>
             <span style="margin-right: 10px;"><b>H</b>: ${this.point.high}</span>
             <span style="margin-right: 10px;"><b>L</b>: ${this.point.low}</span>
-            <span><b>Vol</b>: 2.46</span></div>`
-          );
+            <span><b>Vol</b>: 2.46</span></div>`;
         }
         if (series.type === "column") {
           return "<strong>Vol:</strong> " + this.point.options.y;
@@ -131,7 +121,12 @@ function DynamicHorizontalLineChart() {
         type: "spline",
         name: "",
         color: "#04c793",
-        data: calculateMovingAverage(data?.d?.slice(startPoint, endPoint)?.map(item=> item[2]), 10),
+        data: calculateMovingAverage(
+          data?.d
+            ?.slice(startPoint - 5, parseInt(endPoint))
+            ?.map((item, key) => item[4]),
+          5
+        ),
         stepRadius: 10,
         lineWidth: 2,
         marker: {
@@ -144,7 +139,12 @@ function DynamicHorizontalLineChart() {
         name: "",
         color: "#fa4b62",
         lineWidth: 2,
-        data: calculateMovingAverage(data?.d?.slice(startPoint, endPoint)?.map(item=> item[2]), 5),
+        data: calculateMovingAverage(
+          data?.d
+            ?.slice(startPoint - 9, parseInt(endPoint))
+            ?.map((item) => item[4]),
+          10
+        ),
         stepRadius: 10,
         marker: {
           radius: 0,
@@ -156,17 +156,21 @@ function DynamicHorizontalLineChart() {
         name: "",
         groupPadding: 0,
         pointPadding: 0.2,
-        data: data?.d?.slice(startPoint, endPoint)?.map((item, key) => ({
-          x: parseInt(key),
-          open: item[1],
-          close: item[2],
-          low: item[3],
-          high: item[4],
-        })),
+        data: data?.d?.slice(startPoint, endPoint)?.map((item, key) => {
+          console.log("candlestickitem", item);
+          return {
+            x: parseInt(key),
+            open: item[1], // hình như sai thứ tự/// open : 1, high : 2, low 3 , close 4, vol 5
+            close: item[4],
+            low: item[3],
+            high: item[2],
+          };
+        }),
       },
       {
         type: "column",
         borderColor: "color",
+        borderRadius: "0 0 0 0", // Đặt giá trị borderRadius là "0 0 0 0" để xóa border radius tại cả bốn góc
         yAxis: 1,
         inverted: false,
         name: "",
@@ -178,6 +182,13 @@ function DynamicHorizontalLineChart() {
     ],
     xAxis: {
       crosshair: true,
+      tickInterval: 5,
+      labels: {
+        formatter: function() {
+          return Highcharts.dateFormat('%H:%M %d %b %Y',
+                                        this.value[0]);
+        }
+      }
     },
     yAxis: [
       {
@@ -185,9 +196,9 @@ function DynamicHorizontalLineChart() {
         showLastLabel: false,
         startOnTick: false,
         minPadding: 1,
-        tickAmount: 6,
-        tickPixelInterval: 50,
-        tickInterval: 25,
+        tickAmount: 8,
+        tickPixelInterval: 10,
+        tickInterval: 10,
         lineColor: "#fff",
         lineWidth: 1,
         dashstyle: "Dot",
@@ -235,13 +246,16 @@ function DynamicHorizontalLineChart() {
         pointPadding: 0.2,
         colorByPoint: true,
         colors: ["#04c793", "#fa4b62"],
+        column: {
+          borderRadius: "0 0 0 0", // Đặt giá trị borderRadius là "0 0 0 0" để xóa border radius tại cả bốn góc
+        },
         //pointWidth: 20,
       },
       candlestick: {
-        lineColor: "#04c793",
-        upLineColor: "#f81057",
-        color: "#04c793", // Màu cho các nến tăng giá
-        upColor: "#f81057", // Màu cho các nến giảm giá,
+        lineColor: "#f81057",
+        upLineColor: "#04c793",
+        color: "#f81057", // Màu cho các nến tăng giá
+        upColor: "#04c793", // Màu cho các nến giảm giá,
       },
       series: {
         states: {
@@ -254,7 +268,7 @@ function DynamicHorizontalLineChart() {
   };
 
   return (
-    <div style={{ height: "calc(75vh - 51px)" }}>
+    <div style={{ height: 481.45, width: 1217 }}>
       <HighchartsReact
         containerProps={{ style: { height: "100%" } }}
         ref={chartRef}
