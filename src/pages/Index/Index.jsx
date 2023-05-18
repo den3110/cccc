@@ -3,13 +3,14 @@ import HighchartsReact from "highcharts-react-official";
 import Highcharts from "highcharts/highstock";
 import borderRadius from "highcharts-border-radius";
 import b_price from "../../api/price/b_price";
+import moment from "moment";
 // import dataFake from "./a";
 
 borderRadius(Highcharts);
 function DynamicHorizontalLineChart() {
   const chartRef = useRef();
   const [data, setData] = useState([]);
-  const [startPoint, setStartPoint] = useState(20);
+  const [startPoint, setStartPoint] = useState(30);
   const [endPoint, setEndPoint] = useState(100);
   // Hàm tính trung bình động
   function calculateMovingAverage(data, period) {
@@ -63,7 +64,7 @@ function DynamicHorizontalLineChart() {
     // Hàm lấy giá trị mới nhất từ dữ liệu cập nhật
     // Thay thế bằng cách lấy giá trị từ nguồn dữ liệu thực tế của bạn
     // Ví dụ: return this.props.data[this.props.data.length - 1];
-    const value = Math.random() * 10;
+    const value = 26650;
     console.log(value);
     return value; // Giá trị ngẫu nhiên từ 0 đến 10
   };
@@ -81,6 +82,7 @@ function DynamicHorizontalLineChart() {
       text: "",
     },
     tooltip: {
+      crosshair: [1, 1],
       split: false,
       backgroundColor: "black",
       borderColor: "green",
@@ -120,7 +122,7 @@ function DynamicHorizontalLineChart() {
         yAxis: 0,
         type: "spline",
         name: "",
-        color: "#04c793",
+        color: "#fa4b62",
         data: calculateMovingAverage(
           data?.d
             ?.slice(startPoint - 5, parseInt(endPoint))
@@ -137,11 +139,11 @@ function DynamicHorizontalLineChart() {
         yAxis: 0,
         type: "spline",
         name: "",
-        color: "#fa4b62",
+        color: "#04c793",
         lineWidth: 2,
         data: calculateMovingAverage(
           data?.d
-            ?.slice(startPoint - 9, parseInt(endPoint))
+            ?.slice(startPoint - 10, parseInt(endPoint))
             ?.map((item) => item[4]),
           10
         ),
@@ -181,27 +183,40 @@ function DynamicHorizontalLineChart() {
       },
     ],
     xAxis: {
+      plotLines: [{ // mark the weekend
+        color: 'rgb(132, 134, 143)',
+        width: 2,
+        value: 70,
+        dashStyle: 'dash'
+    }],
       crosshair: true,
       tickInterval: 5,
+      min: 0,
+      max: 70,
       labels: {
-        formatter: function() {
-          return Highcharts.dateFormat('%H:%M %d %b %Y',
-                                        this.value[0]);
-        }
-      }
+        formatter: function () {
+          return moment(data?.d?.[parseInt(this.value) + startPoint]?.[0]).format("mm:ss");
+        },
+      },
     },
     yAxis: [
       {
+        min: 26200,
+        gridLineWidth: 1, // Độ dày của đường kẻ
+        tickWidth: 1, // Độ dày của đường chia trên trục y
+        tickColor: "transparent", // Màu sắc của đường chia trên trục y
+        max: 26800,
         showFirstLabel: false,
         showLastLabel: false,
-        startOnTick: false,
-        minPadding: 1,
-        tickAmount: 8,
-        tickPixelInterval: 10,
-        tickInterval: 10,
+        startPoint: false,
+        minPadding: 0,
+        startOnTick: true,
+        tickAmount: 7,
+        tickInterval: 50,
         lineColor: "#fff",
-        lineWidth: 1,
-        dashstyle: "Dot",
+        style: 'dotted',
+        dashStyle: 'dash',
+        // lineWidth: 1,
         gridLineDashStyle: "longdash",
         labels: {
           style: {
@@ -220,9 +235,9 @@ function DynamicHorizontalLineChart() {
       },
       {
         visible: false,
-        height: "30%",
-        top: "70%",
-        tickPositions: [0, 100], // Vị trí của các điểm chia trên trục Y thứ hai
+        height: "20%",
+        top: "80%",
+        tickPositions: [0, 500], // Vị trí của các điểm chia trên trục Y thứ hai
         // Trục y thứ hai cho biểu đồ cột
         opposite: true, // Hiển thị ở phía bên phải
         min: 0,

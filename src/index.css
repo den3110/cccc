@@ -31,3 +31,7 @@ body::-webkit-scrollbar {
 .highcharts-legend-item, .highcharts-credits, .highcharts-axis-title {
   display: none !important;
 }
+
+.highcharts-yaxis-grid .highcharts-grid-line:last-child {
+  display: none;
+}

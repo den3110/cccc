@@ -50,7 +50,7 @@ const MainLogin = (props) => {
         setTwoFa(true);
         settToken2fa(result?.d?.t)
       } else {
-        Cookies.set("accessToken", result.d.access_token);
+        Cookies.set("accessToken", result.d.refresh_token);
         Cookies.set("refreshToken", result.d.refresh_token);
         navigate("/index", { replace: true });
       }
