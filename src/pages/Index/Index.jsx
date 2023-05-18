@@ -4,9 +4,17 @@ import Highcharts from "highcharts/highstock";
 import borderRadius from "highcharts-border-radius";
 import b_price from "../../api/price/b_price";
 import moment from "moment";
+import _ from "lodash";
 // import dataFake from "./a";
 
 borderRadius(Highcharts);
+function roundDownToNearest(value, nearest) {
+  return Math.floor(value / nearest) * nearest;
+}
+
+function roundUpToNearest(value, nearest) {
+  return Math.ceil(value / nearest) * nearest;
+}
 function DynamicHorizontalLineChart() {
   const chartRef = useRef();
   const [data, setData] = useState([]);
@@ -51,7 +59,7 @@ function DynamicHorizontalLineChart() {
     const currentValue = getCurrentValue();
 
     // Cập nhật dữ liệu và vị trí của đường nằm ngang
-    const chart = chartRef.current.chart;
+    const chart = chartRef.current?.chart;
     const plotLine = chart.yAxis[0].plotLinesAndBands[0];
     plotLine.options.value = currentValue;
     // Di chuyển đường nằm ngang đến vị trí mới
@@ -65,16 +73,55 @@ function DynamicHorizontalLineChart() {
     // Thay thế bằng cách lấy giá trị từ nguồn dữ liệu thực tế của bạn
     // Ví dụ: return this.props.data[this.props.data.length - 1];
     const value = 26650;
-    console.log(value);
+    // console.log(value);
     return value; // Giá trị ngẫu nhiên từ 0 đến 10
   };
-  console.log(data?.d?.slice(startPoint, endPoint)?.map((item) => item[2]));
-
+  // console.log(data?.d?.slice(startPoint, endPoint)?.map((item) => item[2]));
+  // console.log(Math.ceil(_.max(_.map(data?.d, (item) => item[5]))))
+  console.log(Math.floor(_.min(_.map(data?.d, (item) => item[2]))))
+  console.log(Math.ceil(_.max(_.map(data?.d, (item) => item[2]))))
+  console.log(roundDownToNearest(_.min(_.map(data?.d, (item) => item[2])), 100))
   const chartOptions = {
     accessibility: {
       enabled: false,
     },
     chart: {
+      events: {
+        load: function () {
+          var chart = this;
+          var xAxis = chart.xAxis[0];
+
+          // Thiết lập sự kiện resize cho biểu đồ
+          window.addEventListener("resize", function () {
+            chart.reflow(); // Điều chỉnh kích thước biểu đồ khi có sự thay đổi kích thước trình duyệt
+          });
+
+          // Thiết lập transition cho trục x khi có sự thay đổi
+          chart.xAxis[0].update({
+            labels: {
+              animation: {
+                duration: 500, // Thời gian của hiệu ứng transition (milliseconds)
+              },
+            },
+          });
+        },
+        afterSetExtremes: function (event) {
+          var xAxis = this.xAxis[0];
+          var min = event.min;
+          var max = event.max;
+
+          // Kiểm tra nếu khoảng giá trị trục x đã thay đổi
+          if (min !== xAxis.oldMin || max !== xAxis.oldMax) {
+            // Thực hiện điều chỉnh đồ thị tương ứng với khoảng giá trị mới
+            console.log("Khoảng giá trị trục x đã thay đổi:", min, max);
+            // Thực hiện các thao tác cần thiết để điều chỉnh đồ thị
+          }
+
+          // Lưu lại giá trị cũ của trục x
+          xAxis.oldMin = min;
+          xAxis.oldMax = max;
+        },
+      },
       backgroundColor: "#011022",
       spacingBottom: 0,
     },
@@ -85,7 +132,6 @@ function DynamicHorizontalLineChart() {
       crosshair: [1, 1],
       split: false,
       backgroundColor: "black",
-      borderColor: "green",
       shape: "rect",
       style: {
         color: "white",
@@ -96,21 +142,22 @@ function DynamicHorizontalLineChart() {
           y: 80,
         };
       },
+      useHTML: true,
       formatter: function () {
         const { series, point } = this;
         if (series.type === "candlestick") {
           return `<div class="dataVolumeChart" style="font-size: 14px; border-radius: 10px; padding: 5px; background: rgba(0,0,0,0.2);
             background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%,  rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.2) 100%);">
-                <span style="margin-right: 10px;"><b>O</b>: ${this.point.open}</span>
-                <span style="margin-right: 10px;"><b>C</b>: ${this.point.close}</span>
+                <span style="margin-right: 10px; font-size: 17px"><b>O</b>: ${this.point.open}</span>
+                <span style="margin-right: 10px; font-size: 17px"><b>C</b>: ${this.point.close}</span>
                 <span>&nbsp;</span>
             <br>
-            <span style="margin-right: 10px;"><b>H</b>: ${this.point.high}</span>
-            <span style="margin-right: 10px;"><b>L</b>: ${this.point.low}</span>
-            <span><b>Vol</b>: 2.46</span></div>`;
+            <span style="margin-right: 10px; font-size: 17px"><b>H</b>: ${this.point.high}</span>
+            <span style="margin-right: 10px; font-size: 17px"><b>L</b>: ${this.point.low}</span>
+            <span style="font-size: 17px"><b>Vol</b>: 2.46</span></div>`;
         }
         if (series.type === "column") {
-          return "<strong>Vol:</strong> " + this.point.options.y;
+          return `<div style="font-size: 17px"><b style="font-size: 17px">Vol:</b> ${this.point.options.y}</div>` ;
         }
       },
     },
@@ -120,7 +167,9 @@ function DynamicHorizontalLineChart() {
     series: [
       {
         yAxis: 0,
+        gridLineColor: 'rgb(45, 49, 64)',
         type: "spline",
+        zIndex: 10,
         name: "",
         color: "#fa4b62",
         data: calculateMovingAverage(
@@ -138,6 +187,7 @@ function DynamicHorizontalLineChart() {
       {
         yAxis: 0,
         type: "spline",
+        zIndex: 10,
         name: "",
         color: "#04c793",
         lineWidth: 2,
@@ -183,39 +233,45 @@ function DynamicHorizontalLineChart() {
       },
     ],
     xAxis: {
-      plotLines: [{ // mark the weekend
-        color: 'rgb(132, 134, 143)',
-        width: 2,
-        value: 70,
-        dashStyle: 'dash'
-    }],
+      plotLines: [
+        {
+          // mark the weekend
+          color: "rgb(132, 134, 143)",
+          width: 2,
+          value: 70,
+          dashStyle: "dash",
+        },
+      ],
       crosshair: true,
       tickInterval: 5,
       min: 0,
       max: 70,
       labels: {
         formatter: function () {
-          return moment(data?.d?.[parseInt(this.value) + startPoint]?.[0]).format("mm:ss");
+          return moment(
+            data?.d?.[parseInt(this.value) + startPoint]?.[0]
+          ).format("mm:ss");
         },
       },
     },
     yAxis: [
       {
-        min: 26200,
+        gridLineColor: 'rgb(45, 49, 64)',
+        min: roundDownToNearest(_.min(_.map(data?.d, (item) => item[2])), 100) - 50,
         gridLineWidth: 1, // Độ dày của đường kẻ
         tickWidth: 1, // Độ dày của đường chia trên trục y
         tickColor: "transparent", // Màu sắc của đường chia trên trục y
-        max: 26800,
+        max: roundUpToNearest(_.max(_.map(data?.d, (item) => item[2])), 100) - 50,
         showFirstLabel: false,
         showLastLabel: false,
         startPoint: false,
+        startOnTick: false,
         minPadding: 0,
-        startOnTick: true,
-        tickAmount: 7,
+        tickAmount: 8,
         tickInterval: 50,
-        lineColor: "#fff",
-        style: 'dotted',
-        dashStyle: 'dash',
+        // lineColor: "#fff",
+        style: "dotted",
+        dashStyle: "dash",
         // lineWidth: 1,
         gridLineDashStyle: "longdash",
         labels: {
@@ -237,11 +293,11 @@ function DynamicHorizontalLineChart() {
         visible: false,
         height: "20%",
         top: "80%",
-        tickPositions: [0, 500], // Vị trí của các điểm chia trên trục Y thứ hai
+        // tickPositions: [0, 500], // Vị trí của các điểm chia trên trục Y thứ hai
         // Trục y thứ hai cho biểu đồ cột
         opposite: true, // Hiển thị ở phía bên phải
         min: 0,
-        max: 100,
+        max: Math.ceil(_.max(_.map(data?.d, (item) => item[5])) / 100) * 100,
         title: {
           text: "Giá trị cột",
         },
@@ -283,7 +339,7 @@ function DynamicHorizontalLineChart() {
   };
 
   return (
-    <div style={{ height: 481.45, width: 1217 }}>
+    <div style={{ width: "100%", aspectRatio: 5 / 2 }}>
       <HighchartsReact
         containerProps={{ style: { height: "100%" } }}
         ref={chartRef}
