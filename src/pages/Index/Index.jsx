@@ -229,7 +229,7 @@ function DynamicHorizontalLineChart() {
         data: data?.d?.slice(startPoint, endPoint)?.map((item, key) => item[5]), // Dữ liệu của biểu đồ cột,
         colors: data?.d
           ?.slice(startPoint, endPoint)
-          ?.map((item, key) => (item[8] === 0 ? "#04c793" : "#fa4b62")),
+          ?.map((item, key) => (item[4] > item[1] ? "#04c793" : "#fa4b62")),
       },
     ],
     xAxis: {
