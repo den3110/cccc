@@ -78,9 +78,9 @@ function DynamicHorizontalLineChart() {
   };
   // console.log(data?.d?.slice(startPoint, endPoint)?.map((item) => item[2]));
   // console.log(Math.ceil(_.max(_.map(data?.d, (item) => item[5]))))
-  console.log(Math.floor(_.min(_.map(data?.d, (item) => item[2]))))
-  console.log(Math.ceil(_.max(_.map(data?.d, (item) => item[2]))))
-  console.log(roundDownToNearest(_.min(_.map(data?.d, (item) => item[2])), 100))
+  // console.log(Math.floor(_.min(_.map(data?.d, (item) => item[2]))))
+  // console.log(Math.ceil(_.max(_.map(data?.d, (item) => item[2]))))
+  // console.log(roundDownToNearest(_.min(_.map(data?.d, (item) => item[2])), 100))
   const chartOptions = {
     accessibility: {
       enabled: false,
@@ -267,7 +267,7 @@ function DynamicHorizontalLineChart() {
         startPoint: false,
         startOnTick: false,
         minPadding: 0,
-        tickAmount: 8,
+        tickAmount: 7,
         tickInterval: 50,
         // lineColor: "#fff",
         style: "dotted",
@@ -316,7 +316,7 @@ function DynamicHorizontalLineChart() {
         groupPadding: 0,
         pointPadding: 0.2,
         colorByPoint: true,
-        colors: ["#04c793", "#fa4b62"],
+        // colors: ["#04c793", "#fa4b62"],
         column: {
           borderRadius: "0 0 0 0", // Đặt giá trị borderRadius là "0 0 0 0" để xóa border radius tại cả bốn góc
         },
