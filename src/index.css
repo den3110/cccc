@@ -35,3 +35,40 @@ body::-webkit-scrollbar {
 .highcharts-yaxis-grid .highcharts-grid-line:last-child {
   display: none;
 }
+
+.highcharts-label .highcharts-tooltip {
+  filter: brightness(0) invert(1) !important;
+
+}
+
+.plotlineChart .price, .plotlineChart .time {
+  display: inline-block;
+  background-color: #5dc1b9;
+  padding: 2px 5px;
+}
+.plotlineChart .price {
+  margin-bottom: 2px;
+}
+.plotlineChart .price, .plotlineChart .time {
+  display: inline-block;
+  background-color: #5dc1b9;
+  padding: 2px 5px;
+}
+
+.plotlineChart .time {
+  display: inline-block;
+  background-color: #5dc1b9;
+  padding: 2px 5px;
+}
+.plotlineChart .price, .plotlineChart .time {
+  display: inline-block;
+  background-color: #5dc1b9;
+  padding: 2px 5px;
+}
+.align-self-end {
+  -ms-flex-item-align: end!important;
+  align-self: flex-end!important;
+}
+
+.highcharts-plot-line-label {
+}

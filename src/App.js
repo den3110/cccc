@@ -1,14 +1,21 @@
 import styles from "./App.module.css"
-import {BrowserRouter as Router, Routes, Route } from "react-router-dom"
+import {BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import Home from "./pages/Home/Home"
 import Signup from "./pages/Signup/Signup"
 import Login from "./pages/Login/Login"
 import RegisterWithEmail from "./pages/RegisterWithEmail/RegisterWithEmail"
 import { SnackbarProvider } from 'notistack';
 import CustomToast from "./custom/CustomToast"
-import DynamicHorizontalLineChart from "./pages/Index/Index"
+import { useState } from "react"
+import Index from "./pages/Index/Index"
+import AuthRoute from "./components/AuthRoute/AuthRoute"
+import UserProvider from "./components/UserProvider/UserProvider"
+import SocketContainer from "./utils/SocketContainer/SocketContainer"
+
 
 const App= ()=> {
+  const [isAuthenticated, setIsAuthenticated]= useState(false)
+
   return (
     <SnackbarProvider Components={{
       errorComponent: CustomToast
@@ -18,13 +25,25 @@ const App= ()=> {
     }} maxSnack={1} autoHideDuration={2000}>
       <div className={styles["wrap__app"]}>
         <Router>
-          <Routes>
-            <Route path={"/"} element={<Home />} />
-            <Route path={"/register"} element={<Signup />} />
-            <Route path={"/login"} element={<Login />} />
-            <Route path={"/register-with-email"} element={<RegisterWithEmail />} />
-            <Route path={"/index"} element={<DynamicHorizontalLineChart />} />
-          </Routes>
+          {
+            isAuthenticated=== true && 
+            <UserProvider>
+              <SocketContainer chidren={<Routes>
+                  <Route path={"/index"} element={<AuthRoute isAuthenticated={isAuthenticated} element={Index} />} />
+                </Routes>}>
+              </SocketContainer>
+            </UserProvider>
+          }
+          {
+            isAuthenticated=== false && 
+            <Routes>
+              <Route path={"/index"} element={<Navigate to={"/login"} replace />} />
+              <Route path={"/"} element={<Home />} />
+              <Route path={"/register"} element={<Signup />} />
+              <Route path={"/login"} element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+              <Route path={"/register-with-email"} element={<RegisterWithEmail />} />
+            </Routes>
+          }
         </Router>
       </div>
     </SnackbarProvider>

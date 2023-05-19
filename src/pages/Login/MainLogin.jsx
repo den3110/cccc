@@ -50,6 +50,7 @@ const MainLogin = (props) => {
         setTwoFa(true);
         settToken2fa(result?.d?.t)
       } else {
+        props?.setIsAuthenticated(true)
         Cookies.set("accessToken", result.d.refresh_token);
         Cookies.set("refreshToken", result.d.refresh_token);
         navigate("/index", { replace: true });
@@ -66,6 +67,7 @@ const MainLogin = (props) => {
       });
     }
     else if(result?.ok=== true) {
+      props?.setIsAuthenticated(true)
       Cookies.set("accessToken", result.d.access_token);
       Cookies.set("refreshToken", result.d.refresh_token);
       navigate("/index", { replace: true });
