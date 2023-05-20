@@ -21,12 +21,18 @@ function roundUpToNearest(value, nearest) {
 function Index() {
   const lastRef = useRef();
   const candlestickRef = useRef();
+  const candlestickRef2 = useRef();
   const splineMa5Ref = useRef();
+  const splineMa5Ref2 = useRef();
   const splineMa10Ref = useRef();
+  const splineMa10Ref2 = useRef();
   const columnRef = useRef();
+  const columnRef2 = useRef();
   const columnColorRef = useRef();
-  const priceRef= useRef();
-  const restTimeRef= useRef();
+  const columnColorRef2 = useRef();
+
+  const priceRef = useRef();
+  const restTimeRef = useRef();
   // const [lastItem, setLastItem] = useState();
   const { socketWeb } = useContext(SocketContainerContext);
   const chartRef = useRef();
@@ -60,21 +66,75 @@ function Index() {
         // console.log(newData[1])
         // setLastItem(newData[1])
         lastRef.current = newData[1];
+        updateDataAndLinePosition(lastRef.current.closePrice);
 
-        candlestickRef.current = data2?.d
-          ?.slice(startPoint, endPoint)
-          ?.map((item, key) => {
-            // console.log("candlestickitem", item);
-            return {
-              x: parseInt(key),
-              open: item[1], // open : 1, high : 2, low 3 , close 4, vol 5
-              close: item[4],
-              low: item[3],
-              high: item[2],
-              vol: item[5],
-            };
-          })
-          ?.concat([
+        priceRef.current = lastRef.current?.closePrice;
+        restTimeRef.current = lastRef.current?.order;
+        if (document.getElementById("highchart-plot-line-label-d")) {
+          document.getElementById("highchart-plot-line-label-d").innerHTML = `
+            <div class="highcharts-plot-line-label " data-z-index="100" style="font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size: 12px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 916px; top: 124px; color: rgb(255, 255, 255); background: transparent; border-radius: 4px; visibility: inherit;"><div class="plotlineChart d-flex flex-column">
+              <span class="price">${priceRef.current.toFixed(2)}</span>
+              <span class="time align-self-end">00:${
+                restTimeRef.current >= 10
+                  ? restTimeRef.current
+                  : "0" + restTimeRef.current
+              }</span>
+            </div>
+          `;
+        }
+
+        if (parseInt(lastRef.current.order) === 1) {
+          let arr = candlestickRef.current;
+          arr?.forEach((item) => item.x--);
+          chartRef.current?.chart.series[2].addPoint(arr, false, true);
+          arr = candlestickRef.current?.slice(1);
+          candlestickRef.current = arr;
+          candlestickRef2.current = arr;
+          chartRef.current?.chart.series[2].addPoint(arr, false, true);
+
+          // console.log(candlestickRef.current)
+
+          // splineMa5Ref.current = calculateMovingAverage(
+          //   // ma5
+          //   data2?.d
+          //     ?.slice(startPoint - 4, parseInt(endPoint))
+          //     ?.map((item, key) => item[4])
+          //     ?.concat([lastRef.current.closePrice]),
+          //   5
+          // );
+          // //
+
+          // splineMa10Ref.current = calculateMovingAverage(
+          //   // ma10
+          //   splineMa10Ref2.current
+          //     ?.concat([lastRef.current.closePrice]),
+          //   10
+          // );
+          //
+          let arr4 = columnRef.current
+          // chartRef.current?.chart.series[3].addPoint(arr4, false, true);
+          arr4 = columnRef.current?.slice(1);
+          arr4?.forEach((item) => item.x--);
+          columnRef.current = arr4;
+          columnRef2.current = arr4;
+          // chartRef.current?.chart.series[3].addPoint(arr4, false, true);
+
+          // let arr5 = columnColorRef.current;
+          // arr5 = arr5.slice(1);
+          // columnColorRef.current = arr5;
+          // columnColorRef2.current = arr5;
+          // chartRef.current?.chart.series[0].setData(splineMa5Ref.current);
+          // chartRef.current?.chart.series[1].setData(splineMa10Ref.current);
+          // chartRef.current?.chart.series[3].setData(columnRef.current);
+          // chartRef.current?.chart.series[3].setColors(columnColorRef.current);
+          // columnColorRef.current.forEach((color, index) => {
+          //   chartRef.current?.chart.series[3].update({
+          //     color, // Màu sắc cho series
+          //   }, true); // Sử dụng false để tắt hiệu ứng redraw tự động
+          // })
+        } else {
+    
+          candlestickRef.current = candlestickRef2?.current?.concat([
             {
               x: endPoint - startPoint,
               open: lastRef.current.openPrice,
@@ -85,45 +145,46 @@ function Index() {
             },
           ]);
 
-        splineMa5Ref.current = calculateMovingAverage(
-          // ma5
-          data2?.d
-            ?.slice(startPoint - 4, parseInt(endPoint))
-            ?.map((item, key) => item[4])
-            ?.concat([lastRef.current.closePrice]),
-          5
-        );
+          splineMa5Ref.current = calculateMovingAverage(
+            // ma5
+            splineMa5Ref2?.current?.concat([lastRef.current.closePrice]),
+            5
+          );
+          //
 
-        splineMa10Ref.current = calculateMovingAverage(
-          // ma5
-          data2?.d
-            ?.slice(startPoint - 9, parseInt(endPoint))
-            ?.map((item, key) => item[4])
-            ?.concat([lastRef.current.closePrice]),
-          10
-        );
+          splineMa10Ref.current = calculateMovingAverage(
+            // ma10
+            splineMa10Ref2.current?.concat([lastRef.current.closePrice]),
+            10
+          );
+          //
 
-        columnRef.current = data2?.d
-          ?.slice(startPoint, endPoint)
-          ?.map((item, key) => item[5])
-          ?.concat([lastRef.current.baseVolume]);
-        updateDataAndLinePosition(lastRef.current.closePrice);
-        
-        priceRef.current= lastRef.current?.closePrice
-        restTimeRef.current= lastRef.current?.order
-        document.getElementById("highchart-plot-line-label-d").innerHTML= `
-        <div class="highcharts-plot-line-label " data-z-index="100" style="font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size: 12px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 916px; top: 124px; color: rgb(255, 255, 255); background: transparent; border-radius: 4px; visibility: inherit;"><div class="plotlineChart d-flex flex-column">
-                          <span class="price">${priceRef.current.toFixed(2)}</span>
-                          <span class="time align-self-end">00:${restTimeRef.current >= 10 ? restTimeRef.current : "0" + restTimeRef.current}</span>
-                        </div>
-        `
-        // console.log(priceRef.current)
-        // console.log(lastRef.current)
-        // console.log(candlestickRef.current);
-        chartRef.current?.chart.series[0].setData(splineMa5Ref.current);
-        chartRef.current?.chart.series[1].setData(splineMa10Ref.current);
-        chartRef.current?.chart.series[2].setData(candlestickRef.current);
-        chartRef.current?.chart.series[3].setData(columnRef.current);
+          columnRef.current = columnRef2.current?.concat([{
+            x: endPoint - startPoint,
+            y: lastRef.current.baseVolume,
+            color: parseFloat(lastRef.current.closePrice) > parseFloat(lastRef.current.openPrice) ? "#04c793" : "#fa4b62"
+            
+          }
+          ]);
+          columnColorRef.current = columnColorRef2.current?.concat([
+            lastRef.current.closePrice > lastRef.current.openPrice
+            ? "#04c793"
+            : "#fa4b62",
+          ]);
+          // console.log(columnColorRef.current)
+          // columnColorRef.current= Array.from(Array(70).keys()).map(item=> "aqua")
+          // console.log(columnColorRef.current)
+          chartRef.current?.chart.series[0].setData(splineMa5Ref.current, true);
+          chartRef.current?.chart.series[1].setData(
+            splineMa10Ref.current,
+            true
+          );
+          chartRef.current?.chart.series[2].setData(
+            candlestickRef.current,
+            true
+          );
+          chartRef.current?.chart.series[3].setData(columnRef.current, true);
+        }
         // chartRef.current?.chart.redraw(true);
       }
     }
@@ -159,7 +220,21 @@ function Index() {
               vol: item[5],
             };
           });
-
+        //
+        candlestickRef2.current = result?.d
+          ?.slice(startPoint, endPoint)
+          ?.map((item, key) => {
+            // console.log("candlestickitem", item);
+            return {
+              x: parseInt(key),
+              open: item[1], // hình như sai thứ tự/// open : 1, high : 2, low 3 , close 4, vol 5
+              close: item[4],
+              low: item[3],
+              high: item[2],
+              vol: item[5],
+            };
+          });
+        //
         splineMa5Ref.current = calculateMovingAverage(
           // ma5
           result?.d
@@ -167,6 +242,11 @@ function Index() {
             ?.map((item, key) => item[4]),
           5
         );
+        //
+        splineMa5Ref2.current = result?.d
+          ?.slice(startPoint - 4, parseInt(endPoint))
+          ?.map((item, key) => item[4]);
+        //
 
         splineMa10Ref.current = calculateMovingAverage(
           // ma10
@@ -175,14 +255,34 @@ function Index() {
             ?.map((item) => item[4]),
           10
         );
+        //
+        splineMa10Ref2.current = result?.d
+          ?.slice(startPoint - 9, parseInt(endPoint))
+          ?.map((item) => item[4]);
 
         columnRef.current = result?.d
           ?.slice(startPoint, endPoint)
-          ?.map((item, key) => item[5]);
+          ?.map((item, key) => ({
+            x: parseInt(key),
+            y: item[5],
+            color: item[4] > item[1] ? "#04c793" : "#fa4b62"
+          }));
+
+        columnRef2.current = result?.d
+        ?.slice(startPoint, endPoint)
+        ?.map((item, key) => ({
+          x: parseInt(key),
+          y: item[5],
+          color: item[4] > item[1] ? "#04c793" : "#fa4b62"
+        }));
 
         columnColorRef.current = result?.d
           ?.slice(startPoint, endPoint)
           ?.map((item, key) => (item[4] > item[1] ? "#04c793" : "#fa4b62"));
+        columnColorRef2.current = result?.d
+          ?.slice(startPoint, endPoint)
+          ?.map((item, key) => (item[4] > item[1] ? "#04c793" : "#fa4b62"));
+
         setData(result);
         setData2(result);
       } catch (error) {}
@@ -345,6 +445,11 @@ function Index() {
       {
         yAxis: 0,
         type: "candlestick",
+        animation: {
+          duration: 1000, // Thời gian của hiệu ứng di chuyển (1 giây),
+          enable: true,
+          easing: "easeOutBounce",
+        },
         name: "",
         groupPadding: 0,
         pointPadding: 0.2,
@@ -358,7 +463,7 @@ function Index() {
         inverted: false,
         name: "",
         data: columnRef.current, // Dữ liệu của biểu đồ cột,
-        colors: columnColorRef.current,
+        // colors: columnColorRef.current,
       },
     ],
     xAxis: {
@@ -387,7 +492,7 @@ function Index() {
       {
         offset: 0,
         tickPositioner: function () {
-          console.log("this", this);
+          // console.log("this", this);
           const max = this.dataMax; // Giá trị tối đa trên trục y
           const min = this.dataMin; // Giá trị tối thiểu trên trục y
           const numTicks = 8; // Số điểm chia đều trên trục y
@@ -398,7 +503,7 @@ function Index() {
           for (let i = 0; i < numTicks; i++) {
             positions.push(Math.round(min + i * interval)); // Tính toán vị trí của từng điểm
           }
-          console.log("positions", positions);
+          // console.log("positions", positions);
           return positions; // Trả về mảng các vị trí của các điểm
         },
         gridLineColor: "rgb(45, 49, 64)",
@@ -431,14 +536,14 @@ function Index() {
           {
             label: {
               useHTML: true,
-              x: 40,
+              x: 60,
               align: "right",
               formatter: function () {
                 return `<div id="highchart-plot-line-label-d">
-                        <div class="highcharts-plot-line-label " data-z-index="100" style="font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size: 12px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 916px; top: 124px; color: rgb(255, 255, 255); background: transparent; border-radius: 4px; visibility: inherit;"><div class="plotlineChart d-flex flex-column">
-                          <span class="price">${priceRef.current}</span>
-                          <span class="time align-self-end">00:${restTimeRef.current}</span>
-                        </div>
+                          <div class="highcharts-plot-line-label " data-z-index="100" style="font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size: 12px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 916px; top: 124px; color: rgb(255, 255, 255); background: transparent; border-radius: 4px; visibility: inherit;"><div class="plotlineChart d-flex flex-column">
+                            <span class="price">${priceRef.current}</span>
+                            <span class="time align-self-end">00:${restTimeRef.current}</span>
+                          </div>
                     </div></div>`;
               },
             },
@@ -484,6 +589,11 @@ function Index() {
         //pointWidth: 20,
       },
       candlestick: {
+        animation: {
+          duration: 1000, // Thời gian của hiệu ứng di chuyển (1 giây),
+          enable: true,
+          easing: "easeOutBounce",
+        },
         lineColor: "#f81057",
         upLineColor: "#04c793",
         color: "#f81057", // Màu cho các nến tăng giá
