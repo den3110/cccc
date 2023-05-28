@@ -6,7 +6,7 @@ import Login from "./pages/Login/Login"
 import RegisterWithEmail from "./pages/RegisterWithEmail/RegisterWithEmail"
 import { SnackbarProvider } from 'notistack';
 import CustomToast from "./custom/CustomToast"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Index from "./pages/Index/Index"
 import AuthRoute from "./components/AuthRoute/AuthRoute"
 import UserProvider from "./components/UserProvider/UserProvider"
@@ -15,7 +15,12 @@ import SocketContainer from "./utils/SocketContainer/SocketContainer"
 
 const App= ()=> {
   const [isAuthenticated, setIsAuthenticated]= useState(false)
-
+  useEffect(()=> {
+    document.documentElement.style.setProperty(
+      "--vh",
+      `${window.innerHeight * 0.01}px`
+    );
+  }, [])
   return (
     <SnackbarProvider Components={{
       errorComponent: CustomToast

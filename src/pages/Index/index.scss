@@ -1,6 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Public+Sans&display=swap");
 
-
+:root {
+  --primary-color: #00b2ff;
+  --secondary-color: linear-gradient(126deg, #4e004a, #00b2ff 110%);
+  --border-color: #283e48;
+  --gradient-color: linear-gradient(130deg, rgb(20, 0, 31) 6%, rgb(30, 0, 54) 63%, rgb(0, 208, 255) 100%);
+  --grad-color: linear-gradient(130deg, rgb(5 0 8) 6%, rgb(0 4 50) 63%, rgb(0 85 94) 100%);
+  --gradient-secondary-color: linear-gradient(36deg, rgb(7, 168, 255) 6%, rgba(0, 0, 0, 1) 63%);
+  --gradient-background: linear-gradient(120deg, rgb(34 0 117) 24%, rgb(30, 148, 199) 63%);
+  --gradient-footer: linear-gradient(130deg, rgb(5 0 8) 6%, rgb(28 0 50) 63%, rgba(101, 0, 0, 1) 100%);
+  --gradient-login: linear-gradient(227deg, #320279 -12%, #000000 51%, rgb(52, 0, 107) 112%);
+  --gradient-wallet: linear-gradient(180deg,#020024,#0139a8 0,#011d54);
+  
+}
 
 .trans {
   transition: 0.4s all;
