@@ -6,12 +6,14 @@ import { isMobile, isTablet } from "mobile-device-detect";
 import $ from "jquery";
 import Chart from "highcharts-react-official";
 import { useContext, useEffect, useRef, useState } from "react";
-import { SocketContainerContext } from "../../utils/SocketContainer/SocketContainer";
 import borderRadius from "highcharts-border-radius";
-import b_price from "../../api/price/b_price";
-import "./index.scss";
 import Exporting from 'highcharts/modules/exporting';
-import getData from "./data.json";
+// import { SocketContainerContext } from "../../utils/SocketContainer/SocketContainer";
+// import b_price from "../../api/price/b_price";
+import getData from "../../../data.json";
+import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
+import b_price from "../../../api/price/b_price";
+// import "./index.scss";
 
 // Initialize exporting module. (CommonJS only)
 Exporting(Highcharts);
