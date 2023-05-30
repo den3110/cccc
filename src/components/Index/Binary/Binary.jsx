@@ -1,6 +1,7 @@
 import React from "react";
 import "./Binary.css";
 import ChartIndex from "../Chart/ChartIndex";
+import AnalysBet from "../AnalysBet/AnalysBet";
 
 const Binary = () => {
   return (
@@ -38,6 +39,7 @@ const Binary = () => {
           </div>
         </div>
       </div>
+      <AnalysBet />
     </div>
   );
 };

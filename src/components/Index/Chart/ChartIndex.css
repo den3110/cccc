@@ -1,0 +1,35 @@
+@media screen and (min-width: 1200px) {
+    #binaryPage #candle-wrap[data-v-0dc9f329] {
+        height: calc(75vh - 51px);
+    }
+}
+#binaryPage .chartBox[data-v-0dc9f329] {
+    height: calc(75vh - 48.75px);
+    overflow: hidden;
+    background-color: #12023e;
+}
+.bgSecondary8[data-v-0dc9f329] {
+    background-color: #080d1f!important;
+}
+.bgSecondary8 {
+    background-color: #080d1f!important;
+}
+.bgSecondary8 {
+    background-color: #080d1f!important;
+}
+
+@media screen and (max-width: 767px) {
+    #binaryPage .chartBox[data-v-0dc9f329] {
+        height: calc(100vh - 324px);
+    }
+}
+@media screen and (max-width: 1000px) {
+    #binaryPage .chartBox[data-v-0dc9f329] {
+        height: calc(100vh - 341px);
+    }
+}
+@media screen and (max-width: 1024px) {
+    #binaryPage .chartBox[data-v-0dc9f329] {
+        height: calc(100vh - 360px);
+    }
+}

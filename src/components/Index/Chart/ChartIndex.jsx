@@ -13,6 +13,7 @@ import Exporting from 'highcharts/modules/exporting';
 import getData from "../../../data.json";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
 import b_price from "../../../api/price/b_price";
+import "./ChartIndex.css"
 // import "./index.scss";
 
 // Initialize exporting module. (CommonJS only)
@@ -22,6 +23,7 @@ More(Highcharts);
 stockInit(Highcharts);
 loadIndicatorsAll(Highcharts);
 
+// eslint-disable-next-line
 function convertTextValueMeter(t) {
   return t >= -90 && t <= -54
     ? { cl: "rank-1", text: "Strong sell", index: 1 }
@@ -56,14 +58,12 @@ const ChartIndex = () => {
       setDeviceVersion("tablet")
     }
   }, [])
-  //   ohlcStock = [],
-  // volumeStock = [];
 
   const stockChart = {
     chart: {
       backgroundColor: "#011022",
       type: "areaspline",
-      aspectRatio: "16:ằ",
+      aspectRatio: "16:9",
       panning: false,
       followTouchMove: false,
       width: "100%",
@@ -346,10 +346,6 @@ const ChartIndex = () => {
     chartGet.current = chartStock.current?.chart;
   }, []);
   
-  // Moving
-  // Oscillators
-  // Summary
-
   const [chartDataLoaded, setChartDataLoaded] = useState(false);
 
   const [chartOptions, setChartOptions] = useState({
@@ -382,16 +378,16 @@ const ChartIndex = () => {
   // }
   const redrawChart=()=> {
     // if (chartGet && windowWidth > 768) {
-      if (chartGet.current) {
+      if (chartGet.current && window.innerWidth > 768) {
       // var chartInstance = chartGet;
       chartGet.current.redraw();
     }
   }
-  // const reflowChart= ()=> {
-  //   if (chartStock) {
-  //     chartStock.current.chart.reflow();
-  //   }
-  // }
+  const reflowChart= ()=> {
+    if (chartStock) {
+      chartStock.current.chart.reflow();
+    }
+  }
   const updateWindowDimensions= ()=> {
     // windowWidth = window.innerWidth;
     // windowHeight = window.innerHeight;
@@ -466,14 +462,14 @@ const ChartIndex = () => {
         lastCandle.update(o, true);
       } else {
         chartInstance.series[0].addPoint(o, true, true);
-        console.log(chartInstance.series);
+        // console.log(chartInstance.series);
         listData.current.push(data);
         let begin = 0;
 
         const { dataMax } = chartInstance.xAxis[0].getExtremes();
         if (deviceVersion !== "pc") {
           begin = setSizeStock(listData.current);
-          console.log("begin", begin);
+          // console.log("begin", begin);
           chartGet.current.xAxis[0].setExtremes(
             listData.current[begin + 40][0],
             dataMax,
@@ -502,11 +498,11 @@ const ChartIndex = () => {
       getData.countDown = counter > 9 ? counter : "0" + counter;
       window.addEventListener("resize", function () {
         chartInstance.reflow();
-
+        chartInstance.redraw();
         // console.log("Change Size");
       });
     } catch(e) {
-      console.log(e)
+      // console.log(e)
     }
   };
   const onReceiveSocketData = (data) => {
@@ -520,11 +516,11 @@ const ChartIndex = () => {
 
     if (deviceVersion !== "pc") {
       begin = setSizeStock(data);
-      console.log("begin", begin);
+      // console.log("begin", begin);
       // console.log(begin)
     } else {
       let getWidth = parseInt($("body").width());
-      console.log(getWidth);
+      // console.log(getWidth);
       if (getWidth >= 1260 && getWidth <= 1500) {
         begin = 55;
       }
@@ -660,6 +656,12 @@ const ChartIndex = () => {
   useEffect(() => {
     setChartHeight();
   }, []);
+  useEffect(()=> {
+    window.addEventListener("resize", ()=> {
+      chartStock.current.chart?.reflow()
+    })
+    
+  }, [])
   useEffect(() => {
     (async () => {
       try {
