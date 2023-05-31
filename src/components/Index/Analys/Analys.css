@@ -43,12 +43,12 @@
     flex: 0 0 100%;
     max-width: 100%;
 }
-.flex-50[data-v-0dc9f329] {
+/* .flex-50[data-v-0dc9f329] {
     -webkit-box-flex: 0;
     -ms-flex: 0 0 50%;
     flex: 0 0 50%;
     max-width: 50%;
-}
+} */
 
 main-content #binaryPage #rightContent #betAmount.bgSecondary3[data-v-0dc9f329], #main-content #binaryPage #rightContent[data-v-0dc9f329] {
     background-color: #011022!important;
@@ -96,7 +96,7 @@ main-content #binaryPage #rightContent #betAmount.bgSecondary3[data-v-0dc9f329],
 }
 .font-14 {
     font-size: 14px;
-}
+}justify-content
 
 align-items-center {
     -webkit-box-align: center!important;

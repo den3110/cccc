@@ -1,20 +1,562 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import "./AnalysBet.css";
+import { Tab, Tabs } from "react-bootstrap";
+import Chart from "highcharts-react-official";
+import $ from "jquery";
 
+function convertTextValueMeter(t) {
+  return t >= -90 && t <= -54
+    ? { cl: "rank-1", text: "Strong sell", index: 1 }
+    : t > -54 && t <= -18
+    ? { cl: "rank-2", text: "Sell", index: 2 }
+    : t > -18 && t <= 17
+    ? { cl: "rank-3", text: "Neutral", index: 3 }
+    : t > 17 && t <= 53
+    ? { cl: "rank-4", text: "Buy", index: 4 }
+    : t > 53
+    ? { cl: "rank-5", text: "Strong Buy", index: 5 }
+    : void 0;
+}
 const AnalysBet = () => {
+  const gaugeMeterSu = {
+    chart: {
+      type: "gauge",
+      plotBorderWidth: null,
+      backgroundColor: "rgba(0,0,0,0)",
+      plotBackgroundColor: null,
+      plotBackgroundImage: null,
+      height: 60,
+      spacingBottom: 0,
+      spacingTop: 0,
+      spacingLeft: 0,
+      spacingRight: 0,
+      events: {
+        render(t) {
+          let td = t.target.series[0].points[0].y;
+          let n = convertTextValueMeter(td);
+          $(".gauge-meter--su .gauge-meter-background")
+            .removeClass("rank-1 rank-2 rank-3 rank-4 rank-5")
+            .addClass(n.cl);
+          $(".gauge-meter--su .gauge-meter-label-item").removeClass("active");
+          $(
+            ".gauge-meter--su .gauge-meter-label-item:nth-child(" +
+              n.index +
+              ")"
+          ).addClass("active");
+        },
+      },
+      animation: {
+        duration: 1500,
+        easing: "easeOutBounce",
+      },
+    },
+
+    title: {
+      text: "",
+    },
+
+    pane: [
+      {
+        startAngle: -90,
+        endAngle: 90,
+        background: null,
+        center: ["50%", "105%"],
+        size: 120,
+      },
+    ],
+
+    credits: {
+      enabled: false,
+    },
+
+    exporting: {
+      enabled: false,
+    },
+
+    tooltip: {
+      enabled: true,
+    },
+
+    yAxis: [
+      {
+        min: -90,
+        max: 90,
+        minorTickPosition: "outside",
+        tickPosition: "outside",
+        labels: {
+          rotation: "auto",
+          distance: 0,
+          style: {
+            color: "rgba(0,0,0,0)",
+          },
+        },
+        pane: 0,
+        title: "",
+        minorTickColor: "rgba(0,0,0,0)",
+        lineColor: "rgba(0,0,0,0)",
+        tickColor: "rgba(0,0,0,0)",
+      },
+    ],
+
+    plotOptions: {
+      gauge: {
+        dataLabels: {
+          enabled: false,
+        },
+        dial: {
+          radius: "85%",
+          baseLength: "1%",
+          rearLength: 0,
+          backgroundColor: {
+            linearGradient: {
+              x1: 1,
+              y1: 0,
+              x2: 0,
+              y2: 0,
+            },
+            stops: [
+              [0, "#fff"],
+              [1, "#000"],
+            ],
+          },
+          baseWidth: 6,
+          topWidth: 3,
+        },
+      },
+    },
+
+    series: [
+      {
+        name: "Summary",
+        data: [10],
+        yAxis: 0,
+      },
+    ],
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 89,
+          },
+          chartOptions: {
+            chart: {
+              height: 44,
+            },
+            pane: [
+              {
+                size: 60,
+              },
+            ],
+          },
+        },
+      ],
+    },
+    // ,
+    // watch: {
+    //   chartOptions: {
+    //     handler(val) {
+    //       if (this.$refs.chartStock.chart) {
+    //         var chartInstance = chartGet;
+    //         this.$refs.chartStock.chart.redraw();
+    //         chartGet.redraw();
+    //       }
+    //     },
+    //     deep: true,
+    //   },
+    // },
+  };
+
+  const gaugeMeterMa = {
+    chart: {
+      type: "gauge",
+      plotBorderWidth: null,
+      backgroundColor: "rgba(0,0,0,0)",
+      plotBackgroundColor: null,
+      plotBackgroundImage: null,
+      height: 50,
+      spacingBottom: 0,
+      spacingTop: 0,
+      spacingLeft: 0,
+      spacingRight: 0,
+      events: {
+        render(t) {
+          let td = t.target.series[0].points[0].y;
+          let n = convertTextValueMeter(td);
+          $(".gauge-meter--ma .gauge-meter-background")
+            .removeClass("rank-1 rank-2 rank-3 rank-4 rank-5")
+            .addClass(n.cl);
+          $(".gauge-meter--ma .gauge-meter-label-item").removeClass("active");
+          $(
+            ".gauge-meter--ma .gauge-meter-label-item:nth-child(" +
+              n.index +
+              ")"
+          ).addClass("active");
+        },
+      },
+      animation: {
+        duration: 1000,
+        easing: "easeOutBounce",
+      },
+    },
+
+    title: {
+      text: "",
+    },
+
+    pane: [
+      {
+        startAngle: -90,
+        endAngle: 90,
+        background: null,
+        center: ["50%", "105%"],
+        size: 100,
+      },
+    ],
+
+    credits: {
+      enabled: false,
+    },
+
+    exporting: {
+      enabled: false,
+    },
+
+    tooltip: {
+      enabled: true,
+    },
+
+    yAxis: [
+      {
+        min: -90,
+        max: 90,
+        minorTickPosition: "outside",
+        tickPosition: "outside",
+        labels: {
+          rotation: "auto",
+          distance: 0,
+          style: {
+            color: "rgba(0,0,0,0)",
+          },
+        },
+        pane: 0,
+        title: "",
+        minorTickColor: "rgba(0,0,0,0)",
+        lineColor: "rgba(0,0,0,0)",
+        tickColor: "rgba(0,0,0,0)",
+      },
+    ],
+
+    plotOptions: {
+      gauge: {
+        dataLabels: {
+          enabled: false,
+        },
+        dial: {
+          radius: "85%",
+          baseLength: "1%",
+          rearLength: 0,
+          backgroundColor: {
+            linearGradient: {
+              x1: 1,
+              y1: 0,
+              x2: 0,
+              y2: 0,
+            },
+            stops: [
+              [0, "#fff"],
+              [1, "#000"],
+            ],
+          },
+          baseWidth: 6,
+          topWidth: 3,
+        },
+      },
+    },
+
+    series: [
+      {
+        name: "ma",
+        data: [5],
+        yAxis: 0,
+      },
+    ],
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 71,
+          },
+          chartOptions: {
+            chart: {
+              height: 35,
+            },
+            pane: [
+              {
+                size: 50,
+              },
+            ],
+          },
+        },
+      ],
+    },
+  };
+  const gaugeMeterOs = {
+    chart: {
+      type: "gauge",
+      plotBorderWidth: null,
+      backgroundColor: "rgba(0,0,0,0)",
+      plotBackgroundColor: null,
+      plotBackgroundImage: null,
+      height: 50,
+      spacingBottom: 0,
+      spacingTop: 0,
+      spacingLeft: 0,
+      spacingRight: 0,
+      events: {
+        render(t) {
+          let td = t.target.series[0].points[0].y;
+          let n = convertTextValueMeter(td);
+          $(".gauge-meter--os .gauge-meter-background")
+            .removeClass("rank-1 rank-2 rank-3 rank-4 rank-5")
+            .addClass(n.cl);
+          $(".gauge-meter--os .gauge-meter-label-item").removeClass("active");
+          $(
+            ".gauge-meter--os .gauge-meter-label-item:nth-child(" +
+              n.index +
+              ")"
+          ).addClass("active");
+        },
+      },
+      animation: {
+        duration: 1500,
+        easing: "easeOutBounce",
+      },
+    },
+
+    title: {
+      text: "",
+    },
+
+    pane: [
+      {
+        startAngle: -90,
+        endAngle: 90,
+        background: null,
+        center: ["50%", "105%"],
+        size: 140,
+      },
+    ],
+
+    credits: {
+      enabled: false,
+    },
+
+    exporting: {
+      enabled: false,
+    },
+
+    tooltip: {
+      enabled: true,
+    },
+
+    yAxis: [
+      {
+        min: -90,
+        max: 90,
+        maxPadding: 0.1,
+        minorTickPosition: "outside",
+        tickPosition: "outside",
+        labels: {
+          rotation: "auto",
+          distance: 0,
+          style: {
+            color: "rgba(0,0,0,0)",
+          },
+        },
+        pane: 0,
+        title: "",
+        minorTickColor: "rgba(0,0,0,0)",
+        lineColor: "rgba(0,0,0,0)",
+        tickColor: "rgba(0,0,0,0)",
+      },
+    ],
+
+    plotOptions: {
+      gauge: {
+        dataLabels: {
+          enabled: false,
+        },
+        dial: {
+          radius: "85%",
+          baseLength: "1%",
+          rearLength: 0,
+          backgroundColor: {
+            linearGradient: {
+              x1: 1,
+              y1: 0,
+              x2: 0,
+              y2: 0,
+            },
+            stops: [
+              [0, "#fff"],
+              [1, "#000"],
+            ],
+          },
+          baseWidth: 6,
+          topWidth: 3,
+        },
+      },
+    },
+
+    series: [
+      {
+        name: "Oscillator",
+        data: [10],
+        yAxis: 0,
+      },
+    ],
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 71,
+          },
+          chartOptions: {
+            chart: {
+              height: 35,
+            },
+            pane: [
+              {
+                size: 50,
+              },
+            ],
+          },
+          windowWidth: 0,
+          windowHeight: 0,
+        },
+      ],
+    },
+  };
+  const [textTitleOs, setTextTitleOs] = useState("NEUTRAL");
+  const [totalBuyStatic, setTotalBuyStatic] = useState(0);
+  const [NumOscSELL, setNumOscSELL] = useState(0);
+  const [activeGau, setActiveGau] = useState(false);
+  const [activeHis, setActiveHis] = useState(false);
+  const [NumOscNeutral, setNumOscNeutral] = useState(0);
+  const [NumOscBUY, setNumOscBUY] = useState(0);
+  const [textTitleSu, setTextTitleSu] = useState("NEUTRAL");
+  const [NumSumSELL, setNumSumSELL] = useState(0);
+  const [NumSumNeutral, setNumSumNeutral] = useState(0);
+  const [NumSumBUY, setNumSumBUY] = useState(0);
+  const [textTitleMa, setTextTitleMa] = useState("NEUTRAL");
+  const [NumMovSELL, setNumMovSELL] = useState(0);
+  const [NumMovBUY, setNumMovBUY] = useState(0);
+  const [NumMovNeutral, setNumMovNeutral] = useState(0);
+  const [totalSellStatic, setTotalSellStatic] = useState(0);
+  const [optionsOs, setOptionsOs] = useState(gaugeMeterOs);
+  const [optionsMa, setOptionsMa] = useState(gaugeMeterMa);
+  const [optionsSu, setOptionSu] = useState(gaugeMeterSu);
+  const [activeTab, setActiveTab] = useState(true);
+  const chartOs = useRef();
+  const chartSu = useRef();
+  const chartMa = useRef();
+
+  const StaSummary = (e) => {
+    try {
+      let chart = chartSu.current.chart;
+
+      let left = chart.series[0].points[0],
+        leftVal;
+
+      //Summary
+      // this.NumSumBUY = e.b;
+      // this.NumSumSELL = e.s;
+      // this.NumSumNeutral = e.m;
+      setNumSumBUY(e.b);
+      setNumSumSELL(e.s);
+      setNumSumNeutral(e.m);
+
+      if ((e.m > e.s && e.m > e.b) || (e.m === e.s && e.m === e.b)) {
+        setTextTitleSu("NEUTRAL");
+        left.update(0, true);
+        chart.redraw();
+        return;
+      }
+      if (e.s > e.b) {
+        leftVal = -35;
+        setTextTitleSu("SELL");
+        if (e.s >= 5) {
+          leftVal = -50;
+          setTextTitleSu("STRONG SELL");
+        }
+        left.update(leftVal, true);
+        chart.redraw();
+      } else if (e.s < e.b) {
+        leftVal = 35;
+        setTextTitleSu("BUY");
+        if (e.b >= 5) {
+          leftVal = 50;
+          setTextTitleSu("STRONG BUY");
+        }
+        left.update(leftVal, true);
+        chart.redraw();
+      }
+    } catch {}
+  };
+
+  const StaOscillators = (e) => {
+    try {
+      let chart = chartOs.current.chart;
+
+      let left = chart.series[0].points[0],
+        leftVal;
+
+      setNumOscBUY(e.b);
+      setNumOscSELL(e.s);
+      setNumOscNeutral(e.m);
+
+      if ((e.m > e.s && e.m > e.b) || (e.m === e.s && e.m === e.b)) {
+        setTextTitleOs("NEUTRAL");
+        left.update(0, true);
+        chart.redraw();
+      }
+      if (e.s > e.b) {
+        leftVal = -35;
+        setTextTitleOs("SELL");
+        if (e.s >= 5) {
+          leftVal = -50;
+          setTextTitleOs("STRONG SELL");
+        }
+        left.update(leftVal, true);
+        chart.redraw();
+      } else if (e.s < e.b) {
+        leftVal = 35;
+        setTextTitleOs("BUY");
+        if (e.b >= 5) {
+          leftVal = 50;
+          setTextTitleOs("STRONG BUY");
+        }
+        left.update(leftVal, true);
+      }
+      chart.redraw();
+    } catch (e) {
+    } finally {
+    }
+  };
+
   return (
-    <div data-v-0dc9f329 id="analysis-wrapper" className="analysis-wrapper">
+    <div id="analysis-wrapper" className="analysis-wrapper relative">
       <ul
         data-v-0dc9f329
         className="nav nav-pills tab-last-result d-flex w-100"
       >
         <li data-v-0dc9f329 id="community" className="nav-item">
-          <a data-v-0dc9f329 className="nav-link text-capitalize active">
+          <a onClick={()=> setActiveTab(true)} data-v-0dc9f329 className={`nav-link text-capitalize ${activeTab=== true ? "active": ""}`}>
             Indicators
           </a>
         </li>
         <li data-v-0dc9f329 id="community" className="nav-item">
-          <a data-v-0dc9f329 className="nav-link text-capitalize">
+          <a onClick={()=> setActiveTab(false)} data-v-0dc9f329 className={`nav-link text-capitalize ${activeTab=== false ? "active": ""}`}>
             Last results
           </a>
         </li>
@@ -49,7 +591,7 @@ const AnalysBet = () => {
                     </g>
                   </svg>
                   <span data-v-03d91928 className="ml-1 ml-lg-3">
-                    44
+                    36
                   </span>
                 </div>
                 <div data-v-03d91928 className="badgeItem ml-2">
@@ -75,7 +617,7 @@ const AnalysBet = () => {
                     </g>
                   </svg>
                   <span data-v-03d91928 className="ml-1 ml-lg-3">
-                    49
+                    44
                   </span>
                 </div>
               </div>
@@ -83,1454 +625,488 @@ const AnalysBet = () => {
           </div>
         </li>
       </ul>
-      <div data-v-3162dcc5 data-v-0dc9f329 className="wrap-gauge-meter active">
-        <div data-v-3162dcc5 className="wrap-gauge-meter-inner">
-          <div data-v-3162dcc5 className="gauge-meter">
-            <div data-v-3162dcc5 className="gauge-meter-sub gauge-meter--os">
-              <div data-v-3162dcc5 className="v-popover gauge-meter-popover">
-                <div className="trigger" style={{ display: "inline-block" }}>
-                  <h3 data-v-3162dcc5 className="gauge-meter-title">
-                    Oscillators
-                    <span data-v-3162dcc5 className="gauge-meter-title-icon">
-                      <svg
-                        data-v-3162dcc5
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={22}
-                        height={22}
-                        viewBox="0 0 22 22"
-                        className="colorSecondary"
-                      >
-                        <g
-                          data-v-3162dcc5
-                          id="c-question"
-                          transform="translate(3.068 -8.774)"
+      {activeTab=== true && 
+        <div className="wrap-gauge-meter b-desktop">
+          <div className="wrap-gauge-meter-inner">
+            <div data-v-3162dcc5 className="gauge-meter">
+              <div className="gauge-meter-sub gauge-meter--os">
+                <div className="v-popover gauge-meter-popover">
+                  <div className="trigger inline-block">
+                    <h3 className="gauge-meter-title">
+                      Oscillators
+                      <span className="gauge-meter-title-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="22"
+                          height="22"
+                          viewBox="0 0 22 22"
                         >
-                          <g
-                            data-v-3162dcc5
-                            id="Ellipse_1825"
-                            data-name="Ellipse 1825"
-                            transform="translate(-2.068 9.774)"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="square"
-                            strokeMiterlimit={10}
-                            strokeWidth={1}
-                          >
-                            <circle
-                              data-v-3162dcc5
-                              cx={10}
-                              cy={10}
-                              r={10}
-                              stroke="none"
-                            />
-                            <circle
-                              data-v-3162dcc5
-                              cx={10}
-                              cy={10}
-                              r="10.5"
+                          <g id="c-question" transform="translate(3.068 -8.774)">
+                            <g
+                              id="Ellipse_1825"
+                              data-name="Ellipse 1825"
+                              transform="translate(-2.068 9.774)"
                               fill="none"
-                            />
+                              stroke="#fefefe"
+                              stroke-linecap="square"
+                              strokeMiterlimit="10"
+                              strokeWidth="1"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                r="10"
+                                stroke="none"
+                              ></circle>
+                              <circle
+                                cx="10"
+                                cy="10"
+                                r="10.5"
+                                fill="none"
+                              ></circle>
+                            </g>
+                            <g id="question" transform="translate(3.497 13.43)">
+                              <path
+                                id="Path_30768"
+                                data-name="Path 30768"
+                                d="M8.359,10.774a4.349,4.349,0,0,1,.4-2.323,5.026,5.026,0,0,1,1.4-1.421c1.317-.981,1.876-1.491,1.876-2.54,0-1.166-.924-1.637-2.166-1.637a7.306,7.306,0,0,0-3.334.866L5.694,2.063A9.2,9.2,0,0,1,10.035,1a4.89,4.89,0,0,1,3.1.9A3,3,0,0,1,14.287,4.4,3.24,3.24,0,0,1,13.4,6.7,10.58,10.58,0,0,1,11.872,8,5.71,5.71,0,0,0,10.63,9.137a2.68,2.68,0,0,0-.315,1.637H8.359Z"
+                                transform="translate(-5.694 -1)"
+                                fill="#fefefe"
+                              ></path>
+                              <ellipse
+                                id="Ellipse_1827"
+                                data-name="Ellipse 1827"
+                                cx="1.363"
+                                cy="1.284"
+                                rx="1.363"
+                                ry="1.284"
+                                transform="translate(2.252 11.56)"
+                                fill="#fefefe"
+                              ></ellipse>
+                            </g>
                           </g>
-                          <g
-                            data-v-3162dcc5
-                            id="question"
-                            transform="translate(3.497 13.43)"
-                          >
-                            <path
-                              data-v-3162dcc5
-                              id="Path_30768"
-                              data-name="Path 30768"
-                              d="M8.359,10.774a4.349,4.349,0,0,1,.4-2.323,5.026,5.026,0,0,1,1.4-1.421c1.317-.981,1.876-1.491,1.876-2.54,0-1.166-.924-1.637-2.166-1.637a7.306,7.306,0,0,0-3.334.866L5.694,2.063A9.2,9.2,0,0,1,10.035,1a4.89,4.89,0,0,1,3.1.9A3,3,0,0,1,14.287,4.4,3.24,3.24,0,0,1,13.4,6.7,10.58,10.58,0,0,1,11.872,8,5.71,5.71,0,0,0,10.63,9.137a2.68,2.68,0,0,0-.315,1.637H8.359Z"
-                              transform="translate(-5.694 -1)"
-                              fill="currentColor"
-                            />
-                            <ellipse
-                              data-v-3162dcc5
-                              id="Ellipse_1827"
-                              data-name="Ellipse 1827"
-                              cx="1.363"
-                              cy="1.284"
-                              rx="1.363"
-                              ry="1.284"
-                              transform="translate(2.252 11.56)"
-                              fill="currentColor"
-                            />
-                          </g>
-                        </g>
-                      </svg>
-                    </span>
-                  </h3>
-                </div>{" "}
-              </div>
-              <h4 data-v-3162dcc5 className="gauge-meter-sub-title">
-                Sell
-              </h4>
-              <div data-v-3162dcc5 className="gauge-meter-border">
-                <div
-                  data-v-3162dcc5
-                  className="gauge-meter-background rank-2"
-                />
-                <ul data-v-3162dcc5 className="gauge-meter-label-list">
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--strong-sell"
-                  >
-                    strong
-                    <br data-v-3162dcc5 />
-                    sell
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--sell active"
-                  >
-                    sell
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--neutral"
-                  >
-                    neutral
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--buy"
-                  >
-                    buy
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--strong-buy"
-                  >
-                    strong
-                    <br data-v-3162dcc5 />
-                    buy
-                  </li>
-                </ul>
-                <ul data-v-3162dcc5 className="gauge-meter-status-list mb-0">
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--sell"
-                    >
-                      5
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Sell
-                    </span>
-                  </li>
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--neutral"
-                    >
-                      2
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Neutral
-                    </span>
-                  </li>
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--buy"
-                    >
-                      2
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Buy
-                    </span>
-                  </li>
-                </ul>
-                <div
-                  data-v-3162dcc5
-                  className="gauge-meter-pane"
-                  data-highcharts-chart={0}
-                  style={{ overflow: "hidden" }}
-                >
-                  <div
-                    id="highcharts-gj2uu9e-0"
-                    dir="ltr"
-                    className="highcharts-container "
-                    style={{
-                      position: "relative",
-                      overflow: "hidden",
-                      width: "70px",
-                      height: "35px",
-                      textAlign: "left",
-                      lineHeight: "normal",
-                      zIndex: 0,
-                      WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
-                      userSelect: "none",
-                    }}
-                  >
-                    <svg
-                      version="1.1"
-                      className="highcharts-root"
-                      style={{
-                        fontFamily:
-                          '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif',
-                        fontSize: "12px",
-                      }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={70}
-                      height={35}
-                      viewBox="0 0 70 35"
-                    >
-                      <desc>Created with Highcharts 8.2.2</desc>
-                      <defs>
-                        <clipPath id="highcharts-gj2uu9e-2-">
-                          <rect
-                            x={0}
-                            y={0}
-                            width={70}
-                            height={35}
-                            fill="none"
-                          />
-                        </clipPath>
-                        <linearGradient
-                          x1={1}
-                          y1={0}
-                          x2={0}
-                          y2={0}
-                          id="highcharts-gj2uu9e-3"
-                        >
-                          <stop offset={0} stopColor="#fff" stopOpacity={1} />
-                          <stop offset={1} stopColor="#000" stopOpacity={1} />
-                        </linearGradient>
-                      </defs>
-                      <rect
-                        fill="rgba(0,0,0,0)"
-                        className="highcharts-background"
-                        x={0}
-                        y={0}
-                        width={70}
-                        height={35}
-                        rx={0}
-                        ry={0}
-                      />
-                      <rect
-                        fill="none"
-                        className="highcharts-plot-background"
-                        x={0}
-                        y={0}
-                        width={70}
-                        height={35}
-                      />
-                      <g className="highcharts-pane-group" data-z-index={0} />
-                      <rect
-                        fill="none"
-                        className="highcharts-plot-border"
-                        data-z-index={1}
-                        x={0}
-                        y={0}
-                        width={70}
-                        height={35}
-                      />
-                      <g
-                        className="highcharts-grid highcharts-yaxis-grid"
-                        data-z-index={1}
-                      >
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 0.5317286445727163 30.67231378165744"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 12.502433660971121 9.93844449083577"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 35 1.75"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 57.49756633902888 9.938444490835774"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 69.46827135542728 30.672313781657444"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          data-z-index={1}
-                          className="highcharts-grid-line"
-                          d="M 35 36.75 L 35 1.75"
-                          opacity={1}
-                        />
-                      </g>
-                      <g
-                        className="highcharts-axis highcharts-yaxis"
-                        data-z-index={2}
-                      >
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 0.5317286445727163 30.67231378165744 L -9.31634888554936 28.935832004988136"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 12.502433660971121 9.93844449083577 L 6.074557564105728 2.27800005964599"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 35 1.75 L 35 -8.25"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 57.49756633902888 9.938444490835774 L 63.925442435894276 2.278000059645997"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 69.46827135542728 30.672313781657444 L 79.31634888554936 28.935832004988143"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={2}
-                          d="M 35 1.75 L 35 -8.25"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-axis-line"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          data-z-index={7}
-                          d="M 0 36.74999999999999 A 35 35 0 0 1 69.99998250000147 36.71500000583333 M 35 36.75 A 0 0 0 0 0 35 36.75"
-                        />
-                      </g>
-                      <g className="highcharts-series-group" data-z-index={3}>
-                        <g
-                          className="highcharts-series highcharts-series-0 highcharts-gauge-series highcharts-color-0 highcharts-tracker"
-                          data-z-index="0.1"
-                          opacity={1}
-                          transform="translate(0,0) scale(1 1)"
-                          clipPath="url(#highcharts-gj2uu9e-2-)"
-                        >
-                          <path
-                            fill="url(#highcharts-gj2uu9e-3)"
-                            d="M 0 -3 L 0.2975 -3 L 29.75 -1.5 L 29.75 1.5 L 0.2975 3 L 0 3 Z"
-                            transform="translate(35,36.75) rotate(-128.57142857142856 0 0)"
-                            data-z-index={1}
-                            className="highcharts-dial"
-                          />
-                          <circle
-                            cx={0}
-                            cy={0}
-                            r={5}
-                            data-z-index={2}
-                            className="highcharts-pivot"
-                            transform="translate(35,36.75)"
-                            fill="#000000"
-                          />
-                        </g>
-                        <g
-                          className="highcharts-markers highcharts-series-0 highcharts-gauge-series highcharts-color-0"
-                          data-z-index="0.1"
-                          opacity={1}
-                          transform="translate(0,0) scale(1 1)"
-                          clipPath="none"
-                        />
-                      </g>
-                      <text
-                        x={35}
-                        textAnchor="middle"
-                        className="highcharts-title"
-                        data-z-index={4}
-                        style={{
-                          color: "#333333",
-                          fontSize: "18px",
-                          fill: "#333333",
-                        }}
-                        y={14}
-                      />
-                      <text
-                        x={35}
-                        textAnchor="middle"
-                        className="highcharts-subtitle"
-                        data-z-index={4}
-                        style={{ color: "#666666", fill: "#666666" }}
-                        y={14}
-                      />
-                      <text
-                        x={0}
-                        textAnchor="start"
-                        className="highcharts-caption"
-                        data-z-index={4}
-                        style={{ color: "#666666", fill: "#666666" }}
-                        y={47}
-                      />
-                      <g className="highcharts-legend" data-z-index={7}>
-                        <rect
-                          fill="none"
-                          className="highcharts-legend-box"
-                          rx={0}
-                          ry={0}
-                          x={0}
-                          y={0}
-                          width={8}
-                          height={8}
-                          visibility="hidden"
-                        />
-                        <g data-z-index={1}>
-                          <g />
-                        </g>
-                      </g>
-                      <g
-                        className="highcharts-axis-labels highcharts-yaxis-labels"
-                        data-z-index={7}
-                      >
-                        <text
-                          x={35}
-                          style={{
-                            color: "rgba(0,0,0,0)",
-                            cursor: "default",
-                            fontSize: "11px",
-                            fill: "rgba(0,0,0,0)",
-                          }}
-                          textAnchor="middle"
-                          transform="translate(0,0)"
-                          y="1.75"
-                          opacity={1}
-                        >
-                          0
-                        </text>
-                      </g>
-                    </svg>
+                        </svg>
+                      </span>
+                    </h3>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div data-v-3162dcc5 className="gauge-meter-sub gauge-meter--su">
-              <div data-v-3162dcc5 className="v-popover gauge-meter-popover">
-                <div className="trigger" style={{ display: "inline-block" }}>
-                  <h3 data-v-3162dcc5 className="gauge-meter-title">
-                    Summary
-                    <span data-v-3162dcc5 className="gauge-meter-title-icon">
-                      <svg
-                        data-v-3162dcc5
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={22}
-                        height={22}
-                        viewBox="0 0 22 22"
-                        className="colorSecondary"
-                      >
-                        <g
-                          data-v-3162dcc5
-                          id="c-question"
-                          transform="translate(3.068 -8.774)"
-                        >
-                          <g
-                            data-v-3162dcc5
-                            id="Ellipse_1825"
-                            data-name="Ellipse 1825"
-                            transform="translate(-2.068 9.774)"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="square"
-                            strokeMiterlimit={10}
-                            strokeWidth={1}
-                          >
-                            <circle
-                              data-v-3162dcc5
-                              cx={10}
-                              cy={10}
-                              r={10}
-                              stroke="none"
-                            />
-                            <circle
-                              data-v-3162dcc5
-                              cx={10}
-                              cy={10}
-                              r="10.5"
-                              fill="none"
-                            />
-                          </g>
-                          <g
-                            data-v-3162dcc5
-                            id="question"
-                            transform="translate(3.497 13.43)"
-                          >
-                            <path
-                              data-v-3162dcc5
-                              id="Path_30768"
-                              data-name="Path 30768"
-                              d="M8.359,10.774a4.349,4.349,0,0,1,.4-2.323,5.026,5.026,0,0,1,1.4-1.421c1.317-.981,1.876-1.491,1.876-2.54,0-1.166-.924-1.637-2.166-1.637a7.306,7.306,0,0,0-3.334.866L5.694,2.063A9.2,9.2,0,0,1,10.035,1a4.89,4.89,0,0,1,3.1.9A3,3,0,0,1,14.287,4.4,3.24,3.24,0,0,1,13.4,6.7,10.58,10.58,0,0,1,11.872,8,5.71,5.71,0,0,0,10.63,9.137a2.68,2.68,0,0,0-.315,1.637H8.359Z"
-                              transform="translate(-5.694 -1)"
-                              fill="currentColor"
-                            />
-                            <ellipse
-                              data-v-3162dcc5
-                              id="Ellipse_1827"
-                              data-name="Ellipse 1827"
-                              cx="1.363"
-                              cy="1.284"
-                              rx="1.363"
-                              ry="1.284"
-                              transform="translate(2.252 11.56)"
-                              fill="currentColor"
-                            />
-                          </g>
-                        </g>
-                      </svg>
-                    </span>
-                  </h3>
-                </div>{" "}
-              </div>
-              <h4 data-v-3162dcc5 className="gauge-meter-sub-title">
-                Sell
-              </h4>
-              <div data-v-3162dcc5 className="gauge-meter-border">
-                <div
-                  data-v-3162dcc5
-                  className="gauge-meter-background rank-2"
-                />
-                <ul data-v-3162dcc5 className="gauge-meter-label-list">
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--strong-sell"
-                  >
-                    strong
-                    <br data-v-3162dcc5 />
-                    sell
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--sell active"
-                  >
-                    sell
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--neutral"
-                  >
-                    neutral
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--buy"
-                  >
-                    buy
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--strong-buy"
-                  >
-                    strong
-                    <br data-v-3162dcc5 />
-                    buy
-                  </li>
-                </ul>
-                <ul data-v-3162dcc5 className="gauge-meter-status-list mb-0">
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--sell"
-                    >
-                      15
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Sell
-                    </span>
-                  </li>
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--neutral"
-                    >
-                      2
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Neutral
-                    </span>
-                  </li>
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--buy"
-                    >
-                      4
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Buy
-                    </span>
-                  </li>
-                </ul>
-                <div
-                  data-v-3162dcc5
-                  className="gauge-meter-pane"
-                  data-highcharts-chart={1}
-                  style={{ overflow: "hidden" }}
-                >
-                  <div
-                    id="highcharts-gj2uu9e-6"
-                    dir="ltr"
-                    className="highcharts-container "
-                    style={{
-                      position: "relative",
-                      overflow: "hidden",
-                      width: "88px",
-                      height: "44px",
-                      textAlign: "left",
-                      lineHeight: "normal",
-                      zIndex: 0,
-                      WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
-                      userSelect: "none",
-                    }}
-                  >
-                    <svg
-                      version="1.1"
-                      className="highcharts-root"
-                      style={{
-                        fontFamily:
-                          '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif',
-                        fontSize: "12px",
-                      }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={88}
-                      height={44}
-                      viewBox="0 0 88 44"
-                    >
-                      <desc>Created with Highcharts 8.2.2</desc>
-                      <defs>
-                        <clipPath id="highcharts-gj2uu9e-8-">
-                          <rect
-                            x={0}
-                            y={0}
-                            width={88}
-                            height={44}
-                            fill="none"
-                          />
-                        </clipPath>
-                        <linearGradient
-                          x1={1}
-                          y1={0}
-                          x2={0}
-                          y2={0}
-                          id="highcharts-gj2uu9e-9"
-                        >
-                          <stop offset={0} stopColor="#fff" stopOpacity={1} />
-                          <stop offset={1} stopColor="#000" stopOpacity={1} />
-                        </linearGradient>
-                      </defs>
-                      <rect
-                        fill="rgba(0,0,0,0)"
-                        className="highcharts-background"
-                        x={0}
-                        y={0}
-                        width={88}
-                        height={44}
-                        rx={0}
-                        ry={0}
-                      />
-                      <rect
-                        fill="none"
-                        className="highcharts-plot-background"
-                        x={0}
-                        y={0}
-                        width={88}
-                        height={44}
-                      />
-                      <g className="highcharts-pane-group" data-z-index={0} />
-                      <rect
-                        fill="none"
-                        className="highcharts-plot-border"
-                        data-z-index={1}
-                        x={0}
-                        y={0}
-                        width={88}
-                        height={44}
-                      />
-                      <g
-                        className="highcharts-grid highcharts-yaxis-grid"
-                        data-z-index={1}
-                      >
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 0.6684588674628458 38.55948018265507"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 5.894882233484694 24.200000000000006"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 15.717345173792268 12.494044502764972"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 28.951113693670578 4.853524685420034"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 44 2.200000000000003"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 59.04888630632943 4.853524685420034"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 72.28265482620773 12.494044502764979"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 82.1051177665153 24.20000000000001"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 44 46.2 L 87.33154113253715 38.55948018265508"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          data-z-index={1}
-                          className="highcharts-grid-line"
-                          d="M 44 46.2 L 44 2.200000000000003"
-                          opacity={1}
-                        />
-                      </g>
-                      <g
-                        className="highcharts-axis highcharts-yaxis"
-                        data-z-index={2}
-                      >
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 0.6684588674628458 38.55948018265507 L -9.17961866265923 36.82299840598577"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 5.894882233484694 24.200000000000006 L -2.765371804359688 19.200000000000006"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 15.717345173792268 12.494044502764972 L 9.289469076926878 4.833600071575191"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 28.951113693670578 4.853524685420034 L 25.53091226041389 -4.543401522439055"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 44 2.200000000000003 L 44 -7.799999999999997"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 59.04888630632943 4.853524685420034 L 62.469087739586115 -4.543401522439048"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 72.28265482620773 12.494044502764979 L 78.71053092307312 4.833600071575198"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 82.1051177665153 24.20000000000001 L 90.76537180435969 19.200000000000014"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 87.33154113253715 38.55948018265508 L 97.17961866265924 36.82299840598577"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={2}
-                          d="M 44 2.200000000000003 L 44 -7.799999999999997"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-axis-line"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          data-z-index={7}
-                          d="M 0 46.199999999999996 A 44 44 0 0 1 87.99997800000183 46.15600000733333 M 44 46.2 A 0 0 0 0 0 44 46.2"
-                        />
-                      </g>
-                      <g className="highcharts-series-group" data-z-index={3}>
-                        <g
-                          className="highcharts-series highcharts-series-0 highcharts-gauge-series highcharts-color-0 highcharts-tracker"
-                          data-z-index="0.1"
-                          opacity={1}
-                          transform="translate(0,0) scale(1 1)"
-                          clipPath="url(#highcharts-gj2uu9e-8-)"
-                        >
-                          <path
-                            fill="url(#highcharts-gj2uu9e-9)"
-                            d="M 0 -3 L 0.374 -3 L 37.4 -1.5 L 37.4 1.5 L 0.374 3 L 0 3 Z"
-                            transform="translate(44,46.2) rotate(-146.70628210526317 0 0)"
-                            data-z-index={1}
-                            className="highcharts-dial"
-                          />
-                          <circle
-                            cx={0}
-                            cy={0}
-                            r={5}
-                            data-z-index={2}
-                            className="highcharts-pivot"
-                            transform="translate(44,46.2)"
-                            fill="#000000"
-                          />
-                        </g>
-                        <g
-                          className="highcharts-markers highcharts-series-0 highcharts-gauge-series highcharts-color-0"
-                          data-z-index="0.1"
-                          opacity={1}
-                          transform="translate(0,0) scale(1 1)"
-                          clipPath="none"
-                        />
-                      </g>
-                      <text
-                        x={44}
-                        textAnchor="middle"
-                        className="highcharts-title"
-                        data-z-index={4}
-                        style={{
-                          color: "#333333",
-                          fontSize: "18px",
-                          fill: "#333333",
-                        }}
-                        y={14}
-                      />
-                      <text
-                        x={44}
-                        textAnchor="middle"
-                        className="highcharts-subtitle"
-                        data-z-index={4}
-                        style={{ color: "#666666", fill: "#666666" }}
-                        y={14}
-                      />
-                      <text
-                        x={0}
-                        textAnchor="start"
-                        className="highcharts-caption"
-                        data-z-index={4}
-                        style={{ color: "#666666", fill: "#666666" }}
-                        y={56}
-                      />
-                      <g className="highcharts-legend" data-z-index={7}>
-                        <rect
-                          fill="none"
-                          className="highcharts-legend-box"
-                          rx={0}
-                          ry={0}
-                          x={0}
-                          y={0}
-                          width={8}
-                          height={8}
-                          visibility="hidden"
-                        />
-                        <g data-z-index={1}>
-                          <g />
-                        </g>
-                      </g>
-                      <g
-                        className="highcharts-axis-labels highcharts-yaxis-labels"
-                        data-z-index={7}
-                      >
-                        <text
-                          x={44}
-                          style={{
-                            color: "rgba(0,0,0,0)",
-                            cursor: "default",
-                            fontSize: "11px",
-                            fill: "rgba(0,0,0,0)",
-                          }}
-                          textAnchor="middle"
-                          transform="translate(0,0)"
-                          y="2.200000000000003"
-                          opacity={1}
-                        >
-                          0
-                        </text>
-                      </g>
-                    </svg>
-                  </div>
+                <h4 className="gauge-meter-sub-title">{textTitleOs}</h4>
+                <div data-v-3162dcc5 className="gauge-meter-border">
+                  <div className="gauge-meter-background rank-2"></div>
+                  <ul className="gauge-meter-label-list">
+                    <li className="gauge-meter-label-item gauge-meter-label-item--strong-sell">
+                      strong
+                      <br />
+                      sell
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--sell active">
+                      sell
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--neutral">
+                      neutral
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--buy">
+                      buy
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--strong-buy">
+                      strong
+                      <br />
+                      buy
+                    </li>
+                  </ul>
+                  <ul className="gauge-meter-status-list">
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--sell">
+                        {NumOscSELL}
+                      </span>
+                      <span className="gauge-meter-status-text">Sell</span>
+                    </li>
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--neutral">
+                        {NumOscNeutral}
+                      </span>
+                      <span className="gauge-meter-status-text">Neutral</span>
+                    </li>
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--buy">
+                        {NumOscBUY}
+                      </span>
+                      <span className="gauge-meter-status-text">Buy</span>
+                    </li>
+                  </ul>
+                  <Chart
+                    ref={chartOs}
+                    className="gauge-meter-pane"
+                    options={optionsOs}
+                  ></Chart>
                 </div>
               </div>
-            </div>
-            <div data-v-3162dcc5 className="gauge-meter-sub gauge-meter--ma">
-              <div data-v-3162dcc5 className="v-popover gauge-meter-popover">
-                <div className="trigger" style={{ display: "inline-block" }}>
-                  <h3 data-v-3162dcc5 className="gauge-meter-title">
-                    Moving Averages
-                    <span data-v-3162dcc5 className="gauge-meter-title-icon">
-                      <svg
-                        data-v-3162dcc5
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={22}
-                        height={22}
-                        viewBox="0 0 22 22"
-                        className="colorSecondary"
-                      >
-                        <g
-                          data-v-3162dcc5
-                          id="c-question"
-                          transform="translate(3.068 -8.774)"
+              <div className="gauge-meter-sub gauge-meter--su">
+                <div className="v-popover gauge-meter-popover">
+                  <div className="trigger" style={{ display: "inlineBlock" }}>
+                    <h3 className="gauge-meter-title">
+                      Summary
+                      <span className="gauge-meter-title-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="22"
+                          height="22"
+                          viewBox="0 0 22 22"
                         >
-                          <g
-                            data-v-3162dcc5
-                            id="Ellipse_1825"
-                            data-name="Ellipse 1825"
-                            transform="translate(-2.068 9.774)"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeLinecap="square"
-                            strokeMiterlimit={10}
-                            strokeWidth={1}
-                          >
-                            <circle
-                              data-v-3162dcc5
-                              cx={10}
-                              cy={10}
-                              r={10}
-                              stroke="none"
-                            />
-                            <circle
-                              data-v-3162dcc5
-                              cx={10}
-                              cy={10}
-                              r="10.5"
+                          <g id="c-question" transform="translate(3.068 -8.774)">
+                            <g
+                              id="Ellipse_1825"
+                              data-name="Ellipse 1825"
+                              transform="translate(-2.068 9.774)"
                               fill="none"
-                            />
+                              stroke="#fefefe"
+                              stroke-linecap="square"
+                              strokeMiterlimit="10"
+                              strokeWidth="1"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                r="10"
+                                stroke="none"
+                              ></circle>
+                              <circle
+                                cx="10"
+                                cy="10"
+                                r="10.5"
+                                fill="none"
+                              ></circle>
+                            </g>
+                            <g id="question" transform="translate(3.497 13.43)">
+                              <path
+                                id="Path_30768"
+                                data-name="Path 30768"
+                                d="M8.359,10.774a4.349,4.349,0,0,1,.4-2.323,5.026,5.026,0,0,1,1.4-1.421c1.317-.981,1.876-1.491,1.876-2.54,0-1.166-.924-1.637-2.166-1.637a7.306,7.306,0,0,0-3.334.866L5.694,2.063A9.2,9.2,0,0,1,10.035,1a4.89,4.89,0,0,1,3.1.9A3,3,0,0,1,14.287,4.4,3.24,3.24,0,0,1,13.4,6.7,10.58,10.58,0,0,1,11.872,8,5.71,5.71,0,0,0,10.63,9.137a2.68,2.68,0,0,0-.315,1.637H8.359Z"
+                                transform="translate(-5.694 -1)"
+                                fill="#fefefe"
+                              ></path>
+                              <ellipse
+                                id="Ellipse_1827"
+                                data-name="Ellipse 1827"
+                                cx="1.363"
+                                cy="1.284"
+                                rx="1.363"
+                                ry="1.284"
+                                transform="translate(2.252 11.56)"
+                                fill="#fefefe"
+                              ></ellipse>
+                            </g>
                           </g>
-                          <g
-                            data-v-3162dcc5
-                            id="question"
-                            transform="translate(3.497 13.43)"
-                          >
-                            <path
-                              data-v-3162dcc5
-                              id="Path_30768"
-                              data-name="Path 30768"
-                              d="M8.359,10.774a4.349,4.349,0,0,1,.4-2.323,5.026,5.026,0,0,1,1.4-1.421c1.317-.981,1.876-1.491,1.876-2.54,0-1.166-.924-1.637-2.166-1.637a7.306,7.306,0,0,0-3.334.866L5.694,2.063A9.2,9.2,0,0,1,10.035,1a4.89,4.89,0,0,1,3.1.9A3,3,0,0,1,14.287,4.4,3.24,3.24,0,0,1,13.4,6.7,10.58,10.58,0,0,1,11.872,8,5.71,5.71,0,0,0,10.63,9.137a2.68,2.68,0,0,0-.315,1.637H8.359Z"
-                              transform="translate(-5.694 -1)"
-                              fill="currentColor"
-                            />
-                            <ellipse
-                              data-v-3162dcc5
-                              id="Ellipse_1827"
-                              data-name="Ellipse 1827"
-                              cx="1.363"
-                              cy="1.284"
-                              rx="1.363"
-                              ry="1.284"
-                              transform="translate(2.252 11.56)"
-                              fill="currentColor"
-                            />
-                          </g>
-                        </g>
-                      </svg>
-                    </span>
-                  </h3>
-                </div>{" "}
-              </div>
-              <h4 data-v-3162dcc5 className="gauge-meter-sub-title">
-                Strong sell
-              </h4>
-              <div data-v-3162dcc5 className="gauge-meter-border">
-                <div
-                  data-v-3162dcc5
-                  className="gauge-meter-background rank-1"
-                />
-                <ul data-v-3162dcc5 className="gauge-meter-label-list">
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--strong-sell active"
-                  >
-                    strong
-                    <br data-v-3162dcc5 />
-                    sell
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--sell"
-                  >
-                    sell
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--neutral"
-                  >
-                    neutral
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--buy"
-                  >
-                    buy
-                  </li>
-                  <li
-                    data-v-3162dcc5
-                    className="gauge-meter-label-item gauge-meter-label-item--strong-buy"
-                  >
-                    strong
-                    <br data-v-3162dcc5 />
-                    buy
-                  </li>
-                </ul>
-                <ul data-v-3162dcc5 className="gauge-meter-status-list mb-0">
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--sell"
-                    >
-                      10
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Sell
-                    </span>
-                  </li>
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--neutral"
-                    >
-                      0
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Neutral
-                    </span>
-                  </li>
-                  <li data-v-3162dcc5 className="gauge-meter-status-item">
-                    <span
-                      data-v-3162dcc5
-                      className="gauge-meter-status-value gauge-meter-status-value--buy"
-                    >
-                      2
-                    </span>
-                    <span data-v-3162dcc5 className="gauge-meter-status-text">
-                      Buy
-                    </span>
-                  </li>
-                </ul>
-                <div
-                  data-v-3162dcc5
-                  className="gauge-meter-pane"
-                  data-highcharts-chart={2}
-                  style={{ overflow: "hidden" }}
-                >
-                  <div
-                    id="highcharts-gj2uu9e-12"
-                    dir="ltr"
-                    className="highcharts-container "
-                    style={{
-                      position: "relative",
-                      overflow: "hidden",
-                      width: "70px",
-                      height: "35px",
-                      textAlign: "left",
-                      lineHeight: "normal",
-                      zIndex: 0,
-                      WebkitTapHighlightColor: "rgba(0, 0, 0, 0)",
-                      userSelect: "none",
-                    }}
-                  >
-                    <svg
-                      version="1.1"
-                      className="highcharts-root"
-                      style={{
-                        fontFamily:
-                          '"Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, sans-serif',
-                        fontSize: "12px",
-                      }}
-                      xmlns="http://www.w3.org/2000/svg"
-                      width={70}
-                      height={35}
-                      viewBox="0 0 70 35"
-                    >
-                      <desc>Created with Highcharts 8.2.2</desc>
-                      <defs>
-                        <clipPath id="highcharts-gj2uu9e-14-">
-                          <rect
-                            x={0}
-                            y={0}
-                            width={70}
-                            height={35}
-                            fill="none"
-                          />
-                        </clipPath>
-                        <linearGradient
-                          x1={1}
-                          y1={0}
-                          x2={0}
-                          y2={0}
-                          id="highcharts-gj2uu9e-15"
-                        >
-                          <stop offset={0} stopColor="#fff" stopOpacity={1} />
-                          <stop offset={1} stopColor="#000" stopOpacity={1} />
-                        </linearGradient>
-                      </defs>
-                      <rect
-                        fill="rgba(0,0,0,0)"
-                        className="highcharts-background"
-                        x={0}
-                        y={0}
-                        width={70}
-                        height={35}
-                        rx={0}
-                        ry={0}
-                      />
-                      <rect
-                        fill="none"
-                        className="highcharts-plot-background"
-                        x={0}
-                        y={0}
-                        width={70}
-                        height={35}
-                      />
-                      <g className="highcharts-pane-group" data-z-index={0} />
-                      <rect
-                        fill="none"
-                        className="highcharts-plot-border"
-                        data-z-index={1}
-                        x={0}
-                        y={0}
-                        width={70}
-                        height={35}
-                      />
-                      <g
-                        className="highcharts-grid highcharts-yaxis-grid"
-                        data-z-index={1}
-                      >
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 0.5317286445727163 30.67231378165744"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 12.502433660971121 9.93844449083577"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 35 1.75"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 57.49756633902888 9.938444490835774"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-grid-line"
-                          d="M 35 36.75 L 69.46827135542728 30.672313781657444"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          data-z-index={1}
-                          className="highcharts-grid-line"
-                          d="M 35 36.75 L 35 1.75"
-                          opacity={1}
-                        />
-                      </g>
-                      <g
-                        className="highcharts-axis highcharts-yaxis"
-                        data-z-index={2}
-                      >
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 0.5317286445727163 30.67231378165744 L -9.31634888554936 28.935832004988136"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 12.502433660971121 9.93844449083577 L 6.074557564105728 2.27800005964599"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 35 1.75 L 35 -8.25"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 57.49756633902888 9.938444490835774 L 63.925442435894276 2.278000059645997"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-minor-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          d="M 69.46827135542728 30.672313781657444 L 79.31634888554936 28.935832004988143"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-tick"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={2}
-                          d="M 35 1.75 L 35 -8.25"
-                          opacity={1}
-                        />
-                        <path
-                          fill="none"
-                          className="highcharts-axis-line"
-                          stroke="rgba(0,0,0,0)"
-                          strokeWidth={1}
-                          data-z-index={7}
-                          d="M 0 36.74999999999999 A 35 35 0 0 1 69.99998250000147 36.71500000583333 M 35 36.75 A 0 0 0 0 0 35 36.75"
-                        />
-                      </g>
-                      <g className="highcharts-series-group" data-z-index={3}>
-                        <g
-                          className="highcharts-series highcharts-series-0 highcharts-gauge-series highcharts-color-0 highcharts-tracker"
-                          data-z-index="0.1"
-                          opacity={1}
-                          transform="translate(0,0) scale(1 1)"
-                          clipPath="url(#highcharts-gj2uu9e-14-)"
-                        >
-                          <path
-                            fill="url(#highcharts-gj2uu9e-15)"
-                            d="M 0 -3 L 0.2975 -3 L 29.75 -1.5 L 29.75 1.5 L 0.2975 3 L 0 3 Z"
-                            transform="translate(35,36.75) rotate(-154.88599500000004 0 0)"
-                            data-z-index={1}
-                            className="highcharts-dial"
-                          />
-                          <circle
-                            cx={0}
-                            cy={0}
-                            r={5}
-                            data-z-index={2}
-                            className="highcharts-pivot"
-                            transform="translate(35,36.75)"
-                            fill="#000000"
-                          />
-                        </g>
-                        <g
-                          className="highcharts-markers highcharts-series-0 highcharts-gauge-series highcharts-color-0"
-                          data-z-index="0.1"
-                          opacity={1}
-                          transform="translate(0,0) scale(1 1)"
-                          clipPath="none"
-                        />
-                      </g>
-                      <text
-                        x={35}
-                        textAnchor="middle"
-                        className="highcharts-title"
-                        data-z-index={4}
-                        style={{
-                          color: "#333333",
-                          fontSize: "18px",
-                          fill: "#333333",
-                        }}
-                        y={14}
-                      />
-                      <text
-                        x={35}
-                        textAnchor="middle"
-                        className="highcharts-subtitle"
-                        data-z-index={4}
-                        style={{ color: "#666666", fill: "#666666" }}
-                        y={14}
-                      />
-                      <text
-                        x={0}
-                        textAnchor="start"
-                        className="highcharts-caption"
-                        data-z-index={4}
-                        style={{ color: "#666666", fill: "#666666" }}
-                        y={47}
-                      />
-                      <g className="highcharts-legend" data-z-index={7}>
-                        <rect
-                          fill="none"
-                          className="highcharts-legend-box"
-                          rx={0}
-                          ry={0}
-                          x={0}
-                          y={0}
-                          width={8}
-                          height={8}
-                          visibility="hidden"
-                        />
-                        <g data-z-index={1}>
-                          <g />
-                        </g>
-                      </g>
-                      <g
-                        className="highcharts-axis-labels highcharts-yaxis-labels"
-                        data-z-index={7}
-                      >
-                        <text
-                          x={35}
-                          style={{
-                            color: "rgba(0,0,0,0)",
-                            cursor: "default",
-                            fontSize: "11px",
-                            fill: "rgba(0,0,0,0)",
-                          }}
-                          textAnchor="middle"
-                          transform="translate(0,0)"
-                          y="1.75"
-                          opacity={1}
-                        >
-                          0
-                        </text>
-                      </g>
-                    </svg>
+                        </svg>
+                      </span>
+                    </h3>
                   </div>
+                </div>
+                <h4 className="gauge-meter-sub-title">{textTitleSu}</h4>
+                <div className="gauge-meter-border">
+                  <div className="gauge-meter-background rank-3"></div>
+                  <ul className="gauge-meter-label-list">
+                    <li className="gauge-meter-label-item gauge-meter-label-item--strong-sell">
+                      strong
+                      <br />
+                      sell
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--sell">
+                      sell
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--neutral active">
+                      neutral
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--buy">
+                      buy
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--strong-buy">
+                      strong
+                      <br />
+                      buy
+                    </li>
+                  </ul>
+                  <ul className="gauge-meter-status-list">
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--sell">
+                        {NumSumSELL}
+                      </span>
+                      <span className="gauge-meter-status-text">Sell</span>
+                    </li>
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--neutral">
+                        {NumSumNeutral}
+                      </span>
+                      <span className="gauge-meter-status-text">Neutral</span>
+                    </li>
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--buy">
+                        {NumSumBUY}
+                      </span>
+                      <span className="gauge-meter-status-text">Buy</span>
+                    </li>
+                  </ul>
+                  <Chart
+                    className="gauge-meter-pane"
+                    options={optionsSu}
+                    ref={chartSu}
+                  ></Chart>
+                </div>
+              </div>
+              <div className="gauge-meter-sub gauge-meter--ma">
+                <div className="v-popover gauge-meter-popover">
+                  <div className="trigger" style={{ display: "inlineBlock" }}>
+                    <h3 className="gauge-meter-title">
+                      Moving Averages
+                      <span className="gauge-meter-title-icon">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="22"
+                          height="22"
+                          viewBox="0 0 22 22"
+                        >
+                          <g id="c-question" transform="translate(3.068 -8.774)">
+                            <g
+                              id="Ellipse_1825"
+                              data-name="Ellipse 1825"
+                              transform="translate(-2.068 9.774)"
+                              fill="none"
+                              stroke="#fefefe"
+                              stroke-linecap="square"
+                              strokeMiterlimit="10"
+                              strokeWidth="1"
+                            >
+                              <circle
+                                cx="10"
+                                cy="10"
+                                r="10"
+                                stroke="none"
+                              ></circle>
+                              <circle
+                                cx="10"
+                                cy="10"
+                                r="10.5"
+                                fill="none"
+                              ></circle>
+                            </g>
+                            <g id="question" transform="translate(3.497 13.43)">
+                              <path
+                                id="Path_30768"
+                                data-name="Path 30768"
+                                d="M8.359,10.774a4.349,4.349,0,0,1,.4-2.323,5.026,5.026,0,0,1,1.4-1.421c1.317-.981,1.876-1.491,1.876-2.54,0-1.166-.924-1.637-2.166-1.637a7.306,7.306,0,0,0-3.334.866L5.694,2.063A9.2,9.2,0,0,1,10.035,1a4.89,4.89,0,0,1,3.1.9A3,3,0,0,1,14.287,4.4,3.24,3.24,0,0,1,13.4,6.7,10.58,10.58,0,0,1,11.872,8,5.71,5.71,0,0,0,10.63,9.137a2.68,2.68,0,0,0-.315,1.637H8.359Z"
+                                transform="translate(-5.694 -1)"
+                                fill="#fefefe"
+                              ></path>
+                              <ellipse
+                                id="Ellipse_1827"
+                                data-name="Ellipse 1827"
+                                cx="1.363"
+                                cy="1.284"
+                                rx="1.363"
+                                ry="1.284"
+                                transform="translate(2.252 11.56)"
+                                fill="#fefefe"
+                              ></ellipse>
+                            </g>
+                          </g>
+                        </svg>
+                      </span>
+                    </h3>
+                  </div>
+                </div>
+                <h4 className="gauge-meter-sub-title">{textTitleMa}</h4>
+                <div className="gauge-meter-border">
+                  <div className="gauge-meter-background rank-3"></div>
+                  <ul className="gauge-meter-label-list">
+                    <li className="gauge-meter-label-item gauge-meter-label-item--strong-sell">
+                      strong
+                      <br />
+                      sell
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--sell">
+                      sell
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--neutral active">
+                      neutral
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--buy">
+                      buy
+                    </li>
+                    <li className="gauge-meter-label-item gauge-meter-label-item--strong-buy">
+                      strong
+                      <br />
+                      buy
+                    </li>
+                  </ul>
+                  <ul className="gauge-meter-status-list">
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--sell">
+                        {NumMovSELL}
+                      </span>
+                      <span className="gauge-meter-status-text">Sell</span>
+                    </li>
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--neutral">
+                        {NumMovNeutral}
+                      </span>
+                      <span className="gauge-meter-status-text">Neutral</span>
+                    </li>
+                    <li className="gauge-meter-status-item">
+                      <span className="gauge-meter-status-value gauge-meter-status-value--buy">
+                        {NumMovBUY}
+                      </span>
+                      <span className="gauge-meter-status-text">Buy</span>
+                    </li>
+                  </ul>
+                  <Chart
+                    className="gauge-meter-pane"
+                    options={optionsMa}
+                    ref={chartMa}
+                  ></Chart>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div data-v-0dc9f329 id="historyBox" className="historyBox">
-        <div data-v-52f11851 data-v-0dc9f329 className="blockResult">
-          <div data-v-52f11851 className="row">
-            <div data-v-52f11851 className="col">
-              <canvas
-                data-v-ce6a65e8
-                data-v-52f11851
-                id="cv_0"
-                width={340}
-                height={290}
-              />
-            </div>
-            <div data-v-52f11851 className="col">
-              <canvas
-                data-v-ce6a65e8
-                data-v-52f11851
-                id="cv_1"
-                width={340}
-                height={290}
-              />
-            </div>
-            <div data-v-52f11851 className="col">
-              <canvas
-                data-v-ce6a65e8
-                data-v-52f11851
-                id="cv_2"
-                width={340}
-                height={290}
-              />
-            </div>
-            <div data-v-52f11851 className="col">
-              <canvas
-                data-v-ce6a65e8
-                data-v-52f11851
-                id="cv_3"
-                width={340}
-                height={290}
-              />
-            </div>
-            <div data-v-52f11851 className="col">
-              <canvas
-                data-v-ce6a65e8
-                data-v-52f11851
-                id="cv_4"
-                width={340}
-                height={290}
-              />
+      }
+      {
+        activeTab=== false && 
+        <div className="historyBox a-desktop">
+          <div className="overviewInfo flex items-center">
+            <span className="badgeItem">
+              <span className="color-green uppercase font-bold">{"Buy"}</span>
+              <span> {totalBuyStatic} </span>
+            </span>
+            <span className="badgeItem ml-2">
+              <span className="color-red uppercase font-bold">{"Sell"}</span>
+              <span> {totalSellStatic} </span>
+            </span>
+          </div>
+          <div className="ct flex justify-center" style={{marginTop: 6}}>
+            <div className="row fix-list-mobile">
+              <div className="col w-18 list1">
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+              </div>
+              <div className="col w-18 list2">
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+              </div>
+              <div className="col w-18 list3">
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+              </div>
+              <div className="col w-18 list4">
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+              </div>
+              <div className="col w-18 list5">
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-2 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-3 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-4 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+                <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      }
+      {/* <vs-tabs>
+              <vs-tab label="INDICATORS" @click="(activeGau = true), (activeHis = true)">
+              </vs-tab> 
+              <vs-tab label="LAST RESULTS" @click="(activeGau = true), (activeHis = false)">
+              </vs-tab>
+            </vs-tabs> */}
+      {/* className="{ active: activeGau, hidden: !activeHis }" */}
+
+      {/* className="{ active: !activeGau, hidden: activeHis }" */}
     </div>
   );
 };

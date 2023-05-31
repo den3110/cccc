@@ -14,7 +14,7 @@ import getData from "../../../data.json";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
 import b_price from "../../../api/price/b_price";
 import "./ChartIndex.css"
-// import "./index.scss";
+import "./index.scss";
 
 // Initialize exporting module. (CommonJS only)
 Exporting(Highcharts);

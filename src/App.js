@@ -34,7 +34,7 @@ const App= ()=> {
             isAuthenticated=== true && 
             <UserProvider>
               <SocketContainer chidren={<Routes>
-                  <Route path={"/index"} element={<AuthRoute isAuthenticated={isAuthenticated} element={Index} />} />
+                  <Route path={"/*"} element={<AuthRoute isAuthenticated={isAuthenticated} element={Index} />} />
                 </Routes>}>
               </SocketContainer>
             </UserProvider>
