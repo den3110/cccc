@@ -21,7 +21,7 @@ import setting from "./api/auth/setting";
 import refresh from "./api/auth/refresh";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState();
   useEffect(() => {
     (async () => {
       if (Cookies.get("accessToken")) {
