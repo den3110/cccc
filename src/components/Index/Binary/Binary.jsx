@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./Binary.css";
 import ChartIndex from "../Chart/ChartIndex";
 import AnalysBet from "../AnalysBet/AnalysBet";
@@ -44,4 +44,4 @@ const Binary = () => {
   );
 };
 
-export default Binary;
+export default Binary

@@ -421,11 +421,11 @@ p {
 
 }
 
-.groupButton .btn.btnSuccess.colorDisable[data-v-76861cc0]:disabled {
+.btn.btnSuccess.colorDisable[data-v-76861cc0]:disabled, .btn.btnDown.colorDisable[data-v-76861cc0]:disabled {
     opacity: 1;
 }
-.groupButton .btn.btnSuccess.colorDisable[data-v-76861cc0] {
-    background-color: #8b8d96!important;
+.btn.btnDown.colorDisable[data-v-76861cc0], .btn.btnSuccess.colorDisable[data-v-76861cc0] {
+    background-color: #8b8d96 !important;
 }
 .groupButton .btn[data-v-76861cc0] {
     color: #fff;

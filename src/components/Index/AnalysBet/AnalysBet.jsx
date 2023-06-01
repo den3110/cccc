@@ -551,12 +551,24 @@ const AnalysBet = () => {
         className="nav nav-pills tab-last-result d-flex w-100"
       >
         <li data-v-0dc9f329 id="community" className="nav-item">
-          <a onClick={()=> setActiveTab(true)} data-v-0dc9f329 className={`nav-link text-capitalize ${activeTab=== true ? "active": ""}`}>
+          <a
+            onClick={() => setActiveTab(true)}
+            data-v-0dc9f329
+            className={`nav-link text-capitalize ${
+              activeTab === true ? "active" : ""
+            }`}
+          >
             Indicators
           </a>
         </li>
         <li data-v-0dc9f329 id="community" className="nav-item">
-          <a onClick={()=> setActiveTab(false)} data-v-0dc9f329 className={`nav-link text-capitalize ${activeTab=== false ? "active": ""}`}>
+          <a
+            onClick={() => setActiveTab(false)}
+            data-v-0dc9f329
+            className={`nav-link text-capitalize ${
+              activeTab === false ? "active" : ""
+            }`}
+          >
             Last results
           </a>
         </li>
@@ -625,7 +637,7 @@ const AnalysBet = () => {
           </div>
         </li>
       </ul>
-      {activeTab=== true && 
+      {activeTab === true && (
         <div className="wrap-gauge-meter b-desktop">
           <div className="wrap-gauge-meter-inner">
             <div data-v-3162dcc5 className="gauge-meter">
@@ -641,14 +653,17 @@ const AnalysBet = () => {
                           height="22"
                           viewBox="0 0 22 22"
                         >
-                          <g id="c-question" transform="translate(3.068 -8.774)">
+                          <g
+                            id="c-question"
+                            transform="translate(3.068 -8.774)"
+                          >
                             <g
                               id="Ellipse_1825"
                               data-name="Ellipse 1825"
                               transform="translate(-2.068 9.774)"
                               fill="none"
                               stroke="#fefefe"
-                              stroke-linecap="square"
+                              strokeLinecap="square"
                               strokeMiterlimit="10"
                               strokeWidth="1"
                             >
@@ -753,14 +768,17 @@ const AnalysBet = () => {
                           height="22"
                           viewBox="0 0 22 22"
                         >
-                          <g id="c-question" transform="translate(3.068 -8.774)">
+                          <g
+                            id="c-question"
+                            transform="translate(3.068 -8.774)"
+                          >
                             <g
                               id="Ellipse_1825"
                               data-name="Ellipse 1825"
                               transform="translate(-2.068 9.774)"
                               fill="none"
                               stroke="#fefefe"
-                              stroke-linecap="square"
+                              strokeLinecap="square"
                               strokeMiterlimit="10"
                               strokeWidth="1"
                             >
@@ -865,14 +883,17 @@ const AnalysBet = () => {
                           height="22"
                           viewBox="0 0 22 22"
                         >
-                          <g id="c-question" transform="translate(3.068 -8.774)">
+                          <g
+                            id="c-question"
+                            transform="translate(3.068 -8.774)"
+                          >
                             <g
                               id="Ellipse_1825"
                               data-name="Ellipse 1825"
                               transform="translate(-2.068 9.774)"
                               fill="none"
                               stroke="#fefefe"
-                              stroke-linecap="square"
+                              strokeLinecap="square"
                               strokeMiterlimit="10"
                               strokeWidth="1"
                             >
@@ -968,9 +989,8 @@ const AnalysBet = () => {
             </div>
           </div>
         </div>
-      }
-      {
-        activeTab=== false && 
+      )}
+      {activeTab === false && (
         <div className="historyBox a-desktop">
           <div className="overviewInfo flex items-center">
             <span className="badgeItem">
@@ -982,7 +1002,7 @@ const AnalysBet = () => {
               <span> {totalSellStatic} </span>
             </span>
           </div>
-          <div className="ct flex justify-center" style={{marginTop: 6}}>
+          <div className="ct flex justify-center" style={{ marginTop: 6 }}>
             <div className="row fix-list-mobile">
               <div className="col w-18 list1">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1097,7 +1117,7 @@ const AnalysBet = () => {
             </div>
           </div>
         </div>
-      }
+      )}
       {/* <vs-tabs>
               <vs-tab label="INDICATORS" @click="(activeGau = true), (activeHis = true)">
               </vs-tab> 

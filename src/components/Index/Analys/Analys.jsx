@@ -1,7 +1,80 @@
-import React from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Analys.css"
+import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
 
 const Analys = () => {
+  const restTimeRef = useRef()
+  const buttonBuyRef = useRef()
+  const buttonSellRef = useRef()
+  const percentSellRef= useRef()
+  const percentSellTextRef= useRef()
+  const percentBuyTextRef= useRef()
+  const textTradeRef= useRef()
+  const [amount, setAmount]= useState(10)
+
+  const { socketWeb } = useContext(SocketContainerContext);
+  useEffect(() => {
+    if (socketWeb) {
+      socketWeb.onmessage = (e) => {
+        if (
+          e.data.indexOf("BO_PRICE") > -1 ||
+          e.data.indexOf("TRADER_SENTIMENT") > -1 ||
+          e.data.indexOf("BO_CHART_INDICATORS") > -1
+        ) {
+          // lastUpdatePrice = new Date();
+          let data = e.data.replace("42[", "[");
+          //   handleDataWs(data);
+            const newData = JSON.parse(data);
+            if (newData[0] === "BO_PRICE") {
+              onReceiveSocketData(newData[1]);
+              
+            }
+            if(newData[0] === "TRADER_SENTIMENT") {
+              onReceiveSocketData2(newData[1])
+            }
+
+        }
+      };
+    }
+  }, [socketWeb]);
+
+  const onReceiveSocketData= (data)=> {
+    restTimeRef.current.innerHTML= data.order + "s"
+    if(parseInt(data?.session) % 2 === 0 ) {
+      buttonBuyRef?.current?.setAttribute("disabled", true)
+      buttonBuyRef?.current?.classList?.add("colorDisable")
+      buttonSellRef?.current?.setAttribute("disabled", true)
+      buttonSellRef?.current?.classList?.add("colorDisable")
+      textTradeRef.current.innerHTML= "Wait time"
+
+    }
+    else {
+      buttonBuyRef?.current?.removeAttribute("disabled")
+      buttonBuyRef?.current?.classList?.remove("colorDisable")
+      buttonSellRef?.current?.removeAttribute("disabled")
+      buttonSellRef?.current?.classList?.remove("colorDisable")
+      textTradeRef.current.innerHTML= "Please Trade"
+
+    }
+  }
+
+  const onReceiveSocketData2= (data)=> {
+    percentSellRef.current.style.width= data?.dPercent + "%"
+    percentBuyTextRef.current.innerHTML= data?.uPercent + "%"
+    percentSellTextRef.current.innerHTML= data?.dPercent + "%"
+  }
+
+  const handleSubtractAmount= ()=> {
+    if(amount > 0) {
+      setAmount(parseInt(amount) - parseInt(5))
+    }
+  }
+
+  const handleAddAmount= ()=> {
+    setAmount(parseInt(amount) + parseInt(5))
+
+  }
+
   return (
     <div data-v-0dc9f329 id="analysis-bet-wrapper" className="wrap">
       {/**/}
@@ -34,6 +107,7 @@ const Analys = () => {
                       backgroundColor: "rgb(29, 35, 59)",
                       color: "rgb(255, 255, 255)",
                     }}
+                    onClick={handleSubtractAmount}
                   >
                     -
                   </button>
@@ -49,6 +123,8 @@ const Analys = () => {
                     <input
                       data-v-39ad19b4
                       data-v-15011326
+                      value={amount}
+                      onChange={(e)=> setAmount(e.target.value)}
                       type="text"
                       id="InputNumber"
                       className="font-16  inputAmount"
@@ -65,6 +141,7 @@ const Analys = () => {
                       backgroundColor: "rgb(29, 35, 59)",
                       color: "rgb(255, 255, 255)",
                     }}
+                    onClick={handleAddAmount}
                   >
                     +
                   </button>
@@ -193,6 +270,7 @@ const Analys = () => {
                         style={{ backgroundColor: "rgb(1, 181, 140)" }}
                       >
                         <div
+                          ref={percentSellRef}
                           data-v-4708bf56
                           role="progressbar"
                           aria-valuenow={0}
@@ -200,7 +278,7 @@ const Analys = () => {
                           aria-valuemax={100}
                           className="progress-bar"
                           style={{
-                            width: "30%",
+                            
                             backgroundColor: "rgb(250, 40, 67)",
                           }}
                         />
@@ -210,16 +288,18 @@ const Analys = () => {
                         className="d-flex justify-content-between"
                       >
                         <span
+                          ref={percentSellTextRef}
                           data-v-4708bf56
                           style={{ color: "rgb(250, 40, 67)" }}
                         >
-                          30%
+                          0%
                         </span>
                         <span
+                          ref={percentBuyTextRef}
                           data-v-4708bf56
                           style={{ color: "rgb(1, 181, 140)" }}
                         >
-                          70%
+                          100%
                         </span>
                       </div>
                     </div>
@@ -234,6 +314,8 @@ const Analys = () => {
                 <div data-v-76861cc0 className="groupButton mt-lg-2 row">
                   <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
                     <button
+                    
+                      ref={buttonBuyRef}
                       data-v-76861cc0
                       type="button"
                       className="btn button btnSuccess colorSuccess w-100 colorDisable"
@@ -241,7 +323,6 @@ const Analys = () => {
                         backgroundColor: "rgb(1, 181, 140)",
                         borderRadius: "10px",
                       }}
-                      disabled="disabled"
                     >
                       <span data-v-76861cc0 className="text-uppercase font-20">
                         Buy
@@ -276,6 +357,7 @@ const Analys = () => {
                       }}
                     >
                       <p
+                        ref={textTradeRef}
                         data-v-76861cc0
                         className="font-14 mb-0"
                         style={{ lineHeight: "normal" }}
@@ -286,13 +368,15 @@ const Analys = () => {
                         data-v-76861cc0
                         className="font-18 mb-0 font-weight-700"
                         style={{ lineHeight: "normal" }}
+                        ref={restTimeRef}
                       >
-                        24s
+                        0
                       </p>
                     </a>
                   </div>
                   <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
                     <button
+                      ref={buttonSellRef}
                       data-v-76861cc0
                       type="button"
                       className="btn button btnDown colorDanger w-100 colorDisable"
@@ -300,7 +384,6 @@ const Analys = () => {
                         backgroundColor: "rgb(248, 16, 87)",
                         borderRadius: "10px",
                       }}
-                      disabled="disabled"
                     >
                       <span data-v-76861cc0 className="text-uppercase font-20">
                         Sell

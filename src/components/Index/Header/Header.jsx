@@ -1,5 +1,10 @@
 import React from "react";
 import "./Header.css"
+import SettingIcons from "../../../assets/icons/SettingIcons";
+import UserIcons from "../../../assets/icons/UserIcons";
+import NotificationsIcons from "../../../assets/icons/NotificationsIcons";
+import MenuIcons from "../../../assets/icons/MenuIcons";
+import Settings from "../../Settings/Settings";
 
 const Header = () => {
   return (
@@ -32,8 +37,6 @@ const Header = () => {
                   alt=""
                   src="https://starisa.net/img/logo-footer.2b873662.svg"
                 />
-                {/**/}
-                {/**/}
                 {/**/}
                 {/**/}
               </a>
@@ -378,27 +381,7 @@ const Header = () => {
                       className="buttonSetting d-block align-items-center pointer pc"
                     >
                       <span data-v-03c925ae className="icon">
-                        <svg
-                          data-v-03c925ae
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="17.281"
-                          height="17.283"
-                          viewBox="0 0 17.281 17.283"
-                        >
-                          <g
-                            data-v-03c925ae
-                            id="gear"
-                            transform="translate(-2.004 -1.995)"
-                          >
-                            <path
-                              data-v-03c925ae
-                              id="Path_30727"
-                              data-name="Path 30727"
-                              d="M18.111,9.362,16.772,9.25a6.245,6.245,0,0,0-.814-1.96l.871-1.03a1.28,1.28,0,0,0-1.8-1.8L14,5.326a6.234,6.234,0,0,0-1.963-.816L11.92,3.17a1.28,1.28,0,0,0-2.552,0L9.256,4.51a6.245,6.245,0,0,0-1.96.814l-1.03-.868a1.28,1.28,0,0,0-1.8,1.8l.871,1.029a6.239,6.239,0,0,0-.816,1.961l-1.341.112a1.281,1.281,0,0,0,0,2.552l1.341.112a6.238,6.238,0,0,0,.814,1.96l-.871,1.03a1.28,1.28,0,0,0,1.8,1.8L7.3,15.95a6.239,6.239,0,0,0,1.961.816l.112,1.341a1.281,1.281,0,0,0,2.552,0l.112-1.341a6.238,6.238,0,0,0,1.96-.814l1.03.871a1.28,1.28,0,0,0,1.8-1.8l-.871-1.029a6.233,6.233,0,0,0,.816-1.961l1.341-.112a1.281,1.281,0,0,0,0-2.552Zm-7.467,4.445a3.168,3.168,0,1,1,3.168-3.168A3.168,3.168,0,0,1,10.644,13.806Z"
-                              fill="#89809f"
-                            />
-                          </g>
-                        </svg>
+                        <SettingIcons />
                       </span>
                       <span data-v-03c925ae>Settings</span>
                     </div>
@@ -407,6 +390,7 @@ const Header = () => {
                       data-v-03c925ae
                       className="position-absolute top-0"
                     >
+                      <Settings />
                       {/**/}
                     </div>
                   </li>
@@ -425,64 +409,7 @@ const Header = () => {
                           data-v-03c925ae
                           className="text-center d-block w-100"
                         >
-                          <svg
-                            data-v-03c925ae
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="17.281"
-                            height="17.283"
-                            viewBox="0 0 24 24"
-                          >
-                            <g
-                              data-v-03c925ae
-                              id="circle-10"
-                              transform="translate(-1.164 -1.164)"
-                            >
-                              <path
-                                data-v-03c925ae
-                                id="Path_29003"
-                                data-name="Path 29003"
-                                d="M33.642,36.066V35.3a3.093,3.093,0,0,0-1.558-2.685l-3.078-1.765"
-                                transform="translate(-13.086 -13.978)"
-                                fill="none"
-                                strokeMiterlimit={10}
-                                strokeWidth={2}
-                              />
-                              <path
-                                data-v-03c925ae
-                                id="Path_29004"
-                                data-name="Path 29004"
-                                d="M14.636,30.847l-3.078,1.765A3.093,3.093,0,0,0,10,35.3v.768"
-                                transform="translate(-3.876 -13.978)"
-                                fill="none"
-                                strokeMiterlimit={10}
-                                strokeWidth={2}
-                              />
-                              <path
-                                data-v-03c925ae
-                                id="Path_29005"
-                                data-name="Path 29005"
-                                d="M20.124,22.824h0c-2.277,0-4.124-2.362-4.124-4.639V16.124A4.124,4.124,0,0,1,20.124,12h0a4.124,4.124,0,0,1,4.124,4.124v2.062C24.247,20.463,22.4,22.824,20.124,22.824Z"
-                                transform="translate(-6.784 -4.846)"
-                                fill="none"
-                                strokeLinecap="square"
-                                strokeMiterlimit={10}
-                                strokeWidth={2}
-                              />
-                              <circle
-                                data-v-03c925ae
-                                id="Ellipse_1365"
-                                data-name="Ellipse 1365"
-                                cx={11}
-                                cy={11}
-                                r={11}
-                                transform="translate(2.164 2.164)"
-                                fill="none"
-                                strokeLinecap="square"
-                                strokeMiterlimit={10}
-                                strokeWidth={2}
-                              />
-                            </g>
-                          </svg>
+                         <UserIcons />
                         </span>
                         <span data-v-03c925ae className="font-14 txtProfile ">
                           Profile
@@ -494,29 +421,7 @@ const Header = () => {
                     <div data-v-03c925ae className="notification-dropdown">
                       <div className="notification-dropdown-button">
                         <span className="notification-dropdown-button-icon">
-                          <svg
-                            id="bell"
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="15.545"
-                            height={17}
-                            viewBox="0 0 15.545 17"
-                            className="icon3"
-                          >
-                            <path
-                              id="Path_35098"
-                              data-name="Path 35098"
-                              d="M18.393,11.572A3.536,3.536,0,0,1,17.24,8.963V6.712A5.884,5.884,0,0,0,11.472,1,5.913,5.913,0,0,0,5.7,6.767v2.2a3.536,3.536,0,0,1-1.153,2.609A2.488,2.488,0,0,0,3.7,13.247c0,1.51,3.131,2.526,7.772,2.526s7.772-1.016,7.772-2.526A2.547,2.547,0,0,0,18.393,11.572Z"
-                              transform="translate(-3.7 -1)"
-                              fill="#fff"
-                            />
-                            <path
-                              id="Path_35099"
-                              data-name="Path 35099"
-                              d="M25.619,56.51A22.364,22.364,0,0,1,23.2,56.4a2.491,2.491,0,0,0,2.419,1.787A2.524,2.524,0,0,0,28.038,56.4,22.364,22.364,0,0,1,25.619,56.51Z"
-                              transform="translate(-17.847 -41.187)"
-                              fill="#fff"
-                            />
-                          </svg>
+                         <NotificationsIcons />
                         </span>
                         <span className="notification-dropdown-button-text colorSecondary2">
                           Notification
@@ -538,84 +443,7 @@ const Header = () => {
                       data-v-03c925ae
                       className="buttonToggle pointer bgSecondary4"
                     >
-                      <svg
-                        data-v-03c925ae
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="3.331"
-                        height="14.434"
-                        viewBox="0 0 3.331 14.434"
-                        className="iconClose"
-                      >
-                        <g
-                          data-v-03c925ae
-                          id="menu"
-                          transform="translate(0 -61)"
-                        >
-                          <g
-                            data-v-03c925ae
-                            id="Group_13136"
-                            data-name="Group 13136"
-                            transform="translate(0 61)"
-                          >
-                            <g
-                              data-v-03c925ae
-                              id="Group_13135"
-                              data-name="Group 13135"
-                            >
-                              <path
-                                data-v-03c925ae
-                                id="Path_29631"
-                                data-name="Path 29631"
-                                d="M1.665,61a1.665,1.665,0,1,0,1.665,1.665A1.667,1.667,0,0,0,1.665,61Z"
-                                transform="translate(0 -61)"
-                                fill="#fff"
-                              />
-                            </g>
-                          </g>
-                          <g
-                            data-v-03c925ae
-                            id="Group_13138"
-                            data-name="Group 13138"
-                            transform="translate(0 66.551)"
-                          >
-                            <g
-                              data-v-03c925ae
-                              id="Group_13137"
-                              data-name="Group 13137"
-                            >
-                              <path
-                                data-v-03c925ae
-                                id="Path_29632"
-                                data-name="Path 29632"
-                                d="M1.665,211a1.665,1.665,0,1,0,1.665,1.665A1.667,1.667,0,0,0,1.665,211Z"
-                                transform="translate(0 -211)"
-                                fill="#fff"
-                              />
-                            </g>
-                          </g>
-                          <g
-                            data-v-03c925ae
-                            id="Group_13140"
-                            data-name="Group 13140"
-                            transform="translate(0 72.103)"
-                          >
-                            <g
-                              data-v-03c925ae
-                              id="Group_13139"
-                              data-name="Group 13139"
-                            >
-                              <path
-                                data-v-03c925ae
-                                id="Path_29633"
-                                data-name="Path 29633"
-                                d="M1.665,361a1.665,1.665,0,1,0,1.665,1.665A1.667,1.667,0,0,0,1.665,361Z"
-                                transform="translate(0 -361)"
-                                fill="#fff"
-                              />
-                            </g>
-                          </g>
-                        </g>
-                      </svg>
+                      <MenuIcons />
                       <span
                         data-v-03c925ae
                         className="totalCount colorSecondary bgDanger text-uppercase"

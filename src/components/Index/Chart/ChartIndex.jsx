@@ -5,7 +5,7 @@ import loadIndicatorsAll from "highcharts/indicators/indicators";
 import { isMobile, isTablet } from "mobile-device-detect";
 import $ from "jquery";
 import Chart from "highcharts-react-official";
-import { useContext, useEffect, useRef, useState } from "react";
+import { memo, useContext, useEffect, useRef, useState } from "react";
 import borderRadius from "highcharts-border-radius";
 import Exporting from 'highcharts/modules/exporting';
 // import { SocketContainerContext } from "../../utils/SocketContainer/SocketContainer";
@@ -471,7 +471,7 @@ const ChartIndex = () => {
           begin = setSizeStock(listData.current);
           // console.log("begin", begin);
           chartGet.current.xAxis[0].setExtremes(
-            listData.current[begin + 40][0],
+            listData.current[begin + 20][0],
             dataMax,
             false
           );
@@ -565,7 +565,7 @@ const ChartIndex = () => {
         clearInterval(ao);
         const { dataMax } = chartGet.current.xAxis[0].getExtremes();
         if (deviceVersion !== "pc") {
-          chartGet.current.xAxis[0].setExtremes(data[begin + 40][0], dataMax, false);
+          chartGet.current.xAxis[0].setExtremes(data[begin + 20][0], dataMax, false);
           console.log("dataMax", dataMax);
           chartGet.current.redraw();
         } else {

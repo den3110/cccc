@@ -1,12 +1,12 @@
 import React from "react";
 import "./LeftSidebar.css"
-import TradeIcons from "../../../assets/icons/TradeIcons";
-import VipMembers from "../../../assets/icons/VipMembers";
-import TradeIconsActive from "../../../assets/icons/TradeIconsActive";
-import WalletIcons from "../../../assets/icons/WalletIcons";
+// import TradeIcons from "../../../assets/icons/TradeIcons";
+// import VipMembers from "../../../assets/icons/VipMembers";
+// import TradeIconsActive from "../../../assets/icons/TradeIconsActive";
+// import WalletIcons from "../../../assets/icons/WalletIcons";
 // import WalletIconsActive from "../../../assets/icons/WalletIconsActive";
 // import DashboardIconsActive from "../../../assets/icons/DashboardIconsActive";
-import DashboardIcons from "../../../assets/icons/DashboardIcons";
+// import DashboardIcons from "../../../assets/icons/DashboardIcons";
 import LogoutIcons from "../../../assets/icons/LogoutIcons";
 import { data_vertical } from "../../../utils/LeftSideBar/data_vertical";
 import { NavLink } from "react-router-dom";
