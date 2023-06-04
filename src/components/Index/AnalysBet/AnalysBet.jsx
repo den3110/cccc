@@ -537,10 +537,23 @@ const AnalysBet = () => {
   const onReceiveSocketData= (data)=> {
     if(parseInt(data?.order) === 1) {
       lastResultBet.current= lastResultBet?.current?.concat([{finalSide: finalSideCompare(data?.openPrice, data?.closePrice), session: data?.session, gid: 0, id: data?.session}])
+        let spans= document.querySelectorAll(".rounded-full")
+        lastResultBet?.current?.map((item, key)=> {
+          if(item?.finalSide=== "DOWN") {
+            return spans[key].classList.add("bet-buy")
+          }
+          else if(item?.finalSide=== "UP") {
+            return spans[key].classList.add("bet-sell")
+          }
+          else {
+            return spans[key].classList.add("bet-normal")
+          }
+        })
         if(lastResultBet?.current?.length >= 100) {
           lastResultBet.current= lastResultBet?.current?.slice(20, 100)
+          console.log(lastResultBet.current)
         }
-        let spans= document.querySelectorAll(".rounded-full")
+
         lastResultBet?.current?.map((item, key)=> {
           if(item?.finalSide=== "DOWN") {
             return spans[key].classList.add("bet-buy")
