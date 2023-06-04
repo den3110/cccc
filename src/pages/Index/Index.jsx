@@ -7,6 +7,8 @@ import "./Index.css";
 import { Route, Routes } from "react-router-dom";
 import Trading from "./Trading/Trading";
 import Wallet from "./Wallet/Wallet";
+import { createContext } from "react";
+import { useState } from "react";
 
 // function roundDownToNearest(value, nearest) {
 //   return Math.floor(value / nearest) * nearest;
@@ -16,9 +18,14 @@ import Wallet from "./Wallet/Wallet";
 //   return Math.ceil(value / nearest) * nearest;
 // }
 
+
+export const MainContext= createContext()
+
 function Index() {
+  const [openHistoryBet, setOpenHistoryBet]= useState(false)
+
   return (
-    <>
+    <MainContext.Provider value={{openHistoryBet, setOpenHistoryBet}}>
       <div data-v-049fb53f></div>
       <div data-v-2120bbd4 className="wrapper index">
         <div data-v-2120bbd4="" className="spaceTop"></div>
@@ -31,7 +38,7 @@ function Index() {
           </Routes>
         </main>
       </div>
-    </>
+    </MainContext.Provider>
   );
 }
 

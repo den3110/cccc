@@ -836,3 +836,7 @@ ul[data-v-3162dcc5] {
 .bet-normal {
     background-color: #fff !important;
 }
+
+.result-bet {
+    flex-wrap: nowrap;
+}

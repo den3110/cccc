@@ -6,10 +6,14 @@ import NotificationsIcons from "../../../assets/icons/NotificationsIcons";
 import MenuIcons from "../../../assets/icons/MenuIcons";
 import Settings from "../../Settings/Settings";
 import OutsideClickHandler from "react-outside-click-handler";
+import { useContext } from "react";
+import { MainContext } from "../../../pages/Index/Index";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const [openSetting, setOpenSetting] = useState(false);
-
+  const {setOpenHistoryBet, openHistoryBet }= useContext(MainContext)
+  
   return (
     <div data-v-03c925ae data-v-2120bbd4 className="headerMaster">
       <div
@@ -407,9 +411,9 @@ const Header = () => {
                     }
                   </li>
                   <li data-v-03c925ae className="px-2">
-                    <a
+                    <Link 
                       data-v-03c925ae
-                      href="/user/profile"
+                      to="/user/profile"
                       className="p-0 nav-link"
                       id="profileLink"
                     >
@@ -427,7 +431,7 @@ const Header = () => {
                           Profile
                         </span>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                   <li data-v-03c925ae className="settings  px-md-2 px-0 pl-2">
                     <div data-v-03c925ae className="notification-dropdown">
@@ -446,25 +450,28 @@ const Header = () => {
                       {/**/}
                     </div>
                   </li>
-                  <li data-v-03c925ae className="px-2">
-                    <span data-v-03c925ae className="line bgSecondary3" />
-                  </li>
-                  {/**/}
-                  <li data-v-03c925ae className="position-relative">
-                    <div
-                      data-v-03c925ae
-                      className="buttonToggle pointer bgSecondary4"
-                    >
-                      <MenuIcons />
-                      <span
+                  <>
+                    <li data-v-03c925ae className="px-2">
+                      <span data-v-03c925ae className="line bgSecondary3" />
+                    </li>
+                    {/**/}
+                    <li data-v-03c925ae className="position-relative">
+                      <div
                         data-v-03c925ae
-                        className="totalCount colorSecondary bgDanger text-uppercase"
-                        style={{ display: "none" }}
+                        className="buttonToggle pointer bgSecondary4"
+                        onClick={()=> setOpenHistoryBet(prev=> !prev)}
                       >
-                        {/*  */}
-                      </span>
-                    </div>
-                  </li>
+                        <MenuIcons />
+                        <span
+                          data-v-03c925ae
+                          className="totalCount colorSecondary bgDanger text-uppercase"
+                          style={{ display: "none" }}
+                        >
+                          {/*  */}
+                        </span>
+                      </div>
+                    </li>
+                  </>
                 </ul>
               </div>
             </div>

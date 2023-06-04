@@ -1,22 +1,28 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import "./Analys.css"
+import "./Analys.css";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
+import { TradingContext } from "../../../pages/Index/Trading/Trading";
+import { MainContext } from "../../../pages/Index/Index";
 
 const Analys = () => {
-  const restTimeRef = useRef()
-  const buttonBuyRef = useRef()
-  const buttonSellRef = useRef()
-  const percentSellRef= useRef()
-  const percentSellTextRef= useRef()
-  const percentBuyTextRef= useRef()
-  const textTradeRef= useRef()
-  const [amount, setAmount]= useState(10)
-  const [profitPercent, setProfitPercent]= useState(95)
-  const [profit, setProfit]= useState(parseInt(amount) + parseInt(amount) * profitPercent / 100)
-  useEffect(()=> {
-    setProfit(parseInt(amount) + parseInt(amount) * profitPercent / 100)
-  }, [amount, profitPercent])
+  const restTimeRef = useRef();
+  const buttonBuyRef = useRef();
+  const buttonSellRef = useRef();
+  const percentSellRef = useRef();
+  const percentSellTextRef = useRef();
+  const percentBuyTextRef = useRef();
+  const textTradeRef = useRef();
+  const [amount, setAmount] = useState(10);
+  const [profitPercent, setProfitPercent] = useState(95);
+  const [profit, setProfit] = useState(
+    parseInt(amount) + (parseInt(amount) * profitPercent) / 100
+  );
+  useEffect(() => {
+    setProfit(parseInt(amount) + (parseInt(amount) * profitPercent) / 100);
+  }, [amount, profitPercent]);
   const { socketWeb } = useContext(SocketContainerContext);
+  const { setOpenHistoryBet, openHistoryBet } = useContext(MainContext);
+
   useEffect(() => {
     if (socketWeb) {
       socketWeb.addEventListener("message", (e) => {
@@ -28,58 +34,54 @@ const Analys = () => {
           // lastUpdatePrice = new Date();
           let data = e.data.replace("42[", "[");
           //   handleDataWs(data);
-            const newData = JSON.parse(data);
-            if (newData[0] === "BO_PRICE") {
-              onReceiveSocketData(newData[1]);
-              
-            }
-            if(newData[0] === "RTADER_SENTIMENT") {
-              onReceiveSocketData2(newData[1])
-            }
-
+          const newData = JSON.parse(data);
+          if (newData[0] === "BO_PRICE") {
+            onReceiveSocketData(newData[1]);
+          }
+          if (newData[0] === "TRADER_SENTIMENT") {
+            onReceiveSocketData2(newData[1]);
+          }
         }
       });
     }
   }, [socketWeb]);
 
-  const onReceiveSocketData= (data)=> {
-    if(restTimeRef?.current) {
-      restTimeRef.current.innerHTML= data.order + "s"
-      if(parseInt(data?.session) % 2 === 0 ) {
-        buttonBuyRef?.current?.setAttribute("disabled", true)
-        buttonBuyRef?.current?.classList?.add("colorDisable")
-        buttonSellRef?.current?.setAttribute("disabled", true)
-        buttonSellRef?.current?.classList?.add("colorDisable")
-        textTradeRef.current.innerHTML= "Wait time"
-  
-      }
-      else {
-        buttonBuyRef?.current?.removeAttribute("disabled")
-        buttonBuyRef?.current?.classList?.remove("colorDisable")
-        buttonSellRef?.current?.removeAttribute("disabled")
-        buttonSellRef?.current?.classList?.remove("colorDisable")
-        textTradeRef.current.innerHTML= "Please Trade"
-  
+  const onReceiveSocketData = (data) => {
+    if (restTimeRef?.current) {
+      restTimeRef.current.innerHTML = data.order + "s";
+      if (parseInt(data?.session) % 2 === 0) {
+        buttonBuyRef?.current?.setAttribute("disabled", true);
+        buttonBuyRef?.current?.classList?.add("colorDisable");
+        buttonSellRef?.current?.setAttribute("disabled", true);
+        buttonSellRef?.current?.classList?.add("colorDisable");
+        textTradeRef.current.innerHTML = "Wait time";
+      } else {
+        buttonBuyRef?.current?.removeAttribute("disabled");
+        buttonBuyRef?.current?.classList?.remove("colorDisable");
+        buttonSellRef?.current?.removeAttribute("disabled");
+        buttonSellRef?.current?.classList?.remove("colorDisable");
+        textTradeRef.current.innerHTML = "Please Trade";
       }
     }
-  }
+  };
 
-  const onReceiveSocketData2= (data)=> {
-    percentSellRef.current.style.width= data?.dPercent + "%"
-    percentBuyTextRef.current.innerHTML= data?.uPercent + "%"
-    percentSellTextRef.current.innerHTML= data?.dPercent + "%"
-  }
-
-  const handleSubtractAmount= ()=> {
-    if(amount > 0) {
-      setAmount(parseInt(amount) - parseInt(5))
+  const onReceiveSocketData2 = (data) => {
+    if (percentSellRef?.current) {
+      percentSellRef.current.style.width = data?.dPercent + "%";
+      percentBuyTextRef.current.innerHTML = data?.uPercent + "%";
+      percentSellTextRef.current.innerHTML = data?.dPercent + "%";
     }
-  }
+  };
 
-  const handleAddAmount= ()=> {
-    setAmount(parseInt(amount) + parseInt(5))
+  const handleSubtractAmount = () => {
+    if (amount > 0) {
+      setAmount(parseInt(amount) - parseInt(5));
+    }
+  };
 
-  }
+  const handleAddAmount = () => {
+    setAmount(parseInt(amount) + parseInt(5));
+  };
 
   return (
     <div data-v-0dc9f329 id="analysis-bet-wrapper" className="wrap">
@@ -87,10 +89,17 @@ const Analys = () => {
       <div
         data-v-0dc9f329
         id="rightContent"
-        className="rightContent h-100 hideTransaction"
+        className={`rightContent h-100 ${
+          openHistoryBet === false ? "hideTransaction" : ""
+        }`}
       >
         <div data-v-0dc9f329 className="d-flex h-100">
-          <div data-v-0dc9f329 className="flex-50 col-bet flex-100">
+          <div
+            data-v-0dc9f329
+            className={`flex-50 col-bet ${
+              openHistoryBet === false ? "flex-100" : ""
+            }`}
+          >
             <div
               data-v-2860c586
               data-v-0dc9f329
@@ -130,7 +139,7 @@ const Analys = () => {
                       data-v-39ad19b4
                       data-v-15011326
                       value={amount}
-                      onChange={(e)=> setAmount(e.target.value)}
+                      onChange={(e) => setAmount(e.target.value)}
                       type="text"
                       id="InputNumber"
                       className="font-16  inputAmount"
@@ -284,7 +293,6 @@ const Analys = () => {
                           aria-valuemax={100}
                           className="progress-bar"
                           style={{
-                            
                             backgroundColor: "rgb(250, 40, 67)",
                           }}
                         />
@@ -320,7 +328,6 @@ const Analys = () => {
                 <div data-v-76861cc0 className="groupButton mt-lg-2 row">
                   <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
                     <button
-                    
                       ref={buttonBuyRef}
                       data-v-76861cc0
                       type="button"
@@ -614,6 +621,134 @@ const Analys = () => {
               </div>
             </div>
           </div>
+          {
+            openHistoryBet=== true &&
+            <div data-v-0dc9f329 className="flex-50 col-history">
+              <div data-v-35bea3d4 data-v-0dc9f329 id="binaryTransaction">
+                <ul
+                  data-v-35bea3d4
+                  id="myTab"
+                  role="tablist"
+                  className="nav nav-tabs"
+                >
+                  <li data-v-35bea3d4 className="nav-item">
+                    <a
+                      data-v-35bea3d4
+                      id="home-tab"
+                      data-toggle="tab"
+                      href="#home"
+                      role="tab"
+                      aria-controls="home"
+                      aria-selected="true"
+                      className="nav-link active"
+                    >
+                      <span data-v-35bea3d4 className="text-uppercase">
+                        Open
+                      </span>
+                      <span
+                        data-v-35bea3d4
+                        className="totalCount text-uppercase"
+                        style={{ display: "none" }}
+                      >
+                        0
+                      </span>
+                    </a>
+                  </li>
+                  <li data-v-35bea3d4 className="nav-item">
+                    <a
+                      data-v-35bea3d4
+                      id="profile-tab"
+                      data-toggle="tab"
+                      href="#profile"
+                      role="tab"
+                      aria-controls="profile"
+                      aria-selected="false"
+                      className="nav-link"
+                    >
+                      <span data-v-35bea3d4 className="text-uppercase">
+                        Closed
+                      </span>
+                    </a>
+                  </li>
+                </ul>
+                <section
+                  data-v-35bea3d4
+                  className="ps-container scroll-area ps ps--theme_default"
+                  data-ps-id="97bec2bc-170e-856c-904b-ec8f98a997d5"
+                >
+                  <div
+                    data-v-35bea3d4
+                    id="myTabContent"
+                    className="tab-content h-100"
+                  >
+                    <div
+                      data-v-64e012c6
+                      data-v-35bea3d4
+                      className="d-flex flex-column align-items-center justify-content-center h-100"
+                    >
+                      <svg
+                        data-v-64e012c6
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="82.083"
+                        height="82.104"
+                        viewBox="0 0 82.083 82.104"
+                      >
+                        <g
+                          data-v-64e012c6
+                          id="conversion"
+                          transform="translate(82.091 41.045) rotate(135)"
+                          opacity="0.2"
+                        >
+                          <path
+                            data-v-64e012c6
+                            id="Path_26243"
+                            data-name="Path 26243"
+                            d="M54.414,25.393H3.628A3.427,3.427,0,0,1,0,21.766a3.427,3.427,0,0,1,3.628-3.628h42.08L33.737,6.167a3.507,3.507,0,0,1,0-5.079,3.507,3.507,0,0,1,5.079,0L56.953,19.226a3.311,3.311,0,0,1,.726,3.99A3.486,3.486,0,0,1,54.414,25.393Z"
+                            transform="translate(0.011 0)"
+                            fill="#fff"
+                          />
+                          <path
+                            data-v-64e012c6
+                            id="Path_26244"
+                            data-name="Path 26244"
+                            d="M21.776,34.393A3.293,3.293,0,0,1,19.237,33.3L1.1,15.167a3.311,3.311,0,0,1-.726-3.99A3.486,3.486,0,0,1,3.638,9H54.425a3.427,3.427,0,0,1,3.628,3.628,3.427,3.427,0,0,1-3.628,3.628H12.345L24.316,28.226a3.507,3.507,0,0,1,0,5.079A3.293,3.293,0,0,1,21.776,34.393Z"
+                            transform="translate(0 23.649)"
+                            fill="#fff"
+                          />
+                        </g>
+                      </svg>
+                      <p
+                        data-v-64e012c6
+                        className="font-14 font-8m mt-3 color-grey text-center"
+                      >
+                        You have not made any open order
+                      </p>
+                    </div>
+                  </div>
+                  <div
+                    className="ps__scrollbar-x-rail"
+                    style={{ left: "0px", bottom: "0px" }}
+                  >
+                    <div
+                      className="ps__scrollbar-x"
+                      tabIndex={0}
+                      style={{ left: "0px", width: "0px" }}
+                    />
+                  </div>
+                  <div
+                    className="ps__scrollbar-y-rail"
+                    style={{ top: "0px", right: "0px" }}
+                  >
+                    <div
+                      className="ps__scrollbar-y"
+                      tabIndex={0}
+                      style={{ top: "0px", height: "0px" }}
+                    />
+                  </div>
+                </section>
+              </div>
+            </div>
+          }
           {/**/}
         </div>
       </div>

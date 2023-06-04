@@ -1,14 +1,17 @@
-import React, { memo } from "react";
+import React, { useContext } from "react";
 import "./Binary.css";
 import ChartIndex from "../Chart/ChartIndex";
 import AnalysBet from "../AnalysBet/AnalysBet";
+import { MainContext } from "../../../pages/Index/Index";
 
 const Binary = () => {
+  const {openHistoryBet }= useContext(MainContext)
+
   return (
     <div
       data-v-0dc9f329
       id="leftContent"
-      className="leftContent hideTransaction h-100"
+      className={`leftContent h-100 ${openHistoryBet=== false ? "hideTransaction" : ""}`}
     >
       <div
         data-v-0dc9f329

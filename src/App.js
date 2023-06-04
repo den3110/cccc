@@ -17,7 +17,7 @@ import AuthRoute from "./components/AuthRoute/AuthRoute";
 import UserProvider from "./components/UserProvider/UserProvider";
 import SocketContainer from "./utils/SocketContainer/SocketContainer";
 import Cookies from "js-cookie";
-import setting from "./api/auth/setting";
+// import setting from "./api/auth/setting";
 import refresh from "./api/auth/refresh";
 import UserProfile from "./pages/UserProfile/UserProfile";
 

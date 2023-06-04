@@ -61,7 +61,7 @@ const ChartIndex = () => {
     chart: {
       backgroundColor: "#011022",
       type: "areaspline",
-      aspectRatio: "16:ằ",
+      aspectRatio: "16:9",
       panning: false,
       followTouchMove: false,
       width: "100%",

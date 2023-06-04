@@ -114,7 +114,7 @@ a:not(.md-button) {
 }
 
 #leftSidebar .contentSidebar ul.nav li.nav-item .nav-link.router-link-exact-active svg.non-active[data-v-5058a5bc] {
-    display: none;
+    filter: invert(22%) sepia(95%) saturate(206%) hue-rotate(126deg) brightness(90%) contrast(89%)
 }
 #leftSidebar .contentSidebar ul.nav li.nav-item .nav-link svg.non-active[data-v-5058a5bc] {
     display: unset;

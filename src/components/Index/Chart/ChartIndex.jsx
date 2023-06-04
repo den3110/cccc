@@ -16,6 +16,7 @@ import { SocketContainerContext } from "../../../utils/SocketContainer/SocketCon
 import "./ChartIndex.css"
 import "./index.scss";
 import { TradingContext } from "../../../pages/Index/Trading/Trading";
+import { useLayoutEffect } from "react";
 
 // Initialize exporting module. (CommonJS only)
 Exporting(Highcharts);
@@ -49,7 +50,11 @@ progressBar.css("stroke-dasharray", lengthp);
 const ChartIndex = () => {
   const {data }= useContext(TradingContext)
   const listData= useRef()
+  const containerRef= useRef()
+  const prevWidthContainerRef= useRef()
   const [ohlcStock, setOhlcStock] = useState([]);
+  const [sma5, setSma5]= useState([])
+  const [sma10, setSma10]= useState([])
   const [volumeStock, setVolumeStock] = useState([]);
   const [classLandscape, setClassLandscape]= useState("")
   const [deviceVersion, setDeviceVersion]= useState("pc")
@@ -290,7 +295,33 @@ const ChartIndex = () => {
         data: volumeStock,
         yAxis: 1,
       },
+      
       {
+        name: "sma2",
+        id: "sma2",
+        type: "sma",
+        linkedTo: "aapl",
+        data: sma5,
+        color: "#E22A67",
+        lineWidth: 1.5,
+        marker: false,
+        zIndex: 3,
+        visible: true,
+        enableMouseTracking: false,
+        params: {
+          // index: "1",
+          period: 5,
+        },
+        allowPointSelect: false,
+        point: {
+          events: {},
+          tooltip: {
+            enabled: false,
+          },
+        },
+      },
+      {
+        data: sma10,
         name: "sma1",
         id: "sma1",
         type: "sma",
@@ -312,30 +343,6 @@ const ChartIndex = () => {
             //   setTimeout(function () { }, 500)
             // }
           },
-          tooltip: {
-            enabled: false,
-          },
-        },
-      },
-      {
-        name: "sma2",
-        id: "sma2",
-        type: "sma",
-        linkedTo: "aapl",
-        data: ohlcStock,
-        color: "#E22A67",
-        lineWidth: 1.5,
-        marker: false,
-        zIndex: 3,
-        visible: true,
-        enableMouseTracking: false,
-        params: {
-          index: "1",
-          period: 5,
-        },
-        allowPointSelect: false,
-        point: {
-          events: {},
           tooltip: {
             enabled: false,
           },
@@ -538,6 +545,35 @@ const ChartIndex = () => {
 
     const ohlcStockTemp = [];
     const volumeStockTemp = [];
+    const sma5Temp= []
+    const sma10Temp= []
+    for(let i= parseInt(begin) - 20; i < data.length; i++ ) {
+      console.log("i", i)
+      let _o = {
+        x: data[i][0], // the date
+        open: data[i][1], // open
+        high: data[i][2], // high
+        low: data[i][3], // low
+        close: data[i][4], // close
+        vol: data[i][5], // volume
+      };
+      sma5Temp.push(_o);
+      setSma5(sma5Temp);
+    }
+    // 
+    for(let i= parseInt(begin) - 10; i < data.length; i++ ) {
+      let _o = {
+        x: data[i][0], // the date
+        open: data[i][1], // open
+        high: data[i][2], // high
+        low: data[i][3], // low
+        close: data[i][4], // close
+        vol: data[i][5], // volume
+      };
+      sma10Temp.push(_o);
+      setSma10(sma10Temp);
+    }
+    // 
     for (var i = begin; i < data.length; i++) {
 
       var _o = {
@@ -557,10 +593,15 @@ const ChartIndex = () => {
       });
       setVolumeStock(volumeStockTemp)
     }
+    console.log(sma5Temp)
     stockChart.series[0].data = ohlcStockTemp;
     stockChart.series[1].data = volumeStockTemp;
+    stockChart.series[2].data = sma5Temp;
+    stockChart.series[3].data = sma10Temp;
     chartStock.current.chart.series[0].setData(ohlcStockTemp)
     chartStock.current.chart.series[1].setData(volumeStockTemp)
+    chartStock.current.chart.series[2].setData(sma5Temp)
+    chartStock.current.chart.series[3].setData(sma10Temp)
     chartStock.current.chart.redraw()
 
     setChartOptions(stockChart);
@@ -661,13 +702,27 @@ const ChartIndex = () => {
   useEffect(() => {
     setChartHeight();
   }, []);
+  useLayoutEffect(()=> {
+    const intervalId= setInterval(()=> {
+      const currentWidthContainerRef= containerRef.current?.offsetWidth
+      console.log(currentWidthContainerRef)
+      if(prevWidthContainerRef.current !== currentWidthContainerRef) {
+        setChartHeight();
+        if(chartStock?.current) {
+          chartStock.current.chart?.reflow()
+        }
+      }
+      prevWidthContainerRef.current= currentWidthContainerRef
+    }, 1000)
+
+    return ()=> clearInterval(intervalId)
+  }, [])
   useEffect(()=> {
     window.addEventListener("resize", ()=> {
       if(chartStock?.current) {
         chartStock.current.chart?.reflow()
       }
     })
-    
   }, [])
   useEffect(() => {
     (async () => {
@@ -701,7 +756,7 @@ const ChartIndex = () => {
   }, [socketWeb]);
 
   return (
-    <div id="tradePage" className={`trade-container ${isMobile ? classLandscape : ''}`}>
+    <div ref={containerRef} id="tradePage" className={`trade-container ${isMobile ? classLandscape : ''}`}>
       <div className="relative chartBox">
         <Chart
           className="wap-chart trans"

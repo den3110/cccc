@@ -5,6 +5,8 @@ import Chart from "highcharts-react-official";
 import $ from "jquery";
 import { TradingContext } from "../../../pages/Index/Trading/Trading";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
+import UpBetIcons from "../../../assets/icons/UpBetIcons";
+import DownBetIcons from "../../../assets/icons/DownBetIcons";
 
 function convertTextValueMeter(t) {
   return t >= -90 && t <= -54
@@ -493,22 +495,27 @@ const AnalysBet = () => {
       // const lastItemBet= 100 - firstItemBet
       // console.log(lastItemBet)
       // const lastItemBet= 100 - parseInt(firstItemBet)
-      const a1= data?.d?.slice(lastItemBet , 100)
-      console.log(data?.d)
-      console.log(a1?.d)
       const arrayItemBet= data?.d?.slice(lastItemBet , 100)?.map(item=> ({session: item[9], gid: 0, finalSide: finalSideCompare(item[1], item[4]), id: item[9] }))
       lastResultBet.current= arrayItemBet 
+      setTotalBuyStatic(lastResultBet?.current?.filter(item=> item?.finalSide=== "DOWN")?.length)
+      setTotalSellStatic(lastResultBet?.current?.filter(item=> item?.finalSide=== "UP")?.length)
       if(document?.querySelectorAll(".rounded-full")) {
         let spans= document?.querySelectorAll(".rounded-full")
         lastResultBet?.current?.map((item, key)=> {
           if(item?.finalSide=== "DOWN") {
-            return spans[key].classList.add("bet-buy")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-buy")
+            }
           }
           else if(item?.finalSide=== "UP") {
-            return spans[key].classList.add("bet-sell")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-sell")
+            }
           }
           else {
-            return spans[key].classList.add("bet-normal")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-normal")
+            }
           }
         })
       }
@@ -537,7 +544,9 @@ const AnalysBet = () => {
   const onReceiveSocketData= (data)=> {
     if(parseInt(data?.order) === 1) {
       lastResultBet.current= lastResultBet?.current?.concat([{finalSide: finalSideCompare(data?.openPrice, data?.closePrice), session: data?.session, gid: 0, id: data?.session}])
-        let spans= document.querySelectorAll(".rounded-full")
+      setTotalBuyStatic(lastResultBet?.current?.filter(item=> item?.finalSide=== "DOWN")?.length)
+      setTotalSellStatic(lastResultBet?.current?.filter(item=> item?.finalSide=== "UP")?.length)  
+      let spans= document.querySelectorAll(".rounded-full")
         lastResultBet?.current?.map((item, key)=> {
           if(item?.finalSide=== "DOWN") {
             return spans[key].classList.add("bet-buy")
@@ -1100,17 +1109,17 @@ const AnalysBet = () => {
       )}
         <div style={{display: activeTab=== false ? "block" : "none" }} className="historyBox a-desktop">
           <div className="overviewInfo flex items-center">
-            <span className="badgeItem">
-              <span className="color-green uppercase font-bold">{"Buy"}</span>
-              <span> {totalBuyStatic} </span>
+            <span className="badgeItem" style={{padding: 5, display: "flex", alignItems: "center", justifyContent: 'center', gap: 16}}>
+              <UpBetIcons />
+              <span style={{fontWeight: 700}}> {totalBuyStatic} </span>
             </span>
-            <span className="badgeItem ml-2">
-              <span className="color-red uppercase font-bold">{"Sell"}</span>
-              <span> {totalSellStatic} </span>
+            <span className="badgeItem ml-2" style={{padding: 5, display: "flex", alignItems: "center", justifyContent: 'center', gap: 16}}>
+              <DownBetIcons />
+              <span style={{fontWeight: 700}}> {totalSellStatic} </span>
             </span>
           </div>
           <div className="ct flex justify-center" style={{ marginTop: 6 }}>
-            <div className="row fix-list-mobile result-bet">
+            <div className="row fix-list-mobile result-bet" style={{flexWrap: "nowrap"}}>
               <div ref={bet1Ref} className="col w-18 list1">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
