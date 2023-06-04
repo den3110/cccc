@@ -1,12 +1,15 @@
-import React from "react";
-import "./Header.css"
+import React, { useState } from "react";
+import "./Header.css";
 import SettingIcons from "../../../assets/icons/SettingIcons";
 import UserIcons from "../../../assets/icons/UserIcons";
 import NotificationsIcons from "../../../assets/icons/NotificationsIcons";
 import MenuIcons from "../../../assets/icons/MenuIcons";
 import Settings from "../../Settings/Settings";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const Header = () => {
+  const [openSetting, setOpenSetting] = useState(false);
+
   return (
     <div data-v-03c925ae data-v-2120bbd4 className="headerMaster">
       <div
@@ -376,23 +379,32 @@ const Header = () => {
                     {/**/}
                   </li>
                   <li data-v-03c925ae className="settings position-relative">
-                    <div
-                      data-v-03c925ae
-                      className="buttonSetting d-block align-items-center pointer pc"
-                    >
-                      <span data-v-03c925ae className="icon">
-                        <SettingIcons />
-                      </span>
-                      <span data-v-03c925ae>Settings</span>
-                    </div>
-                    <div
-                      data-v-7a073fd5
-                      data-v-03c925ae
-                      className="position-absolute top-0"
-                    >
-                      <Settings />
-                      {/**/}
-                    </div>
+                    {
+                      <OutsideClickHandler
+                        onOutsideClick={() => setOpenSetting(false)}
+                      >
+                        <div
+                          data-v-03c925ae
+                          className="buttonSetting d-block align-items-center pointer pc"
+                          onClick={() => setOpenSetting(!openSetting)}
+                        >
+                          <span data-v-03c925ae className="icon">
+                            <SettingIcons />
+                          </span>
+                          <span data-v-03c925ae>Settings</span>
+                        </div>
+                        {openSetting === true && (
+                          <div
+                            data-v-7a073fd5
+                            data-v-03c925ae
+                            className="position-absolute top-0"
+                          >
+                            <Settings />
+                            {/**/}
+                          </div>
+                        )}
+                      </OutsideClickHandler>
+                    }
                   </li>
                   <li data-v-03c925ae className="px-2">
                     <a
@@ -409,7 +421,7 @@ const Header = () => {
                           data-v-03c925ae
                           className="text-center d-block w-100"
                         >
-                         <UserIcons />
+                          <UserIcons />
                         </span>
                         <span data-v-03c925ae className="font-14 txtProfile ">
                           Profile
@@ -421,7 +433,7 @@ const Header = () => {
                     <div data-v-03c925ae className="notification-dropdown">
                       <div className="notification-dropdown-button">
                         <span className="notification-dropdown-button-icon">
-                         <NotificationsIcons />
+                          <NotificationsIcons />
                         </span>
                         <span className="notification-dropdown-button-text colorSecondary2">
                           Notification

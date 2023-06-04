@@ -5,16 +5,17 @@ import loadIndicatorsAll from "highcharts/indicators/indicators";
 import { isMobile, isTablet } from "mobile-device-detect";
 import $ from "jquery";
 import Chart from "highcharts-react-official";
-import { memo, useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import borderRadius from "highcharts-border-radius";
 import Exporting from 'highcharts/modules/exporting';
 // import { SocketContainerContext } from "../../utils/SocketContainer/SocketContainer";
 // import b_price from "../../api/price/b_price";
 import getData from "../../../data.json";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
-import b_price from "../../../api/price/b_price";
+// import b_price from "../../../api/price/b_price";
 import "./ChartIndex.css"
 import "./index.scss";
+import { TradingContext } from "../../../pages/Index/Trading/Trading";
 
 // Initialize exporting module. (CommonJS only)
 Exporting(Highcharts);
@@ -46,6 +47,7 @@ progressBar.css("stroke-dasharray", lengthp);
 
 
 const ChartIndex = () => {
+  const {data }= useContext(TradingContext)
   const listData= useRef()
   const [ohlcStock, setOhlcStock] = useState([]);
   const [volumeStock, setVolumeStock] = useState([]);
@@ -108,6 +110,8 @@ const ChartIndex = () => {
         pointWidth: "pc" !== deviceVersion ? 7 : 8.6,
         maxPointWidth: "pc" !== deviceVersion ? 7 : 12,
         paddingPoint: "pc" !== deviceVersion ? 7.7 : 10.5,
+        // pointRange: 0.1,
+
       },
       column: {
         minPointLength: 3,
@@ -380,7 +384,7 @@ const ChartIndex = () => {
     // if (chartGet && windowWidth > 768) {
       if (chartGet.current && window.innerWidth > 768) {
       // var chartInstance = chartGet;
-      chartGet.current.redraw();
+      chartGet.current.reflow();
     }
   }
   const reflowChart= ()=> {
@@ -471,7 +475,7 @@ const ChartIndex = () => {
           begin = setSizeStock(listData.current);
           // console.log("begin", begin);
           chartGet.current.xAxis[0].setExtremes(
-            listData.current[begin + 20][0],
+            listData.current[begin + 40][0],
             dataMax,
             false
           );
@@ -498,7 +502,7 @@ const ChartIndex = () => {
       getData.countDown = counter > 9 ? counter : "0" + counter;
       window.addEventListener("resize", function () {
         chartInstance.reflow();
-        chartInstance.redraw();
+        // chartInstance.redraw();
         // console.log("Change Size");
       });
     } catch(e) {
@@ -565,7 +569,7 @@ const ChartIndex = () => {
         clearInterval(ao);
         const { dataMax } = chartGet.current.xAxis[0].getExtremes();
         if (deviceVersion !== "pc") {
-          chartGet.current.xAxis[0].setExtremes(data[begin + 20][0], dataMax, false);
+          chartGet.current.xAxis[0].setExtremes(data[begin + 40][0], dataMax, false);
           console.log("dataMax", dataMax);
           chartGet.current.redraw();
         } else {
@@ -595,18 +599,20 @@ const ChartIndex = () => {
 
     // $(".w-18").css("max-width", $("#analysis-wrapper").width() / 4);
     let setS = setInterval(() => {
-      let w = $(".chartBox").width();
-      let h = $(".chartBox").height();
-      if (!!w && !!h) {
-        let cH = chartStock.current.chart.chartHeight;
-        let chartInstance = chartStock.current.chart;
-        chartInstance.setSize(w, cH, true);
-        if (cH !== h) {
-          // let chartInstance = this.$refs.chartStock.chart;
-          chartInstance.setSize(w, h, true);
-          chartGet.current = chartInstance;
-        } else {
-          clearInterval(setS);
+      if(chartStock?.current) {
+        let w = $(".chartBox").width();
+        let h = $(".chartBox").height();
+        if (!!w && !!h) {
+          let cH = chartStock.current.chart.chartHeight;
+          let chartInstance = chartStock.current.chart;
+          chartInstance.setSize(w, cH, true);
+          if (cH !== h) {
+            // let chartInstance = this.$refs.chartStock.chart;
+            chartInstance.setSize(w, h, true);
+            chartGet.current = chartInstance;
+          } else {
+            clearInterval(setS);
+          }
         }
       }
     }, 600);
@@ -634,7 +640,6 @@ const ChartIndex = () => {
     // chartGet = chartStock.current.chart;
     window.addEventListener("resize", redrawChart);
     updateWindowDimensions();
-
     window.addEventListener("resize", updateWindowDimensions);
     if (window.screen && window.screen.orientation && window.screen.orientation.type) {
       setClassLandscape(window.screen.orientation.type)
@@ -658,23 +663,26 @@ const ChartIndex = () => {
   }, []);
   useEffect(()=> {
     window.addEventListener("resize", ()=> {
-      chartStock.current.chart?.reflow()
+      if(chartStock?.current) {
+        chartStock.current.chart?.reflow()
+      }
     })
     
   }, [])
   useEffect(() => {
     (async () => {
       try {
-        const data = await b_price();
-        listData.current = data.d;
-        getDataDefaultGet(data.d);
+        if(data) {
+          listData.current = data.d;
+          getDataDefaultGet(data.d);
+        }
       } catch (error) {}
     })();
-  }, []);
+  }, [data?.d]);
 
   useEffect(() => {
     if (socketWeb) {
-      socketWeb.onmessage = (e) => {
+      socketWeb.addEventListener("message", (e) => {
         if (
           e.data.indexOf("BO_PRICE") > -1 ||
           e.data.indexOf("TRADER_SENTIMENT") > -1 ||
@@ -688,7 +696,7 @@ const ChartIndex = () => {
               onReceiveSocketData(newData[1]);
             }
         }
-      };
+      }) ;
     }
   }, [socketWeb]);
 

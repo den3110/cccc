@@ -26,6 +26,8 @@ const SocketContainer = ({ chidren }) => {
         connection.send('42["BO_CHART_INDICATORS"]');
         connection.send('42["BO_RESULT_SUBSCRIBE"]');
         connection.send('42["WET_BLOCK_DISTRIBUTION"]');
+        connection.send('42["SOCKET_BO_LAST_RESULT_SUBSCRIBE"]');
+        // connection.send('42["SOCKET_BO_LAST_RESULT"]');
 
         setInterval(() => {
           connection.send("2");

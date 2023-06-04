@@ -1,8 +1,10 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "./AnalysBet.css";
-import { Tab, Tabs } from "react-bootstrap";
+// import { Tab, Tabs } from "react-bootstrap";
 import Chart from "highcharts-react-official";
 import $ from "jquery";
+import { TradingContext } from "../../../pages/Index/Trading/Trading";
+import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
 
 function convertTextValueMeter(t) {
   return t >= -90 && t <= -54
@@ -437,6 +439,8 @@ const AnalysBet = () => {
       ],
     },
   };
+  const { data } = useContext(TradingContext);
+  const {socketWeb }= useContext(SocketContainerContext)
   const [textTitleOs, setTextTitleOs] = useState("NEUTRAL");
   const [totalBuyStatic, setTotalBuyStatic] = useState(0);
   const [NumOscSELL, setNumOscSELL] = useState(0);
@@ -460,7 +464,96 @@ const AnalysBet = () => {
   const chartOs = useRef();
   const chartSu = useRef();
   const chartMa = useRef();
+  const lastResultBet = useRef();
+  const bet1Ref= useRef()
+  const bet2Ref= useRef()
+  const bet3Ref= useRef()
+  const bet4Ref= useRef()
+  const bet5Ref= useRef()
 
+  const finalSideCompare= (a, b)=> {
+    if(parseFloat(a) > parseFloat(b)) {
+      return "UP"
+    }
+    else if(parseFloat(a) < parseFloat(b)) {
+      return "DOWN"
+    }
+    else {
+      return "NORMAL"
+    }
+  }
+  useEffect(() => {
+    if(data) {
+      const lastResultPrice = data?.d?.[data?.d?.length - 1];
+      const firstItemBet= lastResultPrice?.[9] % 20
+      let lastItemBet= 20 - firstItemBet - 1
+      if(lastItemBet=== 0) {
+        lastItemBet= 20
+      }
+      // const lastItemBet= 100 - firstItemBet
+      // console.log(lastItemBet)
+      // const lastItemBet= 100 - parseInt(firstItemBet)
+      const a1= data?.d?.slice(lastItemBet , 100)
+      console.log(data?.d)
+      console.log(a1?.d)
+      const arrayItemBet= data?.d?.slice(lastItemBet , 100)?.map(item=> ({session: item[9], gid: 0, finalSide: finalSideCompare(item[1], item[4]), id: item[9] }))
+      lastResultBet.current= arrayItemBet 
+      if(document?.querySelectorAll(".rounded-full")) {
+        let spans= document?.querySelectorAll(".rounded-full")
+        lastResultBet?.current?.map((item, key)=> {
+          if(item?.finalSide=== "DOWN") {
+            return spans[key].classList.add("bet-buy")
+          }
+          else if(item?.finalSide=== "UP") {
+            return spans[key].classList.add("bet-sell")
+          }
+          else {
+            return spans[key].classList.add("bet-normal")
+          }
+        })
+      }
+      // console.log(lastResultBet?.current)
+    }
+  }, [data]);
+  useEffect(()=> {
+    if(socketWeb) {
+      socketWeb.addEventListener("message", (e)=> {
+        if (
+          e.data.indexOf("BO_PRICE") > -1 ||
+          e.data.indexOf("TRADER_SENTIMENT") > -1 ||
+          e.data.indexOf("BO_CHART_INDICATORS") > -1
+        ) {
+          // lastUpdatePrice = new Date();
+          let data = e.data.replace("42[", "[");
+          //   handleDataWs(data);
+            const newData = JSON.parse(data);
+            if (newData[0] === "BO_PRICE") {
+              onReceiveSocketData(newData[1]);
+            }
+        }
+      })
+    }
+  }, [socketWeb])
+  const onReceiveSocketData= (data)=> {
+    if(parseInt(data?.order) === 1) {
+      lastResultBet.current= lastResultBet?.current?.concat([{finalSide: finalSideCompare(data?.openPrice, data?.closePrice), session: data?.session, gid: 0, id: data?.session}])
+        if(lastResultBet?.current?.length >= 100) {
+          lastResultBet.current= lastResultBet?.current?.slice(20, 100)
+        }
+        let spans= document.querySelectorAll(".rounded-full")
+        lastResultBet?.current?.map((item, key)=> {
+          if(item?.finalSide=== "DOWN") {
+            return spans[key].classList.add("bet-buy")
+          }
+          else if(item?.finalSide=== "UP") {
+            return spans[key].classList.add("bet-sell")
+          }
+          else {
+            return spans[key].classList.add("bet-normal")
+          }
+        })
+      }
+    }
   const StaSummary = (e) => {
     try {
       let chart = chartSu.current.chart;
@@ -990,8 +1083,7 @@ const AnalysBet = () => {
           </div>
         </div>
       )}
-      {activeTab === false && (
-        <div className="historyBox a-desktop">
+        <div style={{display: activeTab=== false ? "block" : "none" }} className="historyBox a-desktop">
           <div className="overviewInfo flex items-center">
             <span className="badgeItem">
               <span className="color-green uppercase font-bold">{"Buy"}</span>
@@ -1003,8 +1095,8 @@ const AnalysBet = () => {
             </span>
           </div>
           <div className="ct flex justify-center" style={{ marginTop: 6 }}>
-            <div className="row fix-list-mobile">
-              <div className="col w-18 list1">
+            <div className="row fix-list-mobile result-bet">
+              <div ref={bet1Ref} className="col w-18 list1">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1026,7 +1118,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div className="col w-18 list2">
+              <div ref={bet2Ref} className="col w-18 list2">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1048,7 +1140,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div className="col w-18 list3">
+              <div ref={bet3Ref} className="col w-18 list3">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1070,7 +1162,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div className="col w-18 list4">
+              <div ref={bet4Ref} className="col w-18 list4">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1092,7 +1184,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div className="col w-18 list5">
+              <div ref={bet5Ref} className="col w-18 list5">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1117,7 +1209,6 @@ const AnalysBet = () => {
             </div>
           </div>
         </div>
-      )}
       {/* <vs-tabs>
               <vs-tab label="INDICATORS" @click="(activeGau = true), (activeHis = true)">
               </vs-tab> 

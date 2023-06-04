@@ -15,7 +15,7 @@ const Analys = () => {
   const { socketWeb } = useContext(SocketContainerContext);
   useEffect(() => {
     if (socketWeb) {
-      socketWeb.onmessage = (e) => {
+      socketWeb.addEventListener("message", (e) => {
         if (
           e.data.indexOf("BO_PRICE") > -1 ||
           e.data.indexOf("TRADER_SENTIMENT") > -1 ||
@@ -29,32 +29,34 @@ const Analys = () => {
               onReceiveSocketData(newData[1]);
               
             }
-            if(newData[0] === "TRADER_SENTIMENT") {
+            if(newData[0] === "RTADER_SENTIMENT") {
               onReceiveSocketData2(newData[1])
             }
 
         }
-      };
+      });
     }
   }, [socketWeb]);
 
   const onReceiveSocketData= (data)=> {
-    restTimeRef.current.innerHTML= data.order + "s"
-    if(parseInt(data?.session) % 2 === 0 ) {
-      buttonBuyRef?.current?.setAttribute("disabled", true)
-      buttonBuyRef?.current?.classList?.add("colorDisable")
-      buttonSellRef?.current?.setAttribute("disabled", true)
-      buttonSellRef?.current?.classList?.add("colorDisable")
-      textTradeRef.current.innerHTML= "Wait time"
-
-    }
-    else {
-      buttonBuyRef?.current?.removeAttribute("disabled")
-      buttonBuyRef?.current?.classList?.remove("colorDisable")
-      buttonSellRef?.current?.removeAttribute("disabled")
-      buttonSellRef?.current?.classList?.remove("colorDisable")
-      textTradeRef.current.innerHTML= "Please Trade"
-
+    if(restTimeRef?.current) {
+      restTimeRef.current.innerHTML= data.order + "s"
+      if(parseInt(data?.session) % 2 === 0 ) {
+        buttonBuyRef?.current?.setAttribute("disabled", true)
+        buttonBuyRef?.current?.classList?.add("colorDisable")
+        buttonSellRef?.current?.setAttribute("disabled", true)
+        buttonSellRef?.current?.classList?.add("colorDisable")
+        textTradeRef.current.innerHTML= "Wait time"
+  
+      }
+      else {
+        buttonBuyRef?.current?.removeAttribute("disabled")
+        buttonBuyRef?.current?.classList?.remove("colorDisable")
+        buttonSellRef?.current?.removeAttribute("disabled")
+        buttonSellRef?.current?.classList?.remove("colorDisable")
+        textTradeRef.current.innerHTML= "Please Trade"
+  
+      }
     }
   }
 

@@ -824,3 +824,15 @@ ul[data-v-3162dcc5] {
     top: 40px;
     right: -40px;
 }
+
+.bet-buy {
+    background-color: #01b58c !important;
+}
+
+.bet-sell {
+    background-color: #f81057 !important;
+}
+
+.bet-normal {
+    background-color: #fff !important;
+}

@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React from "react";
 import Header from "../../components/Index/Header/Header";
 import LeftSidebar from "../../components/Index/LeftSidebar/LeftSidebar";
 import "./Index.css";
-import Binary from "../../components/Index/Binary/Binary";
-import Analys from "../../components/Index/Analys/Analys";
+// import Binary from "../../components/Index/Binary/Binary";
+// import Analys from "../../components/Index/Analys/Analys";
 import { Route, Routes } from "react-router-dom";
 import Trading from "./Trading/Trading";
 import Wallet from "./Wallet/Wallet";

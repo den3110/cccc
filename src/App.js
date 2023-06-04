@@ -19,6 +19,7 @@ import SocketContainer from "./utils/SocketContainer/SocketContainer";
 import Cookies from "js-cookie";
 import setting from "./api/auth/setting";
 import refresh from "./api/auth/refresh";
+import UserProfile from "./pages/UserProfile/UserProfile";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState();
@@ -84,7 +85,20 @@ const App = () => {
                       }
                     />
                     <Route
+                      path="/user/profile"
+                      element={
+                        <AuthRoute
+                          isAuthenticated={isAuthenticated}
+                          element={UserProfile}
+                        />
+                      }
+                    />
+                    <Route
                       path={"/login"}
+                      element={<Navigate to={"/index"} replace />}
+                    />
+                    <Route 
+                      path={"/"}
                       element={<Navigate to={"/index"} replace />}
                     />
                   </Routes>
