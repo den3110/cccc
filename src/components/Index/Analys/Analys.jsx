@@ -11,7 +11,11 @@ const Analys = () => {
   const percentBuyTextRef= useRef()
   const textTradeRef= useRef()
   const [amount, setAmount]= useState(10)
-
+  const [profitPercent, setProfitPercent]= useState(95)
+  const [profit, setProfit]= useState(parseInt(amount) + parseInt(amount) * profitPercent / 100)
+  useEffect(()=> {
+    setProfit(parseInt(amount) + parseInt(amount) * profitPercent / 100)
+  }, [amount, profitPercent])
   const { socketWeb } = useContext(SocketContainerContext);
   useEffect(() => {
     if (socketWeb) {
@@ -235,10 +239,10 @@ const Analys = () => {
                       </p>
                       <p
                         data-v-0bab5d8e
-                        className="profitPercent color-light-blue my-auto"
-                        style={{ color: "rgb(255, 255, 255)" }}
+                        className="profitPercent my-auto"
+                        // style={{ color: "rgb(255, 255, 255)" }}
                       >
-                        95%
+                        {profitPercent}%
                       </p>
                     </div>
                     <div
@@ -246,7 +250,7 @@ const Analys = () => {
                       className="color-green font-30 font-weight-700 text-center"
                       style={{ color: "rgb(1, 181, 140)" }}
                     >
-                      +$19.5
+                      +${profit}
                     </div>
                   </div>
                 </div>
@@ -451,7 +455,7 @@ const Analys = () => {
                           data-v-0261f4c4
                           className="colorSuccess profitPrice"
                         >
-                          +$19.5
+                          +${profit}
                         </span>
                       </div>
                     </div>

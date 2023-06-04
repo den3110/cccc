@@ -551,7 +551,9 @@ const AnalysBet = () => {
         })
         if(lastResultBet?.current?.length >= 100) {
           lastResultBet.current= lastResultBet?.current?.slice(20, 100)
-          console.log(lastResultBet.current)
+          spans.forEach(item=> item.classList.remove("bet-buy"))
+          spans.forEach(item=> item.classList.remove("bet-sell"))
+          spans.forEach(item=> item.classList.remove("bet-normal"))
         }
 
         lastResultBet?.current?.map((item, key)=> {
