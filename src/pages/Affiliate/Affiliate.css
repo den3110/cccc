@@ -1,0 +1,295 @@
+.affiliatePage[data-v-94088026] {
+    min-height: calc(100vh - 65px);
+}
+.bodyContent[data-v-94088026] {
+    display: block;
+}
+
+.affiliatePage .banner[data-v-94088026] {
+    position: relative;
+    width: 100%;
+    min-height: calc(100vh - 185px);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.affiliatePage .banner .content[data-v-94088026] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.h-100 {
+    height: 100%!important;
+}
+@media (min-width: 1200px) {
+    .container, .container-lg, .container-md, .container-sm, .container-xl {
+        max-width: 1140px;
+    }
+}
+
+@media (min-width: 992px) {
+    .container, .container-lg, .container-md, .container-sm {
+        max-width: 960px;
+    }
+}
+
+@media (min-width: 768px) {
+    .container, .container-md, .container-sm {
+        max-width: 720px;
+    }
+}
+@media (min-width: 576px) {
+    .container, .container-sm {
+        max-width: 540px;
+    }
+}
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.h-100 {
+    height: 100%!important;
+}
+.align-items-center {
+    -webkit-box-align: center!important;
+    -ms-flex-align: center!important;
+    align-items: center!important;
+}
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+@media (min-width: 992px) {
+    .col-lg-6 {
+        -webkit-box-flex: 0;
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+.col-lg-6 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.line-height-normal[data-v-94088026] {
+    line-height: normal!important;
+}
+.color-white[data-v-94088026] {
+    color: #fff;
+}
+.font-weight-700[data-v-94088026] {
+    font-weight: 700;
+}
+.font-30[data-v-94088026] {
+    font-size: 1.875rem!important;
+}
+.color-white {
+    color: #fff;
+}
+.font-weight-700 {
+    font-weight: 700;
+}
+.font-30 {
+    font-size: 1.875rem!important;
+}
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem!important;
+}
+.color-white {
+    color: #fff;
+}
+.font-weight-700 {
+    font-weight: 700;
+}
+.font-30 {
+    font-size: 1.875rem!important;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.affiliatePage .banner .btn-large[data-v-94088026] {
+    white-space: nowrap;
+    padding: 11px 2.5rem;
+}
+.button.primary[data-v-94088026] {
+    background-color: #5dc1b9!important;
+    color: #fff!important;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+.button.primary, .button.primary span, .text-primary, a .primary-hover:hover {
+    color: #fff!important;
+}
+.button.primary {
+    background-color: #5dc1b9!important;
+}
+.button[data-v-94088026] {
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-weight: 700!important;
+    text-decoration: none;
+}
+
+Affiliate .affiliateCommission .bgSecondary4[data-v-94088026], .Affiliate .affiliateMamnagement .bgSecondary4[data-v-94088026], .Affiliate .affiliatePage .bgSecondary4[data-v-94088026] {
+    background: #02142b!important;
+}
+.Affiliate .affiliateCommission .bgSecondary4, .Affiliate .affiliateMamnagement .bgSecondary4, .Affiliate .affiliatePage .bgSecondary4 {
+    background: #02142b!important;
+}
+.affiliatePage .affiliateInfo[data-v-94088026] {
+    padding: 1.25rem;
+    border-radius: 18px;
+    height: 100%;
+}
+.Affiliate .affiliateCommission .bgSecondary4, .Affiliate .affiliateMamnagement .bgSecondary4, .Affiliate .affiliatePage .bgSecondary4 {
+    background: #02142b!important;
+}
+.borderPrimary[data-v-94088026] {
+    border: 1px solid;
+    border-color: #5dc1b9;
+}
+
+.flex-column, .flex-row {
+    -webkit-box-direction: normal!important;
+}
+.row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.col-lg-12 {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.colorSecondary2[data-v-94088026] {
+    color: #8b8d96!important;
+}
+.font-14[data-v-94088026] {
+    font-size: 14px;
+}
+.colorSecondary2 {
+    color: #8b8d96!important;
+}
+
+.affiliatePage .affiliateInfo .inputGroup[data-v-94088026] {
+    position: relative;
+}
+
+.affiliatePage .affiliateInfo .inputGroup input[data-v-94088026] {
+    height: 45px;
+    line-height: 45px;
+    background-color: #fafafa;
+    color: #333;
+    border-radius: 4px;
+}
+
+input.form-control[data-v-94088026], input[data-v-94088026], select.form-control[data-v-94088026], select[data-v-94088026] {
+    padding: 5px 11px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #868f93;
+    border-radius: 0;
+}
+
+.form-control[data-v-94088026], .md-field .md-input[data-v-94088026], .md-field .md-textarea[data-v-94088026], .winput[data-v-94088026] {
+    width: 100%;
+    color: #333;
+    padding: 0 10px!important;
+    background: transparent;
+    border-radius: 4px;
+    height: 40px;
+    line-height: 40px;
+}
+
+.form-control[readonly] {
+    background-color: #e9ecef;
+    opacity: 1;
+}
+
+.affiliatePage .affiliateInfo .inputGroup .input-append[data-v-94088026] {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    overflow: hidden;
+}
+
+.affiliatePage .affiliateInfo .inputGroup .input-append .button[data-v-94088026] {
+    width: 95px;
+    height: 31px;
+    line-height: normal;
+}
+.affiliatePage .affiliateInfo .button[data-v-94088026] {
+    white-space: nowrap;
+}
+.button.primary[data-v-94088026] {
+    background-color: #5dc1b9!important;
+    color: #fff!important;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+.button.primary, .button.primary span, .text-primary, a .primary-hover:hover {
+    color: #fff!important;
+}
+.button.primary {
+    background-color: #5dc1b9!important;
+}
+.button[data-v-94088026] {
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-weight: 700!important;
+    text-decoration: none;
+}
+.button[data-v-94088026] {
+    font-weight: 700;
+}
+.button[data-v-94088026] {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}

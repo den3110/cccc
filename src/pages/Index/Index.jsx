@@ -9,6 +9,7 @@ import Trading from "./Trading/Trading";
 import Wallet from "./Wallet/Wallet";
 import { createContext } from "react";
 import { useState } from "react";
+import Affiliate from "../Affiliate/Affiliate";
 
 // function roundDownToNearest(value, nearest) {
 //   return Math.floor(value / nearest) * nearest;
@@ -32,10 +33,13 @@ function Index() {
         <Header />
         <main data-v-2120bbd4 className={"wrapper-main-content primary1"}>
           <LeftSidebar />
-          <Routes>
-            <Route path={"/index"} element={<Trading />} />
-            <Route path={"/user/balance"} element={<Wallet />} />
-          </Routes>
+          <div data-v-2120bbd4 id="main-content" className="hasSidebar">
+            <Routes>
+              <Route path={"/index"} element={<Trading />} />
+              <Route path={"/user/balance"} element={<Wallet />} />
+              <Route path={"/affiliate/general"} element={<Affiliate />} />
+            </Routes>
+          </div>
         </main>
       </div>
     </MainContext.Provider>
