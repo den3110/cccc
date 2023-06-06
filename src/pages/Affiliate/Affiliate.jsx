@@ -1,7 +1,10 @@
-import React from "react";
-import "./Affiliate.css"
+import React, { useState } from "react";
+import "./Affiliate.css";
+import OutsideClickHandler from "react-outside-click-handler";
 
 const Affiliate = () => {
+  const [openPopup, setOpenPopup] = useState(false);
+
   return (
     <div data-v-94088026 data-v-2120bbd4 className="bodyContent affiliatePage">
       <div data-v-94088026>
@@ -30,6 +33,7 @@ const Affiliate = () => {
                       data-v-94088026
                       type="button"
                       className="btn button primary btn-green btn-large"
+                      onClick={() => setOpenPopup(!openPopup)}
                     >
                       Buy now $100
                     </button>
@@ -212,10 +216,15 @@ const Affiliate = () => {
             tabIndex={-1}
             role="dialog"
             aria-hidden="true"
-            className="modal fade modalBuyNow"
+            className={`modal ${openPopup ? "" : "fade"} modalBuyNow`}
+            style={{ display: openPopup ? "block" : "none" }}
           >
             <div data-v-4d48c421 className="modal-dialog modal-auth">
-              <div data-v-4d48c421 className="close-page">
+              <div
+                onClick={() => setOpenPopup(false)}
+                data-v-4d48c421
+                className="close-page"
+              >
                 <svg
                   data-v-4d48c421
                   data-v-75485923
@@ -305,85 +314,87 @@ const Affiliate = () => {
                     </svg>
                   </div>
                 </div>
-                <div data-v-4d48c421 className="contentWrapper">
-                  <div data-v-4d48c421 className="header borderBtSecondary2">
-                    <span
-                      data-v-4d48c421
-                      className="font-20 font-weight-700 text-capitalize modal-title"
-                    >
-                      Confirm your participation
-                    </span>
-                  </div>
-                  <div data-v-4d48c421 className="body">
-                    <div data-v-4d48c421 className="imgShake mb-3" />
-                    <div
-                      data-v-4d48c421
-                      className="textContent mb-3 colorSecondary"
-                    >
-                      Pay $100 to become a VIP member. Do you want to pay?
-                    </div>
-                    <div
-                      data-v-4d48c421
-                      className="checkbox d-flex align-items-center justify-content-center"
-                    >
-                      <input
-                        data-v-4d48c421
-                        type="checkbox"
-                        id="customControlInline"
-                        className="checkboxInput"
-                      />
+                <OutsideClickHandler onOutsideClick={() => setOpenPopup(false)}>
+                  <div data-v-4d48c421 className="contentWrapper">
+                    <div data-v-4d48c421 className="header borderBtSecondary2">
                       <span
                         data-v-4d48c421
-                        htmlFor="customControlInline"
-                        className="accept"
+                        className="font-20 font-weight-700 text-capitalize modal-title"
                       >
-                        I confirm and accept
-                        <a
-                          data-v-4d48c421
-                          href="/faqs"
-                          className="term"
-                          target="_blank"
-                        >
-                          Terms of Service
-                        </a>
+                        Confirm your participation
                       </span>
                     </div>
-                    <div
-                      data-v-4d48c421
-                      className="checkbox d-flex align-items-center justify-content-center"
-                    >
-                      <input
+                    <div data-v-4d48c421 className="body">
+                      <div data-v-4d48c421 className="imgShake mb-3" />
+                      <div
                         data-v-4d48c421
-                        type="checkbox"
-                        id="acceptAgencyObligations"
-                        className="checkboxInput"
-                      />
-                      <span
-                        data-v-4d48c421
-                        htmlFor="acceptAgencyObligations"
-                        className="accept"
+                        className="textContent mb-3 colorSecondary"
                       >
-                        I have read and accept
-                        <a
+                        Pay $100 to become a VIP member. Do you want to pay?
+                      </div>
+                      <div
+                        data-v-4d48c421
+                        className="checkbox d-flex align-items-center justify-content-center"
+                      >
+                        <input
                           data-v-4d48c421
-                          href="https://starisa.azureedge.net/Agency_Obligations/wl_Agency Obligations_en.pdf"
-                          target="_blank"
-                          className="term"
+                          type="checkbox"
+                          id="customControlInline"
+                          className="checkboxInput"
+                        />
+                        <span
+                          data-v-4d48c421
+                          htmlFor="customControlInline"
+                          className="accept"
                         >
-                          VIP Obligations
-                        </a>
-                      </span>
+                          I confirm and accept
+                          <a
+                            data-v-4d48c421
+                            href="/faqs"
+                            className="term"
+                            target="_blank"
+                          >
+                            Terms of Service
+                          </a>
+                        </span>
+                      </div>
+                      <div
+                        data-v-4d48c421
+                        className="checkbox d-flex align-items-center justify-content-center"
+                      >
+                        <input
+                          data-v-4d48c421
+                          type="checkbox"
+                          id="acceptAgencyObligations"
+                          className="checkboxInput"
+                        />
+                        <span
+                          data-v-4d48c421
+                          htmlFor="acceptAgencyObligations"
+                          className="accept"
+                        >
+                          I have read and accept
+                          <a
+                            data-v-4d48c421
+                            href="https://starisa.azureedge.net/Agency_Obligations/wl_Agency Obligations_en.pdf"
+                            target="_blank"
+                            className="term"
+                          >
+                            VIP Obligations
+                          </a>
+                        </span>
+                      </div>
+                      <button
+                        data-v-4d48c421
+                        disabled="disabled"
+                        className="btn button primary btn-large btn-radius w-100 font-weight-700"
+                      >
+                        Confirm
+                      </button>
+                      {/**/}
                     </div>
-                    <button
-                      data-v-4d48c421
-                      disabled="disabled"
-                      className="btn button primary btn-large btn-radius w-100 font-weight-700"
-                    >
-                      Confirm
-                    </button>
-                    {/**/}
                   </div>
-                </div>
+                </OutsideClickHandler>
               </div>
             </div>
           </div>
@@ -491,6 +502,10 @@ const Affiliate = () => {
         </div>
       </div>
       {/**/}
+      <div
+        style={{ display: openPopup === true ? "block" : "none" }}
+        class="modal-backdrop fade show"
+      ></div>
     </div>
   );
 };

@@ -23,32 +23,38 @@ import UserProfile from "./pages/UserProfile/UserProfile";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState();
-  useEffect(() => {
-    (async () => {
-      if (Cookies.get("accessToken")) {
-        const result = await refresh({
-          captcha: "string",
-          captcha_geetest: {
-            captcha_output: "",
-            gen_time: "",
-            lot_number: "",
-            pass_token: "",
-          },
-          client_id: "starisa-web",
-          grant_type: "refresh_token",
-          refresh_token: Cookies.get("refreshToken"),
-        });
-        if (result?.ok === true) {
-          Cookies.set("accessToken", result?.d?.access_token);
-          Cookies.set("refresh_token", result?.d?.refresh_token);
-          setIsAuthenticated(true);
-        } else {
-          setIsAuthenticated(false);
-        }
+  const refreshToken= async () => {
+    if (Cookies.get("accessToken")) {
+      const result = await refresh({
+        captcha: "string",
+        captcha_geetest: {
+          captcha_output: "",
+          gen_time: "",
+          lot_number: "",
+          pass_token: "",
+        },
+        client_id: "starisa-web",
+        grant_type: "refresh_token",
+        refresh_token: Cookies.get("refreshToken"),
+      });
+      if (result?.ok === true) {
+        Cookies.set("accessToken", result?.d?.access_token);
+        Cookies.set("refresh_token", result?.d?.refresh_token);
+        setIsAuthenticated(true);
       } else {
         setIsAuthenticated(false);
       }
-    })();
+    } else {
+      setIsAuthenticated(false);
+    }
+  }
+  useEffect(() => {
+    refreshToken()
+    const intervalId= setInterval(()=> {
+      refreshToken()
+    }, 3000)
+    return ()=> clearInterval(intervalId)
+    
   }, []);
   useEffect(() => {
     document.documentElement.style.setProperty(

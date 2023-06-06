@@ -301,7 +301,7 @@ const ChartIndex = () => {
         id: "sma2",
         type: "sma",
         linkedTo: "aapl",
-        data: sma5,
+        // data: sma5,
         color: "#E22A67",
         lineWidth: 1.5,
         marker: false,
@@ -321,7 +321,7 @@ const ChartIndex = () => {
         },
       },
       {
-        data: sma10,
+        // data: sma10chartInstance?.reflow();,
         name: "sma1",
         id: "sma1",
         type: "sma",
@@ -365,17 +365,17 @@ const ChartIndex = () => {
       chartGet.current.redraw();
     },
   });
-  const [chartOptionsStock, setChartOptionsStock] = useState(stockChart);
-  const [betOpen, setBetOpen] = useState({
-    s: 0,
-    l: {
-      bet: [
-        {
-          items: [],
-        },
-      ],
-    },
-  });
+  // const [chartOptionsStock, setChartOptionsStock] = useState(stockChart);
+  // const [betOpen, setBetOpen] = useState({
+  //   s: 0,
+  //   l: {
+  //     bet: [
+  //       {
+  //         items: [],
+  //       },
+  //     ],
+  //   },
+  // });
   // useEffect(()=> {
   //   setChartOptionsStock(stockChart)
   // }, [stockChart])
@@ -389,9 +389,9 @@ const ChartIndex = () => {
   // }
   const redrawChart=()=> {
     // if (chartGet && windowWidth > 768) {
-      if (chartGet.current && window.innerWidth > 768) {
+      if (chartStock.current?.chart?.reflow() && window.innerWidth > 768) {
       // var chartInstance = chartGet;
-      chartGet.current.reflow();
+      chartStock.current?.chart?.reflow();
     }
   }
   const reflowChart= ()=> {
@@ -421,7 +421,7 @@ const ChartIndex = () => {
           chartInstance.series[1].points?.length - 1
         ];
       var color = getColor(data.openPrice, data.closePrice);
-      if (lastCandle.x === data.createDateTime) {
+      if (lastCandle?.x === data.createDateTime) {
         lastCandle.update(
           {
             x: data.createDateTime,
@@ -450,70 +450,76 @@ const ChartIndex = () => {
 
   const updateCandleStickChart = (data) => {
     // console.log(12345)
-    var chartInstance = chartGet.current;
+    const chartInstance = chartStock.current?.chart;
     try {
-      var lastCandle =
-        chartInstance.series[0].points[
-          chartInstance.series[0].points?.length - 1
-        ];
-      var color = getColor(data.openPrice, data.closePrice);
-
-      var counter = Number(data.order);
-
-      var o = {
-        x: data.createDateTime,
-        open: data.openPrice,
-        high: data.highPrice,
-        low: data.lowPrice,
-        close: data.closePrice,
-        vol: data.baseVolume,
-        color: color,
-      };
-      if (lastCandle.x === data.createDateTime) {
-        lastCandle.update(o, true);
-      } else {
-        chartInstance.series[0].addPoint(o, true, true);
-        // console.log(chartInstance.series);
-        listData.current.push(data);
-        let begin = 0;
-
-        const { dataMax } = chartInstance.xAxis[0].getExtremes();
-        if (deviceVersion !== "pc") {
-          begin = setSizeStock(listData.current);
-          // console.log("begin", begin);
-          chartGet.current.xAxis[0].setExtremes(
-            listData.current[begin + 40][0],
-            dataMax,
-            false
-          );
-          chartGet.current.redraw();
+      if(chartInstance?.series?.[0]) {
+        var lastCandle =
+          chartInstance.series[0].points[
+            chartInstance.series[0].points?.length - 1
+          ];
+        var color = getColor(data.openPrice, data.closePrice);
+  
+        var counter = Number(data.order);
+  
+        var o = {
+          x: data.createDateTime,
+          open: data.openPrice,
+          high: data.highPrice,
+          low: data.lowPrice,
+          close: data.closePrice,
+          vol: data.baseVolume,
+          color: color,
+        };
+        if (lastCandle?.x === data.createDateTime) {
+          lastCandle.update(o, true);
         } else {
-          let c = listData.current?.length;
-          chartGet.current.xAxis[0].setExtremes(listData.current[c - 90][0], dataMax, false);
-          chartGet.current.redraw();
+          chartInstance.series[0].addPoint(o, true, true);
+          // console.log(chartInstance.series);
+          listData.current.push(data);
+          let begin = 0;
+  
+          const { dataMax } = chartInstance.xAxis[0].getExtremes();
+          if (deviceVersion !== "pc") {
+            begin = setSizeStock(listData.current);
+            // console.log("begin", begin);
+            chartGet.current.xAxis[0].setExtremes(
+              listData.current[begin + 40][0],
+              dataMax,
+              false
+            );
+            chartGet.current.redraw();
+          } else {
+            let c = listData.current?.length;
+            chartGet.current.xAxis[0].setExtremes(listData.current[c - 90][0], dataMax, false);
+            chartGet.current.redraw();
+          }
         }
-      }
-      chartInstance.xAxis[0].options.plotLines[0].value = data.createDateTime;
-      chartInstance.yAxis[0].options.plotLines[0].value = data.closePrice;
-      let f = chartInstance.yAxis[0].plotLinesAndBands[0];
-      f.label &&
-        f.label.attr({
-          text:
-            '<div class="plotlineChart flex flex-col"><span class="price">' +
-            data.closePrice.toFixed(2) +
-            '</span><span class="time self-end">00:' +
-            (counter > 9 ? counter : "0" + counter) +
-            "</span></div>",
+        chartInstance.xAxis[0].options.plotLines[0].value = data.createDateTime;
+        chartInstance.yAxis[0].options.plotLines[0].value = data.closePrice;
+        let f = chartInstance.yAxis[0].plotLinesAndBands[0];
+        f?.label &&
+          f?.label.attr({
+            text:
+              '<div class="plotlineChart flex flex-col"><span class="price">' +
+              data?.closePrice.toFixed(2) +
+              '</span><span class="time self-end">00:' +
+              (counter > 9 ? counter : "0" + counter) +
+              "</span></div>",
+          });
+  
+        getData.countDown = counter > 9 ? counter : "0" + counter;
+        window.addEventListener("resize", function () {
+          // if(chartInstance?.reflow()) {
+          //   chartInstance?.reflow();
+          // }
+          chartStock.current?.chart?.reflow();
+          chartStock.current?.chart?.redraw();
+          // chartInstance.redraw();
+          // console.log("Change Size");
         });
-
-      getData.countDown = counter > 9 ? counter : "0" + counter;
-      window.addEventListener("resize", function () {
-        chartInstance.reflow();
-        // chartInstance.redraw();
-        // console.log("Change Size");
-      });
+      }
     } catch(e) {
-      // console.log(e)
+      console.log(e)
     }
   };
   const onReceiveSocketData = (data) => {
@@ -547,32 +553,32 @@ const ChartIndex = () => {
     const volumeStockTemp = [];
     const sma5Temp= []
     const sma10Temp= []
-    for(let i= parseInt(begin) - 20; i < data.length; i++ ) {
-      console.log("i", i)
-      let _o = {
-        x: data[i][0], // the date
-        open: data[i][1], // open
-        high: data[i][2], // high
-        low: data[i][3], // low
-        close: data[i][4], // close
-        vol: data[i][5], // volume
-      };
-      sma5Temp.push(_o);
-      setSma5(sma5Temp);
-    }
+    // for(let i= parseInt(begin) - 20; i < data.length; i++ ) {
+    //   console.log("i", i)
+    //   let _o = {
+    //     x: data[i][0], // the date
+    //     open: data[i][1], // open
+    //     high: data[i][2], // high
+    //     low: data[i][3], // low
+    //     close: data[i][4], // close
+    //     vol: data[i][5], // volume
+    //   };
+    //   sma5Temp.push(_o);
+    //   setSma5(sma5Temp);
+    // }
     // 
-    for(let i= parseInt(begin) - 10; i < data.length; i++ ) {
-      let _o = {
-        x: data[i][0], // the date
-        open: data[i][1], // open
-        high: data[i][2], // high
-        low: data[i][3], // low
-        close: data[i][4], // close
-        vol: data[i][5], // volume
-      };
-      sma10Temp.push(_o);
-      setSma10(sma10Temp);
-    }
+    // for(let i= parseInt(begin) - 10; i < data.length; i++ ) {
+    //   let _o = {
+    //     x: data[i][0], // the date
+    //     open: data[i][1], // open
+    //     high: data[i][2], // high
+    //     low: data[i][3], // low
+    //     close: data[i][4], // close
+    //     vol: data[i][5], // volume
+    //   };
+    //   sma10Temp.push(_o);
+    //   setSma10(sma10Temp);
+    // }
     // 
     for (var i = begin; i < data.length; i++) {
 
@@ -593,7 +599,7 @@ const ChartIndex = () => {
       });
       setVolumeStock(volumeStockTemp)
     }
-    console.log(sma5Temp)
+    // console.log(sma5Temp)
     stockChart.series[0].data = ohlcStockTemp;
     stockChart.series[1].data = volumeStockTemp;
     stockChart.series[2].data = sma5Temp;
@@ -608,15 +614,13 @@ const ChartIndex = () => {
     let ao = setInterval(() => {
       if (chartGet.current) {
         clearInterval(ao);
-        const { dataMax } = chartGet.current.xAxis[0].getExtremes();
+        const { dataMax } = chartGet?.current?.xAxis?.[0].getExtremes();
         if (deviceVersion !== "pc") {
-          chartGet.current.xAxis[0].setExtremes(data[begin + 40][0], dataMax, false);
-          console.log("dataMax", dataMax);
+          chartGet.current.xAxis[0].setExtremes(data?.[begin + 40]?.[0], dataMax, false);
           chartGet.current.redraw();
         } else {
           let c = data.length;
-          chartGet.current.xAxis[0].setExtremes(data[c - 90][0], dataMax, false);
-          console.log(data[c - 90][0]);
+          chartGet?.current?.xAxis?.[0].setExtremes(data?.[c - 90]?.[0], dataMax, false);
           chartGet.current.redraw();
         }
       }
@@ -702,10 +706,9 @@ const ChartIndex = () => {
   useEffect(() => {
     setChartHeight();
   }, []);
-  useLayoutEffect(()=> {
+  useEffect(()=> {
     const intervalId= setInterval(()=> {
       const currentWidthContainerRef= containerRef.current?.offsetWidth
-      console.log(currentWidthContainerRef)
       if(prevWidthContainerRef.current !== currentWidthContainerRef) {
         setChartHeight();
         if(chartStock?.current) {

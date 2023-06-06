@@ -549,13 +549,19 @@ const AnalysBet = () => {
       let spans= document.querySelectorAll(".rounded-full")
         lastResultBet?.current?.map((item, key)=> {
           if(item?.finalSide=== "DOWN") {
-            return spans[key].classList.add("bet-buy")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-buy")
+            }
           }
           else if(item?.finalSide=== "UP") {
-            return spans[key].classList.add("bet-sell")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-sell")
+            }
           }
           else {
-            return spans[key].classList.add("bet-normal")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-normal")
+            }
           }
         })
         if(lastResultBet?.current?.length >= 100) {
@@ -567,13 +573,19 @@ const AnalysBet = () => {
 
         lastResultBet?.current?.map((item, key)=> {
           if(item?.finalSide=== "DOWN") {
-            return spans[key].classList.add("bet-buy")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-buy")
+            }
           }
           else if(item?.finalSide=== "UP") {
-            return spans[key].classList.add("bet-sell")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-sell")
+            }
           }
           else {
-            return spans[key].classList.add("bet-normal")
+            if(spans[key]?.classList) {
+              return spans[key].classList.add("bet-normal")
+            }
           }
         })
       }

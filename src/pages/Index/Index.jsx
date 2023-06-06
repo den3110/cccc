@@ -36,7 +36,7 @@ function Index() {
           <div data-v-2120bbd4 id="main-content" className="hasSidebar">
             <Routes>
               <Route path={"/index"} element={<Trading />} />
-              <Route path={"/user/balance"} element={<Wallet />} />
+              <Route path={"/user/*"} element={<Wallet />} />
               <Route path={"/affiliate/general"} element={<Affiliate />} />
             </Routes>
           </div>
