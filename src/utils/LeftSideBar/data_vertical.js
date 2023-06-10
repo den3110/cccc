@@ -6,32 +6,30 @@ import VipMembers from "../../assets/icons/VipMembers";
 import WalletIcons from "../../assets/icons/WalletIcons";
 import WalletIconsActive from "../../assets/icons/WalletIconsActive";
 
-export const data_vertical= [{
+export const data_vertical = [
+  {
     link: "/index",
     icons: <TradeIcons />,
     iconsActive: <TradeIconsActive />,
     title: "Trade",
-
-},
-{
-    link: "/affiliate/general",
+  },
+  {
+    link: "/affiliate",
     icons: <VipMembers />,
     iconsActive: <VipMembers />,
     title: "Vip Member",
-},
-{
-    link: "/user/balance",
+  },
+  {
+    link: "/user",
     icons: <WalletIcons />,
     iconsActive: <WalletIconsActive />,
     title: "Wallet",
-    
-},{
-    link: "/user/trade-history",
+  },
+
+  {
+    link: "/trade-history",
     icons: <DashboardIcons />,
     iconsActive: <DashboardIconsActive />,
     title: "Dashboard",
-    
-}
-
-]
-
+  },
+];

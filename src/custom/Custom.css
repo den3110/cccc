@@ -109,6 +109,10 @@ div {
 .wrapNotify.error .boxNotify .icon[data-v-049fb53f] {
     background: #fa4b62;
 }
+
+.wrapNotify.success .boxNotify .icon[data-v-049fb53f] {
+    background: rgb(35, 193, 95);
+}
 .wrapNotify .boxNotify .icon[data-v-049fb53f] {
     border-radius: 50%;
     display: -webkit-inline-box;

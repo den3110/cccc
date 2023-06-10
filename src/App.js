@@ -10,7 +10,7 @@ import Signup from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import RegisterWithEmail from "./pages/RegisterWithEmail/RegisterWithEmail";
 import { SnackbarProvider } from "notistack";
-import CustomToast from "./custom/CustomToast";
+import ErrorToast from "./custom/ErrorToast";
 import { useEffect, useState } from "react";
 import Index from "./pages/Index/Index";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
@@ -20,6 +20,7 @@ import Cookies from "js-cookie";
 // import setting from "./api/auth/setting";
 import refresh from "./api/auth/refresh";
 import UserProfile from "./pages/UserProfile/UserProfile";
+import SuccessToast from "./custom/SuccessToast";
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState();
@@ -52,7 +53,7 @@ const App = () => {
     refreshToken()
     const intervalId= setInterval(()=> {
       refreshToken()
-    }, 3000)
+    }, 300000)
     return ()=> clearInterval(intervalId)
     
   }, []);
@@ -65,13 +66,14 @@ const App = () => {
   return (
     <SnackbarProvider
       Components={{
-        errorComponent: CustomToast,
+        errorComponent: ErrorToast,
+        successComponent: SuccessToast
       }}
       anchorOrigin={{
         vertical: "top",
         horizontal: "right",
       }}
-      maxSnack={1}
+      maxSnack={3}
       autoHideDuration={2000}
     >
       <div className={styles["wrap__app"]}>
@@ -114,6 +116,7 @@ const App = () => {
           )}
           {isAuthenticated === false && (
             <Routes>
+              <Route path={"/*"} element={<Navigate to={"/index"} />} />
               <Route
                 path={"/index"}
                 element={<Navigate to={"/login"} replace />}

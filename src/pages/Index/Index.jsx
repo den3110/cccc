@@ -10,7 +10,12 @@ import Wallet from "./Wallet/Wallet";
 import { createContext } from "react";
 import { useState } from "react";
 import Affiliate from "../Affiliate/Affiliate";
-
+import TradeHistory from "../../components/Wallet/TradeHistory/TradeHistory";
+import { useContext } from "react";
+import { UserProviderContext } from "../../components/UserProvider/UserProvider";
+import AffiliateForVip from "../Affiliate/AffiliateForVip/AffiliateForVip";
+import UpgradeVip from "../UpgradeVip/UpgradeVip";
+import { useMediaQuery  } from 'react-responsive';
 // function roundDownToNearest(value, nearest) {
 //   return Math.floor(value / nearest) * nearest;
 // }
@@ -23,21 +28,28 @@ import Affiliate from "../Affiliate/Affiliate";
 export const MainContext= createContext()
 
 function Index() {
+  const isDesktopScreen = useMediaQuery({ query: '(min-width: 1025px)' })
   const [openHistoryBet, setOpenHistoryBet]= useState(false)
-
+  const {userOverview }= useContext(UserProviderContext)
+  const [classIndex, setClassIndex]= useState("index")
   return (
-    <MainContext.Provider value={{openHistoryBet, setOpenHistoryBet}}>
+    <MainContext.Provider value={{openHistoryBet, setOpenHistoryBet, classIndex, setClassIndex}}>
       <div data-v-049fb53f></div>
-      <div data-v-2120bbd4 className="wrapper index">
+      <div data-v-2120bbd4 className={`wrapper ${classIndex}`}>
         <div data-v-2120bbd4="" className="spaceTop"></div>
         <Header />
         <main data-v-2120bbd4 className={"wrapper-main-content primary1"}>
-          <LeftSidebar />
+            {
+              isDesktopScreen && 
+              <LeftSidebar />
+            }
           <div data-v-2120bbd4 id="main-content" className="hasSidebar">
             <Routes>
               <Route path={"/index"} element={<Trading />} />
               <Route path={"/user/*"} element={<Wallet />} />
-              <Route path={"/affiliate/general"} element={<Affiliate />} />
+              <Route path={"/affiliate/*"} element={userOverview?.d?.rank && userOverview?.d?.rank > 0 ? <AffiliateForVip /> : <Affiliate />} />
+              <Route path={"/trade-history"} element={<TradeHistory />} />
+              <Route path={"/upgrade-vip"} element={<UpgradeVip />} />
             </Routes>
           </div>
         </main>

@@ -1,0 +1,441 @@
+.bgPrimary1-hover[data-v-2120bbd4]:hover, .bgPrimary1[data-v-2120bbd4] {
+    background-color: #080d1f!important;
+}
+.affiliateMamnagement[data-v-22362ac0] {
+    padding-bottom: 3rem;
+    min-height: calc(100vh - 65px);
+}
+
+.Affiliate .affiliateCommission .backgroundDark[data-v-22362ac0], .Affiliate .affiliateMamnagement .backgroundDark[data-v-22362ac0], .Affiliate .affiliatePage .backgroundDark[data-v-22362ac0] {
+    background: #1f2f43;
+}
+
+.container[data-v-9b54ed4a] {
+    max-width: 100%;
+}
+
+.affiliateMamnagement .container[data-v-22362ac0] {
+    max-width: 100% !important;
+}
+
+
+.filterDiv[data-v-22362ac0] {
+    padding: 37px 42px;
+    margin-bottom: 33px;
+}
+
+.Affiliate.Management .affiliateMamnagement .filterDiv[data-v-22362ac0] {
+    background: transparent;
+}
+
+.color-white[data-v-22362ac0] {
+    color: #fff;
+}
+.font-weight-700[data-v-22362ac0] {
+    font-weight: 700;
+}
+.font-30[data-v-22362ac0] {
+    font-size: 1.875rem!important;
+}
+.text-capitalize {
+    text-transform: capitalize!important;
+}
+
+.w-50 {
+    width: 50%!important;
+}
+
+.filterDiv .colFirst[data-v-22362ac0]:before {
+    content: "";
+    background-color: #41416f;
+    width: 1px;
+    height: 45px;
+    position: absolute;
+    z-index: 898888;
+    right: -25px;
+    top: 22px;
+    opacity: .6;
+}
+
+.color-white-50[data-v-22362ac0] {
+    color: hsla(0,0%,100%,.5)!important;
+}
+
+.btnSearchType.search.active[data-v-22362ac0] {
+    background-color: #5dc1b9;
+    color: #080d1f;
+}
+
+.Affiliate .affiliateCommission .btnSearchType[data-v-22362ac0], .Affiliate .affiliateMamnagement .btnSearchType[data-v-22362ac0], .Affiliate .affiliatePage .btnSearchType[data-v-22362ac0] {
+    border-color: transparent!important;
+}
+.Affiliate .affiliateCommission .btnSearchType, .Affiliate .affiliateMamnagement .btnSearchType, .Affiliate .affiliatePage .btnSearchType {
+    border-color: transparent!important;
+}
+.button.primary[data-v-22362ac0] {
+    background-color: #5dc1b9!important;
+    color: #fff!important;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.btnSearchType[data-v-22362ac0] {
+    background-color: #4d4e4e;
+    color: #fff;
+    border: 1px solid #8b8d96;
+    border-radius: 10px;
+    min-width: 162px;
+    padding: 9px 0;
+}
+
+.button[data-v-22362ac0] {
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-weight: 700!important;
+    text-decoration: none;
+}
+
+.Affiliate .affiliateCommission .btnSearchType[data-v-22362ac0], .Affiliate .affiliateMamnagement .btnSearchType[data-v-22362ac0], .Affiliate .affiliatePage .btnSearchType[data-v-22362ac0] {
+    border-color: transparent!important;
+}
+
+.w-50 {
+    width: 50%!important;
+}
+.d-inline-block {
+    display: inline-block!important;
+}
+
+.color-white-50[data-v-22362ac0] {
+    color: hsla(0,0%,100%,.5)!important;
+}
+
+.Affiliate .affiliateCommission .btnSearchType[data-v-22362ac0], .Affiliate .affiliateMamnagement .btnSearchType[data-v-22362ac0], .Affiliate .affiliatePage .btnSearchType[data-v-22362ac0] {
+    border-color: transparent!important;
+}
+.Affiliate .affiliateCommission .btnSearchType, .Affiliate .affiliateMamnagement .btnSearchType, .Affiliate .affiliatePage .btnSearchType {
+    border-color: transparent!important;
+}
+.btnSearchType.dropdown[data-v-22362ac0] {
+    border-radius: 5px;
+}
+
+.Affiliate .affiliateCommission .btnSearchType, .Affiliate .affiliateMamnagement .btnSearchType, .Affiliate .affiliatePage .btnSearchType {
+    border-color: transparent!important;
+}
+
+.btnSearchType.dropdown[data-v-22362ac0] {
+    border-radius: 5px;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+.Affiliate .affiliateCommission .btnSearchType, .Affiliate .affiliateMamnagement .btnSearchType, .Affiliate .affiliatePage .btnSearchType {
+    border-color: transparent!important;
+}
+.btnSearchType[data-v-22362ac0] {
+    background-color: #4d4e4e;
+    color: #fff;
+    border: 1px solid #8b8d96;
+    border-radius: 10px;
+    min-width: 162px;
+    padding: 9px 0;
+}
+
+.dropdown-toggle:after {
+    display: inline-block;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+.Affiliate .affiliateCommission .dropdown-menu[data-v-22362ac0], .Affiliate .affiliateMamnagement .dropdown-menu[data-v-22362ac0], .Affiliate .affiliatePage .dropdown-menu[data-v-22362ac0] {
+    border-color: #142545!important;
+}
+.dropdown .dropdown-menu[data-v-22362ac0] {
+    background-color: #02142b;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 10rem;
+    padding: 0.5rem 0;
+    margin: 0.125rem 0 0;
+    font-size: 1rem;
+    color: #212529;
+    text-align: left;
+    list-style: none;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.15);
+    border-radius: 0.25rem;
+}
+
+.Affiliate .affiliateCommission .dropdown-menu .dropdown-item[data-v-22362ac0], .Affiliate .affiliateMamnagement .dropdown-menu .dropdown-item[data-v-22362ac0], .Affiliate .affiliatePage .dropdown-menu .dropdown-item[data-v-22362ac0] {
+    border-bottom: 1px solid #3f465b!important;
+}
+
+.dropdown .dropdown-menu .dropdown-item[data-v-22362ac0] {
+    color: #fff;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.filterDiv .btnSearch[data-v-22362ac0] {
+    min-width: 170px;
+}
+.button.primary[data-v-22362ac0] {
+    background-color: #5dc1b9!important;
+    color: #fff!important;
+}
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.btnSearch[data-v-22362ac0] {
+    padding: 0 28px;
+    color: #080d1f;
+    -webkit-transition: all .5s;
+    transition: all .5s;
+    height: 42px;
+    white-space: nowrap;
+}
+.button[data-v-22362ac0] {
+    cursor: pointer;
+    border: none;
+    background: none;
+    position: relative;
+    -webkit-transition: all .3s ease;
+    transition: all .3s ease;
+    font-weight: 700!important;
+    text-decoration: none;
+}
+.button[data-v-22362ac0] {
+    font-weight: 700;
+}
+
+.button[data-v-22362ac0] {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.button.primary span[data-v-22362ac0], .text-primary[data-v-22362ac0], a .primary-hover[data-v-22362ac0]:hover {
+    color: #fff!important;
+}
+
+.affiliateMamnagement .container[data-v-22362ac0] {
+    max-width: 100%;
+}
+@media screen and (min-width: 1024px) {
+    .paddingResult[data-v-22362ac0] {
+        padding-left: 42px;
+    }
+}
+
+.mb-3, .my-3 {
+    margin-bottom: 1rem!important;
+}
+
+.color-white[data-v-22362ac0] {
+    color: #fff;
+}
+.font-weight-700[data-v-22362ac0] {
+    font-weight: 700;
+}
+.font-30[data-v-22362ac0] {
+    font-size: 1.875rem!important;
+}
+
+.textTime[data-v-22362ac0] {
+    color: #8b8d96;
+}
+
+.Affiliate .affiliateCommission .btnTime[data-v-22362ac0], .Affiliate .affiliateMamnagement .btnTime[data-v-22362ac0], .Affiliate .affiliatePage .btnTime[data-v-22362ac0] {
+    border-color: #142545!important;
+}
+.btnTime[data-v-22362ac0] {
+    padding: 5px 11px;
+    border-radius: 5px;
+    border: 1px solid #8b8d96;
+    color: #8b8d96;
+    background-color: transparent;
+    white-space: nowrap;
+}
+
+button[data-v-22362ac0] {
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+}
+
+.Affiliate .affiliateCommission .btnTime[data-v-22362ac0], .Affiliate .affiliateMamnagement .btnTime[data-v-22362ac0], .Affiliate .affiliatePage .btnTime[data-v-22362ac0] {
+    border-color: #142545!important;
+}
+
+.Affiliate .affiliateCommission .btnTime, .Affiliate .affiliateMamnagement .btnTime, .Affiliate .affiliatePage .btnTime {
+    border-color: #142545!important;
+}
+.btnTime.active[data-v-22362ac0] {
+    background-color: #5dc1b9;
+    color: #fff;
+    border-color: #5dc1b9;
+}
+.button.primary[data-v-22362ac0] {
+    background-color: #5dc1b9!important;
+    color: #fff!important;
+}
+
+.Affiliate .affiliateCommission .btnTime[data-v-22362ac0], .Affiliate .affiliateMamnagement .btnTime[data-v-22362ac0], .Affiliate .affiliatePage .btnTime[data-v-22362ac0] {
+    border-color: #142545!important;
+}
+
+.btn:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.btnTime[data-v-22362ac0] {
+    padding: 5px 11px;
+    border-radius: 5px;
+    border: 1px solid #8b8d96;
+    color: #8b8d96;
+    background-color: transparent;
+    white-space: nowrap;
+}
+
+button[data-v-22362ac0] {
+    -webkit-transition: all .2s linear;
+    transition: all .2s linear;
+}
+
+.Affiliate.Management .affiliateMamnagement .search-result .table-pc[data-v-22362ac0] {
+    border-radius: 5px!important;
+}
+.Affiliate.Management .affiliateMamnagement .search-result .table-responsive[data-v-22362ac0] {
+    border-color: #142545!important;
+}
+
+@media screen and (min-width: 1025px) {
+    .Management .affiliateMamnagement .search-result .table-responsive[data-v-22362ac0] {
+        border-radius: 20px!important;
+        border: 1px solid #303539!important;
+    }
+}
+
+.table-responsive {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.Affiliate .affiliateCommission .table[data-v-22362ac0], .Affiliate .affiliateMamnagement .table[data-v-22362ac0], .Affiliate .affiliatePage .table[data-v-22362ac0] {
+    background: #02142b!important;
+}
+
+.table[data-v-22362ac0] {
+    color: #fff;
+    text-align: center;
+    background-color: #02142b;
+}
+
+.table-responsive>.table-bordered {
+    border: 0;
+    border: 1px solid #142545
+}
+
+@media screen and (min-width: 1025px) {
+    .Management .affiliateMamnagement .search-result .table-responsive .table-bordered td[data-v-22362ac0]:first-child, .Management .affiliateMamnagement .search-result .table-responsive .table-bordered th[data-v-22362ac0]:first-child {
+        border-left: none!important;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .Management .affiliateMamnagement .search-result .table-responsive .table-bordered td[data-v-22362ac0], .Management .affiliateMamnagement .search-result .table-responsive .table-bordered th[data-v-22362ac0] {
+        border-top: none!important;
+    } 
+}
+
+.Affiliate .affiliateCommission .borderBottom[data-v-22362ac0], .Affiliate .affiliateCommission .borderBtSecondary2[data-v-22362ac0], .Affiliate .affiliateCommission .borderSecondary2[data-v-22362ac0], .Affiliate .affiliateCommission .dropdown .btn-primary[data-v-22362ac0], .Affiliate .affiliateCommission .groupButton .form-control[data-v-22362ac0], .Affiliate .affiliateCommission .nav[data-v-22362ac0], .Affiliate .affiliateCommission .networkVolumeStats .cardBody .border-bottom[data-v-22362ac0], .Affiliate .affiliateCommission .networkVolumeStats .cardBody .border-top[data-v-22362ac0], .Affiliate .affiliateCommission .table-bordered td[data-v-22362ac0], .Affiliate .affiliateCommission .table-bordered thead th[data-v-22362ac0], .Affiliate .affiliateCommission .wrap-chart .header[data-v-22362ac0], .Affiliate .affiliateCommission .wrap-chart[data-v-22362ac0], .Affiliate .affiliateMamnagement .borderBottom[data-v-22362ac0], .Affiliate .affiliateMamnagement .borderBtSecondary2[data-v-22362ac0], .Affiliate .affiliateMamnagement .borderSecondary2[data-v-22362ac0], .Affiliate .affiliateMamnagement .dropdown .btn-primary[data-v-22362ac0], .Affiliate .affiliateMamnagement .groupButton .form-control[data-v-22362ac0], .Affiliate .affiliateMamnagement .nav[data-v-22362ac0], .Affiliate .affiliateMamnagement .networkVolumeStats .cardBody .border-bottom[data-v-22362ac0], .Affiliate .affiliateMamnagement .networkVolumeStats .cardBody .border-top[data-v-22362ac0], .Affiliate .affiliateMamnagement .table-bordered td[data-v-22362ac0], .Affiliate .affiliateMamnagement .table-bordered thead th[data-v-22362ac0], .Affiliate .affiliateMamnagement .wrap-chart .header[data-v-22362ac0], .Affiliate .affiliateMamnagement .wrap-chart[data-v-22362ac0], .Affiliate .affiliatePage .borderBottom[data-v-22362ac0], .Affiliate .affiliatePage .borderBtSecondary2[data-v-22362ac0], .Affiliate .affiliatePage .borderSecondary2[data-v-22362ac0], .Affiliate .affiliatePage .dropdown .btn-primary[data-v-22362ac0], .Affiliate .affiliatePage .groupButton .form-control[data-v-22362ac0], .Affiliate .affiliatePage .nav[data-v-22362ac0], .Affiliate .affiliatePage .networkVolumeStats .cardBody .border-bottom[data-v-22362ac0], .Affiliate .affiliatePage .networkVolumeStats .cardBody .border-top[data-v-22362ac0], .Affiliate .affiliatePage .table-bordered td[data-v-22362ac0], .Affiliate .affiliatePage .table-bordered thead th[data-v-22362ac0], .Affiliate .affiliatePage .wrap-chart .header[data-v-22362ac0], .Affiliate .affiliatePage .wrap-chart[data-v-22362ac0] {
+    border-color: #142545!important;
+}
+
+.table-bordered thead th[data-v-22362ac0] {
+    color: hsla(0,0%,100%,.5);
+    font-weight: 400;
+    border-bottom-width: 1px;
+    border-color: #8b8d96;
+}
+
+.table thead th {
+    vertical-align: bottom;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.table-bordered, .table-bordered td, .table-bordered th {
+    border: 1px solid #dee2e6;
+}
+
+table td, .table th {
+    padding: 0.75rem;
+}
+
+@media screen and (min-width: 1025px) {
+    .Management .affiliateMamnagement .search-result .table-responsive .table-bordered tr:last-child td[data-v-22362ac0] {
+        border-bottom: none!important;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .Management .affiliateMamnagement .search-result .table-responsive .table-bordered td[data-v-22362ac0]:last-child, .Management .affiliateMamnagement .search-result .table-responsive .table-bordered th[data-v-22362ac0]:last-child {
+        border-right: none!important;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .Management .affiliateMamnagement .search-result .table-responsive .table-bordered td[data-v-22362ac0]:first-child, .Management .affiliateMamnagement .search-result .table-responsive .table-bordered th[data-v-22362ac0]:first-child {
+        border-left: none!important;
+    }
+}
+
+@media screen and (min-width: 1025px) {
+    .Management .affiliateMamnagement .search-result .table-responsive .table-bordered td[data-v-22362ac0], .Management .affiliateMamnagement .search-result .table-responsive .table-bordered th[data-v-22362ac0] {
+        border-top: none!important;
+    }
+}
+
+.Affiliate.Management .affiliateMamnagement .search-result .table-pc[data-v-22362ac0] {
+    border-radius: 5px!important;
+}
+.Affiliate.Management .affiliateMamnagement .search-result .table-responsive[data-v-22362ac0] {
+    border-color: #142545!important;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.btnSearchType[data-v-22362ac0] {
+    background-color: #4d4e4e !important;
+    color: #fff !important;
+    border: 1px solid #8b8d96;
+    border-radius: 10px !important;
+    min-width: 162px;
+    padding: 9px 0;
+}

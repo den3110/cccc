@@ -8,12 +8,24 @@ import Settings from "../../Settings/Settings";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useContext } from "react";
 import { MainContext } from "../../../pages/Index/Index";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import ArrowDownIcons from "../../../assets/icons/ArrowDownIcons";
+import { UserProviderContext } from "../../UserProvider/UserProvider";
+import UserBalance from "../../Popup/UserBalance/UserBalance";
+import numberWithCommas from "../../../function/number_separators";
+import { useMediaQuery } from "react-responsive";
+import MenuMobileIcons from "../../../assets/icons/MenuMobileIcons";
 
 const Header = () => {
+  const isDesktopScreen = useMediaQuery({ query: "(min-width: 1025px)" });
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 1025px)" });
   const [openSetting, setOpenSetting] = useState(false);
-  const {setOpenHistoryBet, openHistoryBet }= useContext(MainContext)
-  
+  const [openBalance, setOpenBalance] = useState(false);
+  const { setOpenHistoryBet } = useContext(MainContext);
+  const { userBalance } = useContext(UserProviderContext);
+
+  const location = useLocation();
+
   return (
     <div data-v-03c925ae data-v-2120bbd4 className="headerMaster">
       <div
@@ -31,22 +43,31 @@ const Header = () => {
               className="h-100 d-flex align-items-center"
             >
               {/**/}
-              <a
-                data-v-03c925ae
-                href="/index"
-                className="ml-1 logoMobile customBgLogo d-flex align-items-stretch router-link-exact-active router-link-active"
-                aria-current="page"
-              >
-                <img
+              {isDesktopScreen && (
+                <Link
                   data-v-03c925ae
-                  width={162}
-                  height={50}
-                  alt=""
-                  src="https://starisa.net/img/logo-footer.2b873662.svg"
-                />
-                {/**/}
-                {/**/}
-              </a>
+                  to="/index"
+                  className="ml-1 logoMobile customBgLogo d-flex align-items-stretch router-link-exact-active router-link-active"
+                  aria-current="page"
+                >
+                  <img
+                    data-v-03c925ae
+                    width={162}
+                    height={50}
+                    alt=""
+                    src="https://starisa.net/img/logo-footer.2b873662.svg"
+                  />
+                  {/**/}
+                  {/**/}
+                </Link>
+              )}
+              {isMobileScreen && (
+                <div data-v-03c925ae className="mobile menuMobileIcon">
+                  <span data-v-03c925ae className="mobileIcon hide">
+                    <MenuMobileIcons />
+                  </span>
+                </div>
+              )}
             </div>
             <div data-v-03c925ae id="rightNav" className="d-flex">
               {/**/}
@@ -82,291 +103,55 @@ const Header = () => {
                     className="balance header-balance mr-lg-4"
                     style={{ borderRadius: "10px" }}
                   >
-                    <div data-v-03c925ae className="dropdown pointer">
-                      <a
-                        data-v-03c925ae
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                        className="buttonBalance d-flex align-items-center"
-                      >
-                        <div
+                    <OutsideClickHandler
+                      onOutsideClick={() => setOpenBalance(false)}
+                    >
+                      <div data-v-03c925ae className="dropdown pointer">
+                        <Link
                           data-v-03c925ae
-                          className="mr-0 d-flex flex-column mr-lg-2"
+                          role="button"
+                          data-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          className="buttonBalance d-flex align-items-center"
+                          onClick={() => setOpenBalance(!openBalance)}
                         >
-                          <span
-                            data-v-03c925ae
-                            className="mb-1 text-left font-8 color-white"
-                          >
-                            Demo account
-                          </span>
                           <div
                             data-v-03c925ae
-                            className="d-flex align-items-center"
+                            className="mr-0 d-flex flex-column mr-lg-2"
                           >
                             <span
                               data-v-03c925ae
-                              className="colorWhite font-16"
+                              className="mb-1 text-left font-8 color-white"
                             >
-                              <b data-v-03c925ae>$1,000</b>
+                              Demo account
                             </span>
-                          </div>
-                        </div>
-                        <span data-v-03c925ae className="arrow">
-                          <svg
-                            data-v-03c925ae
-                            xmlns="http://www.w3.org/2000/svg"
-                            width={10}
-                            viewBox="0 0 32 32"
-                          >
-                            <g
-                              data-v-03c925ae
-                              strokeLinecap="square"
-                              strokeLinejoin="miter"
-                              strokeWidth={2}
-                              fill="#111111"
-                              stroke="#111111"
-                              className="nc-icon-wrapper"
-                            >
-                              <g
-                                data-v-03c925ae
-                                className="nc-interact_sorting-o-32"
-                              >
-                                <path
-                                  data-v-03c925ae
-                                  data-cap="none"
-                                  fill="none"
-                                  stroke="#ffffff"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M4 10l12 12"
-                                  strokeDasharray="16.97 16.97"
-                                  strokeDashoffset={0}
-                                />
-                                <path
-                                  data-v-03c925ae
-                                  data-cap="none"
-                                  fill="none"
-                                  stroke="#ffffff"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M28 10L16 22"
-                                  strokeDasharray="16.97 16.97"
-                                  strokeDashoffset={0}
-                                />
-                              </g>
-                            </g>
-                          </svg>
-                        </span>
-                      </a>
-                      <div data-v-03c925ae className="dropdown-menu sub-menu">
-                        <div data-v-03c925ae className="boxItemRadio pointer">
-                          <div
-                            data-v-03c925ae
-                            className="d-flex align-items-center"
-                          >
-                            <div data-v-03c925ae className="flexLeft">
-                              <div
-                                data-v-03c925ae
-                                className="boxSelectAccount d-flex"
-                              >
-                                <span
-                                  data-v-03c925ae
-                                  className="mr-2 radioButton"
-                                />
-                                <div data-v-03c925ae>
-                                  <div
-                                    data-v-03c925ae
-                                    className="d-flex flex-column"
-                                  >
-                                    <span
-                                      data-v-03c925ae
-                                      className="mb-1 color-white-50 font-12 font-10m"
-                                    >
-                                      Live account
-                                    </span>
-                                    <div
-                                      data-v-03c925ae
-                                      className="d-flex align-items-center"
-                                    >
-                                      <span
-                                        data-v-03c925ae
-                                        className="font-18 font-12m font-weight-700 price color-white d-flex"
-                                      >
-                                        <span
-                                          data-v-03c925ae
-                                          className="font-arial"
-                                        >
-                                          $
-                                        </span>
-                                        <span data-v-03c925ae>0</span>
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
                             <div
                               data-v-03c925ae
-                              className="flexRight d-flex justify-content-end align-items-center"
+                              className="d-flex align-items-center"
                             >
-                              <a
+                              <span
                                 data-v-03c925ae
-                                href="#"
-                                className="buttonDeposit font-12 font-10m"
+                                className="colorWhite font-16"
                               >
-                                <svg
-                                  data-v-03c925ae
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width={46}
-                                  height={29}
-                                  viewBox="0 0 46 29"
-                                >
-                                  <g
-                                    data-v-03c925ae
-                                    id="Group_13378"
-                                    data-name="Group 13378"
-                                    transform="translate(-230 -71)"
-                                  >
-                                    <g
-                                      data-v-03c925ae
-                                      id="Group_13375"
-                                      data-name="Group 13375"
-                                    >
-                                      <g
-                                        data-v-03c925ae
-                                        id="Group_13376"
-                                        data-name="Group 13376"
-                                      >
-                                        <rect
-                                          data-v-03c925ae
-                                          id="Rectangle_4298"
-                                          data-name="Rectangle 4298"
-                                          width={46}
-                                          height={29}
-                                          rx={4}
-                                          transform="translate(230 71)"
-                                          fill="#5DC1B9"
-                                        />
-                                      </g>
-                                    </g>
-                                    <g
-                                      data-v-03c925ae
-                                      id="Group_13377"
-                                      data-name="Group 13377"
-                                    >
-                                      <g
-                                        data-v-03c925ae
-                                        id="conversion"
-                                        transform="translate(246.725 78.133)"
-                                      >
-                                        <path
-                                          data-v-03c925ae
-                                          id="Path_13963"
-                                          data-name="Path 13963"
-                                          d="M15.692,7.459H1V6.123H14.079L10.072,2.116l.945-.944,5.147,5.147a.668.668,0,0,1-.472,1.14Z"
-                                          transform="translate(-1 -1.172)"
-                                          stroke="#fff"
-                                          className="fill-color"
-                                        />
-                                        <path
-                                          data-v-03c925ae
-                                          id="Path_13964"
-                                          data-name="Path 13964"
-                                          d="M6.342,34.287,1.2,29.14A.668.668,0,0,1,1.668,28H16.359v1.336H3.28l4.007,4.007Z"
-                                          transform="translate(-1 -19.042)"
-                                          stroke="#fff"
-                                          className="fill-color"
-                                        />
-                                      </g>
-                                    </g>
-                                  </g>
-                                </svg>
-                              </a>
+                                <b data-v-03c925ae>
+                                  $
+                                  {numberWithCommas(
+                                    userBalance?.d?.demoBalance
+                                  ) ?? "_"}
+                                </b>
+                              </span>
                             </div>
                           </div>
-                        </div>
-                        <div data-v-03c925ae className="boxItemRadio pointer">
-                          <div
-                            data-v-03c925ae
-                            className="d-flex align-items-center"
-                          >
-                            <div data-v-03c925ae className="flexLeft">
-                              <div
-                                data-v-03c925ae
-                                className="boxSelectAccount d-flex"
-                              >
-                                <span
-                                  data-v-03c925ae
-                                  className="mr-2 radioButton active"
-                                />
-                                <div data-v-03c925ae>
-                                  <div
-                                    data-v-03c925ae
-                                    className="d-flex flex-column"
-                                  >
-                                    <span
-                                      data-v-03c925ae
-                                      className="mb-1 color-white-50 font-12 font-10m"
-                                    >
-                                      Demo account
-                                    </span>
-                                    <div
-                                      data-v-03c925ae
-                                      className="d-flex align-items-center"
-                                    >
-                                      <span
-                                        data-v-03c925ae
-                                        className="font-18 font-12m font-weight-700 price color-white d-flex"
-                                      >
-                                        <span
-                                          data-v-03c925ae
-                                          className="font-arial"
-                                        >
-                                          $
-                                        </span>
-                                        <span data-v-03c925ae>1,000</span>
-                                      </span>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div
-                              data-v-03c925ae
-                              className="flexRight d-flex justify-content-end align-items-center"
-                            >
-                              <a data-v-03c925ae href="#">
-                                <svg
-                                  data-v-03c925ae
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="17.795"
-                                  height="18.488"
-                                  viewBox="0 0 17.795 18.488"
-                                  id="refill-balance"
-                                >
-                                  <g
-                                    data-v-03c925ae
-                                    id="refresh-01"
-                                    transform="translate(-1 0.081)"
-                                  >
-                                    <path
-                                      data-v-03c925ae
-                                      id="Path_26259"
-                                      data-name="Path 26259"
-                                      d="M18.8,7.366,17.555-.081,14.993,2.481a8.8,8.8,0,1,0,2.9,10.641.8.8,0,0,0-1.468-.642,7.215,7.215,0,1,1-2.573-8.854l-2.5,2.5Z"
-                                      fill="#fff"
-                                    />
-                                  </g>
-                                </svg>
-                              </a>
-                            </div>
-                          </div>
-                        </div>
+                          <span data-v-03c925ae className="arrow">
+                            <ArrowDownIcons />
+                          </span>
+                        </Link>
+                        <UserBalance open={openBalance} />
                       </div>
-                    </div>
+                    </OutsideClickHandler>
                   </li>
+
                   <li
                     data-v-03c925ae
                     className="mr-2 qDeposit position-relative"
@@ -382,57 +167,61 @@ const Header = () => {
                     </button>
                     {/**/}
                   </li>
-                  <li data-v-03c925ae className="settings position-relative">
-                    {
-                      <OutsideClickHandler
-                        onOutsideClick={() => setOpenSetting(false)}
+                  {isDesktopScreen && (
+                    <li data-v-03c925ae className="settings position-relative">
+                      {
+                        <OutsideClickHandler
+                          onOutsideClick={() => setOpenSetting(false)}
+                        >
+                          <div
+                            data-v-03c925ae
+                            className="buttonSetting d-block align-items-center pointer pc"
+                            onClick={() => setOpenSetting(!openSetting)}
+                          >
+                            <span data-v-03c925ae className="icon">
+                              <SettingIcons />
+                            </span>
+                            <span data-v-03c925ae>Settings</span>
+                          </div>
+                          {openSetting === true && (
+                            <div
+                              data-v-7a073fd5
+                              data-v-03c925ae
+                              className="position-absolute top-0"
+                            >
+                              <Settings />
+                              {/**/}
+                            </div>
+                          )}
+                        </OutsideClickHandler>
+                      }
+                    </li>
+                  )}
+                  {isDesktopScreen && (
+                    <li data-v-03c925ae className="px-2">
+                      <Link
+                        data-v-03c925ae
+                        to="/user/profile"
+                        className="p-0 nav-link"
+                        id="profileLink"
                       >
                         <div
                           data-v-03c925ae
-                          className="buttonSetting d-block align-items-center pointer pc"
-                          onClick={() => setOpenSetting(!openSetting)}
+                          className="buttonColumn d-block align-items-center pointer pc"
                         >
-                          <span data-v-03c925ae className="icon">
-                            <SettingIcons />
-                          </span>
-                          <span data-v-03c925ae>Settings</span>
-                        </div>
-                        {openSetting === true && (
-                          <div
-                            data-v-7a073fd5
+                          <span
                             data-v-03c925ae
-                            className="position-absolute top-0"
+                            className="text-center d-block w-100"
                           >
-                            <Settings />
-                            {/**/}
-                          </div>
-                        )}
-                      </OutsideClickHandler>
-                    }
-                  </li>
-                  <li data-v-03c925ae className="px-2">
-                    <Link 
-                      data-v-03c925ae
-                      to="/user/profile"
-                      className="p-0 nav-link"
-                      id="profileLink"
-                    >
-                      <div
-                        data-v-03c925ae
-                        className="buttonColumn d-block align-items-center pointer pc"
-                      >
-                        <span
-                          data-v-03c925ae
-                          className="text-center d-block w-100"
-                        >
-                          <UserIcons />
-                        </span>
-                        <span data-v-03c925ae className="font-14 txtProfile ">
-                          Profile
-                        </span>
-                      </div>
-                    </Link>
-                  </li>
+                            <UserIcons />
+                          </span>
+                          <span data-v-03c925ae className="font-14 txtProfile ">
+                            Profile
+                          </span>
+                        </div>
+                      </Link>
+                    </li>
+                  )}
                   <li data-v-03c925ae className="settings  px-md-2 px-0 pl-2">
                     <div data-v-03c925ae className="notification-dropdown">
                       <div className="notification-dropdown-button">
@@ -451,26 +240,39 @@ const Header = () => {
                     </div>
                   </li>
                   <>
-                    <li data-v-03c925ae className="px-2">
-                      <span data-v-03c925ae className="line bgSecondary3" />
-                    </li>
-                    {/**/}
-                    <li data-v-03c925ae className="position-relative">
-                      <div
-                        data-v-03c925ae
-                        className="buttonToggle pointer bgSecondary4"
-                        onClick={()=> setOpenHistoryBet(prev=> !prev)}
-                      >
-                        <MenuIcons />
-                        <span
-                          data-v-03c925ae
-                          className="totalCount colorSecondary bgDanger text-uppercase"
-                          style={{ display: "none" }}
-                        >
-                          {/*  */}
-                        </span>
-                      </div>
-                    </li>
+                    {isDesktopScreen && (
+                      <>
+                        {location.pathname === "/index" && (
+                          <>
+                            <li data-v-03c925ae className="px-2">
+                              <span
+                                data-v-03c925ae
+                                className="line bgSecondary3"
+                              />
+                            </li>
+
+                            <li data-v-03c925ae className="position-relative">
+                              <div
+                                data-v-03c925ae
+                                className="buttonToggle pointer bgSecondary4"
+                                onClick={() =>
+                                  setOpenHistoryBet((prev) => !prev)
+                                }
+                              >
+                                <MenuIcons />
+                                <span
+                                  data-v-03c925ae
+                                  className="totalCount colorSecondary bgDanger text-uppercase"
+                                  style={{ display: "none" }}
+                                >
+                                  {/*  */}
+                                </span>
+                              </div>
+                            </li>
+                          </>
+                        )}
+                      </>
+                    )}
                   </>
                 </ul>
               </div>

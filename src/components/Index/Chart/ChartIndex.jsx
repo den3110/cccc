@@ -389,10 +389,11 @@ const ChartIndex = () => {
   // }
   const redrawChart=()=> {
     // if (chartGet && windowWidth > 768) {
-      if (chartStock.current?.chart?.reflow() && window.innerWidth > 768) {
+      // if (chartStock.current?.chart?.reflow() && window.innerWidth > 768) {
       // var chartInstance = chartGet;
       chartStock.current?.chart?.reflow();
-    }
+      chartStock.current?.chart?.redraw();
+    // }
   }
   const reflowChart= ()=> {
     if (chartStock) {
@@ -414,8 +415,8 @@ const ChartIndex = () => {
   // }
 
   const updateBarChart = (data) => {
-    var chartInstance = chartGet.current;
     try {
+      const chartInstance = chartStock.current.chart;
       var lastCandle =
         chartInstance.series[1].points[
           chartInstance.series[1].points?.length - 1
@@ -477,6 +478,7 @@ const ChartIndex = () => {
           // console.log(chartInstance.series);
           listData.current.push(data);
           let begin = 0;
+          console.log("begin", begin)
   
           const { dataMax } = chartInstance.xAxis[0].getExtremes();
           if (deviceVersion !== "pc") {
@@ -485,7 +487,7 @@ const ChartIndex = () => {
             chartGet.current.xAxis[0].setExtremes(
               listData.current[begin + 40][0],
               dataMax,
-              false
+              true
             );
             chartGet.current.redraw();
           } else {
@@ -538,6 +540,9 @@ const ChartIndex = () => {
     } else {
       let getWidth = parseInt($("body").width());
       // console.log(getWidth);
+      if (getWidth > 1600 ) {
+        begin = 10;
+      }
       if (getWidth >= 1260 && getWidth <= 1500) {
         begin = 55;
       }

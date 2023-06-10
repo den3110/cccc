@@ -1,10 +1,16 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import "./Analys.css";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
-import { TradingContext } from "../../../pages/Index/Trading/Trading";
+// import { TradingContext } from "../../../pages/Index/Trading/Trading";
 import { MainContext } from "../../../pages/Index/Index";
+import betApi from "../../../api/bet/bet";
+import { useSnackbar } from "notistack";
+import { Link } from "react-router-dom";
+import { UserProviderContext } from "../../UserProvider/UserProvider";
 
 const Analys = () => {
+  const {setUserBalance, userBalance }= useContext(UserProviderContext)
+  const { enqueueSnackbar }= useSnackbar()
   const restTimeRef = useRef();
   const buttonBuyRef = useRef();
   const buttonSellRef = useRef();
@@ -13,14 +19,16 @@ const Analys = () => {
   const percentBuyTextRef = useRef();
   const textTradeRef = useRef();
   const [amount, setAmount] = useState(10);
+  // eslint-disable-next-line
   const [profitPercent, setProfitPercent] = useState(95);
   const [profit, setProfit] = useState(
-    parseInt(amount) + (parseInt(amount) * profitPercent) / 100
+    parseInt(amount) + (parseInt(amount) * profitPercent) / 100 || 0
   );
   useEffect(() => {
-    setProfit(parseInt(amount) + (parseInt(amount) * profitPercent) / 100);
+    setProfit(parseInt(amount) + (parseInt(amount) * profitPercent) / 100 || 0);
   }, [amount, profitPercent]);
   const { socketWeb } = useContext(SocketContainerContext);
+  // eslint-disable-next-line
   const { setOpenHistoryBet, openHistoryBet } = useContext(MainContext);
 
   useEffect(() => {
@@ -82,6 +90,21 @@ const Analys = () => {
   const handleAddAmount = () => {
     setAmount(parseInt(amount) + parseInt(5));
   };
+
+  const betBinary= async (betType)=> {
+    try {
+      const result= await betApi({betAccountType: "DEMO", betAmount: amount, betType: betType})
+      if(result?.ok=== true) {
+        enqueueSnackbar("Đặt lệnh thành công", {variant: "successComponent"})
+        setUserBalance(prev=> ({...prev, d: {...userBalance.d, demoBalance: userBalance.d?.demoBalance - amount}}))
+      }
+      else {
+        enqueueSnackbar(result?.m, {variant: "errorComponent"})
+      }
+    } catch (error) {
+      
+    }
+  }
 
   return (
     <div data-v-0dc9f329 id="analysis-bet-wrapper" className="wrap">
@@ -328,6 +351,7 @@ const Analys = () => {
                 <div data-v-76861cc0 className="groupButton mt-lg-2 row">
                   <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
                     <button
+                      onClick={()=> betBinary("UP")}
                       ref={buttonBuyRef}
                       data-v-76861cc0
                       type="button"
@@ -360,7 +384,7 @@ const Analys = () => {
                     </button>
                   </div>
                   <div data-v-76861cc0 className="  pb-1 col-md-12 col-4 my-2">
-                    <a
+                    <Link
                       data-v-76861cc0
                       className="btn btnTransparent w-100 d-flex flex-column justify-content-center align-items-center"
                       style={{
@@ -385,10 +409,11 @@ const Analys = () => {
                       >
                         0
                       </p>
-                    </a>
+                    </Link>
                   </div>
                   <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
                     <button
+                      onClick={()=> betBinary("DOWN")}
                       ref={buttonSellRef}
                       data-v-76861cc0
                       type="button"
