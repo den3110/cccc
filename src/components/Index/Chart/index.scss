@@ -1423,7 +1423,7 @@
   }
 }
 
-@media only screen and (min-device-width: 428px) and (max-device-width: 926px) {
+@media only screen and (min-width: 428px) and (max-width: 926px) {
   .wrap-gauge-meter {
     top: 60px !important;
   }
@@ -1437,7 +1437,7 @@
   }
 }
 
-@media only screen and (min-device-width: 390px) and (max-device-width: 844px) {
+@media only screen and (min-device-width: 391px) and (max-device-width: 844px) {
   .wrap-gauge-meter {
     top: 60px !important;
   }
@@ -1456,9 +1456,9 @@
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
-  .wrap-gauge-meter {
-    top: 60px !important;
-  }
+  // .wrap-gauge-meter {
+  //   top: 60px !important;
+  // }
 
   .lg\:relative.mt-4.text-center.color_white.cbtl {
     display: none;

@@ -416,31 +416,34 @@ const ChartIndex = () => {
 
   const updateBarChart = (data) => {
     try {
-      const chartInstance = chartStock.current.chart;
-      var lastCandle =
-        chartInstance.series[1].points[
-          chartInstance.series[1].points?.length - 1
-        ];
-      var color = getColor(data.openPrice, data.closePrice);
-      if (lastCandle?.x === data.createDateTime) {
-        lastCandle.update(
-          {
-            x: data.createDateTime,
-            y: data.baseVolume,
-            color: color,
-          },
-          true
-        );
-      } else {
-        chartInstance.series[1].addPoint(
-          {
-            x: data.createDateTime,
-            y: data.baseVolume,
-            color: color,
-          },
-          true,
-          true
-        );
+      if(chartStock.current) {
+
+        const chartInstance = chartStock?.current.chart;
+        var lastCandle =
+          chartInstance.series[1].points[
+            chartInstance.series[1].points?.length - 1
+          ];
+        var color = getColor(data.openPrice, data.closePrice);
+        if (lastCandle?.x === data.createDateTime) {
+          lastCandle.update(
+            {
+              x: data.createDateTime,
+              y: data.baseVolume,
+              color: color,
+            },
+            true
+          );
+        } else {
+          chartInstance.series[1].addPoint(
+            {
+              x: data.createDateTime,
+              y: data.baseVolume,
+              color: color,
+            },
+            true,
+            true
+          );
+        }
       }
     } catch (err) {
       console.log(err);
@@ -473,6 +476,7 @@ const ChartIndex = () => {
         };
         if (lastCandle?.x === data.createDateTime) {
           lastCandle.update(o, true);
+          console.log(lastCandle.x, data.createDateTime)
         } else {
           chartInstance.series[0].addPoint(o, true, true);
           // console.log(chartInstance.series);

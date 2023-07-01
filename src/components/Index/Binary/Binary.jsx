@@ -3,15 +3,18 @@ import "./Binary.css";
 import ChartIndex from "../Chart/ChartIndex";
 import AnalysBet from "../AnalysBet/AnalysBet";
 import { MainContext } from "../../../pages/Index/Index";
+import { useMediaQuery } from "react-responsive";
 
 const Binary = () => {
   const {openHistoryBet }= useContext(MainContext)
+  const isDesktopScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  // const isMobileScreen = useMediaQuery({ query: "(max-width: 768px)" });
 
   return (
     <div
       data-v-0dc9f329
       id="leftContent"
-      className={`leftContent h-100 ${openHistoryBet=== false ? "hideTransaction" : ""}`}
+      className={`leftContent ${isDesktopScreen ? "h-100" : ""} ${openHistoryBet=== false ? "hideTransaction" : ""}`}
     >
       <div
         data-v-0dc9f329
@@ -42,7 +45,10 @@ const Binary = () => {
           </div>
         </div>
       </div>
-      <AnalysBet />
+      { 
+        isDesktopScreen &&
+        <AnalysBet />
+      }
     </div>
   );
 };

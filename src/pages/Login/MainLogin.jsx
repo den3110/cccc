@@ -9,7 +9,7 @@ import login2fa from "../../api/auth/login_with_2fa";
 const MainLogin = (props) => {
   const [twoFa, setTwoFa] = useState(false);
   const [token2fa, settToken2fa] = useState();
-  const [code2fa, setcode2fa]= useState("")
+  const [code2fa, setcode2fa] = useState("");
   const [captcha, setCaptcha] = useState();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,26 +31,26 @@ const MainLogin = (props) => {
     const result = await login({
       email: email,
       password,
-      captcha: captcha?.captchaCode?.captcha_output,
+      captcha: captcha?.captchaCode,
       captcha_geetest: {
-        captcha_output: captcha?.captchaCode?.captcha_output,
-        gen_time: captcha?.captchaCode?.gen_time,
-        lot_number: captcha?.captchaCode?.lot_number,
-        pass_token: captcha?.captchaCode?.pass_token,
+        // captcha_output: captcha?.captchaCode,
+        // gen_time: captcha?.captchaCode?.gen_time,
+        // lot_number: captcha?.captchaCode?.lot_number,
+        // pass_token: captcha?.captchaCode?.pass_token,
       },
       client_id: "starisa-web",
       grant_type: "password",
     });
     if (result?.ok === false) {
-      enqueueSnackbar(result?.m,{
+      enqueueSnackbar(result?.m, {
         variant: "errorComponent",
       });
     } else {
       if (result?.d?.require2Fa === true) {
         setTwoFa(true);
-        settToken2fa(result?.d?.t)
+        settToken2fa(result?.d?.t);
       } else {
-        props?.setIsAuthenticated(true)
+        props?.setIsAuthenticated(true);
         Cookies.set("accessToken", result.d.refresh_token);
         Cookies.set("refreshToken", result.d.refresh_token);
         navigate("/index", { replace: true });
@@ -58,21 +58,26 @@ const MainLogin = (props) => {
     }
   };
 
-  const handleSubmit2Fa= async (e)=> {
-    e.preventDefault()
-    const result= await login2fa({client_id: "starisa-web", code: code2fa, td_code: "", td_p_codde: "", token: token2fa})
-    if(result?.ok=== false ) {
-       enqueueSnackbar(result?.m,{
+  const handleSubmit2Fa = async (e) => {
+    e.preventDefault();
+    const result = await login2fa({
+      client_id: "starisa-web",
+      code: code2fa,
+      td_code: "",
+      td_p_codde: "",
+      token: token2fa,
+    });
+    if (result?.ok === false) {
+      enqueueSnackbar(result?.m, {
         variant: "errorComponent",
       });
-    }
-    else if(result?.ok=== true) {
-      props?.setIsAuthenticated(true)
+    } else if (result?.ok === true) {
+      props?.setIsAuthenticated(true);
       Cookies.set("accessToken", result.d.access_token);
       Cookies.set("refreshToken", result.d.refresh_token);
       navigate("/index", { replace: true });
     }
-  }
+  };
   return (
     <>
       <div className={"boxAuthentication show"}>
@@ -155,7 +160,7 @@ const MainLogin = (props) => {
           <div className={"formWapper w-100"}>
             {twoFa === true && (
               <>
-                <form data-v-0bf909cc data-v-14042e34 id="loginForm" >
+                <form data-v-0bf909cc data-v-14042e34 id="loginForm">
                   <h4
                     data-v-0bf909cc
                     className="font-24 colorSecondary font-weight-bold mb-4"
@@ -173,7 +178,7 @@ const MainLogin = (props) => {
                     <div data-v-0bf909cc className="position-relative">
                       <input
                         value={code2fa}
-                        onChange={(e)=> setcode2fa(e.target.value)}
+                        onChange={(e) => setcode2fa(e.target.value)}
                         data-v-0bf909cc
                         type="tel"
                         className="

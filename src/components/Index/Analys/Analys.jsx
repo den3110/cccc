@@ -7,10 +7,15 @@ import betApi from "../../../api/bet/bet";
 import { useSnackbar } from "notistack";
 import { Link } from "react-router-dom";
 import { UserProviderContext } from "../../UserProvider/UserProvider";
+import HistoryBet from "./HistoryBet";
+import { useMediaQuery } from "react-responsive";
+import AnalysBet from "../AnalysBet/AnalysBet";
 
 const Analys = () => {
-  const {setUserBalance, userBalance }= useContext(UserProviderContext)
-  const { enqueueSnackbar }= useSnackbar()
+  const isDesktopScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 768px)" });
+  const { setUserBalance, userBalance } = useContext(UserProviderContext);
+  const { enqueueSnackbar } = useSnackbar();
   const restTimeRef = useRef();
   const buttonBuyRef = useRef();
   const buttonSellRef = useRef();
@@ -91,24 +96,37 @@ const Analys = () => {
     setAmount(parseInt(amount) + parseInt(5));
   };
 
-  const betBinary= async (betType)=> {
+  const betBinary = async (betType) => {
     try {
-      const result= await betApi({betAccountType: "DEMO", betAmount: amount, betType: betType})
-      if(result?.ok=== true) {
-        enqueueSnackbar("Đặt lệnh thành công", {variant: "successComponent"})
-        setUserBalance(prev=> ({...prev, d: {...userBalance.d, demoBalance: userBalance.d?.demoBalance - amount}}))
+      const result = await betApi({
+        betAccountType: "DEMO",
+        betAmount: amount,
+        betType: betType,
+      });
+      if (result?.ok === true) {
+        enqueueSnackbar("Đặt lệnh thành công", { variant: "successComponent" });
+        setUserBalance((prev) => ({
+          ...prev,
+          d: {
+            ...userBalance.d,
+            demoBalance: userBalance.d?.demoBalance - amount,
+          },
+        }));
+      } else {
+        enqueueSnackbar(result?.m, { variant: "errorComponent" });
       }
-      else {
-        enqueueSnackbar(result?.m, {variant: "errorComponent"})
-      }
-    } catch (error) {
-      
-    }
-  }
+    } catch (error) {}
+  };
 
   return (
-    <div data-v-0dc9f329 id="analysis-bet-wrapper" className="wrap">
+    <div
+      data-v-0dc9f329
+      id="analysis-bet-wrapper"
+      className={isDesktopScreen ? "wrap" : "wrap bgSecondary8"}
+    >
       {/**/}
+      {isMobileScreen && <AnalysBet />}
+      {/*  */}
       <div
         data-v-0dc9f329
         id="rightContent"
@@ -129,26 +147,66 @@ const Analys = () => {
               id="betAmount"
               className="colorSecondary bgSecondary3"
             >
-              <p data-v-2860c586 className="font-14 font-12m mb-2 mb1Landscape">
-                Amount
-              </p>
+              {isDesktopScreen && (
+                <p
+                  data-v-2860c586
+                  className="font-14 font-12m mb-2 mb1Landscape"
+                >
+                  Amount
+                </p>
+              )}
+              {isMobileScreen && (
+                <div
+                  data-v-0bab5d8e
+                  className="profit d-flex align-items-center justify-content-center pt-0 my-lg-2"
+                  style={{margin: 0, height: 20}}
+                >
+                  <p data-v-0bab5d8e style={{ margin: 0 }}>
+                    Profit
+                  </p>
+                  <span
+                    data-v-0bab5d8e
+                    className="profitPercent mx-2"
+                    style={{
+                      color: "rgb(255, 255, 255)",
+                      marginBottom: 0,
+                      marginTop: 0,
+                    }}
+                  >
+                    {profitPercent}%
+                  </span>
+                  <span
+                    data-v-0bab5d8e
+                    className=" font-24 font-weight-700"
+                    style={{ color: "rgb(1, 181, 140)" }}
+                  >
+                    +${profit}
+                  </span>
+                </div>
+              )}
               <div data-v-2860c586>
                 <div
                   data-v-15011326
                   data-v-2860c586
-                  className="align-items-center wrapInputAmount d-flex"
+                  className={isDesktopScreen ? "align-items-center wrapInputAmount d-flex" : "groupButtonMobile d-flex mb-2"}
                 >
                   <button
                     data-v-15011326
-                    className="btnPrice"
+                    data-v-2860c586
+                    className={isDesktopScreen ? "btnPrice" : "btn btnTransparent colorSecondary mr-1"}
                     style={{
                       backgroundColor: "rgb(29, 35, 59)",
                       color: "rgb(255, 255, 255)",
+                      width: 73,
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center"
                     }}
                     onClick={handleSubtractAmount}
                   >
                     -
                   </button>
+
                   <div
                     data-v-15011326
                     className="inputGroup"
@@ -173,185 +231,199 @@ const Analys = () => {
                     </span>
                   </div>
                   <button
+                  data-v-2860c586
                     data-v-15011326
-                    className="btnPrice"
+                    className={isDesktopScreen ? "btnPrice" : "btn btnTransparent colorSecondary mr-1"}
                     style={{
                       backgroundColor: "rgb(29, 35, 59)",
                       color: "rgb(255, 255, 255)",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center"
                     }}
                     onClick={handleAddAmount}
                   >
                     +
                   </button>
                 </div>
-                <div data-v-2860c586>
-                  <div data-v-7285a2e4>
-                    <div data-v-7285a2e4 className="keyboardAmount mt-2">
-                      <div data-v-7285a2e4 className="row">
-                        <div data-v-7285a2e4 className="col-4 amountItem">
-                          <a data-v-7285a2e4 href="#">
-                            <span
-                              data-v-7285a2e4
-                              className="bagItem colorSecondary primary-hover"
-                              style={{ borderRadius: "10px" }}
-                            >
-                              <span data-v-7285a2e4>+</span>5
-                            </span>
-                          </a>
-                        </div>
-                        <div data-v-7285a2e4 className="col-4 amountItem">
-                          <a data-v-7285a2e4 href="#">
-                            <span
-                              data-v-7285a2e4
-                              className="bagItem colorSecondary primary-hover"
-                              style={{ borderRadius: "10px" }}
-                            >
-                              <span data-v-7285a2e4>+</span>10
-                            </span>
-                          </a>
-                        </div>
-                        <div data-v-7285a2e4 className="col-4 amountItem">
-                          <a data-v-7285a2e4 href="#">
-                            <span
-                              data-v-7285a2e4
-                              className="bagItem colorSecondary primary-hover"
-                              style={{ borderRadius: "10px" }}
-                            >
-                              <span data-v-7285a2e4>+</span>20
-                            </span>
-                          </a>
-                        </div>
-                        <div data-v-7285a2e4 className="col-4 amountItem">
-                          <a data-v-7285a2e4 href="#">
-                            <span
-                              data-v-7285a2e4
-                              className="bagItem colorSecondary primary-hover"
-                              style={{ borderRadius: "10px" }}
-                            >
-                              <span data-v-7285a2e4>+</span>50
-                            </span>
-                          </a>
-                        </div>
-                        <div data-v-7285a2e4 className="col-4 amountItem">
-                          <a data-v-7285a2e4 href="#">
-                            <span
-                              data-v-7285a2e4
-                              className="bagItem colorSecondary primary-hover"
-                              style={{ borderRadius: "10px" }}
-                            >
-                              <span data-v-7285a2e4>+</span>100
-                            </span>
-                          </a>
-                        </div>
-                        <div data-v-7285a2e4 className="col-4 amountItem">
-                          <a data-v-7285a2e4 href="#">
-                            <span
-                              data-v-7285a2e4
-                              className="bagItem colorSecondary primary-hover all"
-                              style={{ borderRadius: "10px" }}
-                            >
-                              {/**/}All
-                            </span>
-                          </a>
+                {isDesktopScreen && (
+                  <div data-v-2860c586>
+                    <div data-v-7285a2e4>
+                      <div data-v-7285a2e4 className="keyboardAmount mt-2">
+                        <div data-v-7285a2e4 className="row">
+                          <div data-v-7285a2e4 className="col-4 amountItem">
+                            <Link data-v-7285a2e4 href="#">
+                              <span
+                                data-v-7285a2e4
+                                className="bagItem colorSecondary primary-hover"
+                                style={{ borderRadius: "10px" }}
+                              >
+                                <span data-v-7285a2e4>+</span>5
+                              </span>
+                            </Link>
+                          </div>
+                          <div data-v-7285a2e4 className="col-4 amountItem">
+                            <Link data-v-7285a2e4 href="#">
+                              <span
+                                data-v-7285a2e4
+                                className="bagItem colorSecondary primary-hover"
+                                style={{ borderRadius: "10px" }}
+                              >
+                                <span data-v-7285a2e4>+</span>10
+                              </span>
+                            </Link>
+                          </div>
+                          <div data-v-7285a2e4 className="col-4 amountItem">
+                            <Link data-v-7285a2e4 href="#">
+                              <span
+                                data-v-7285a2e4
+                                className="bagItem colorSecondary primary-hover"
+                                style={{ borderRadius: "10px" }}
+                              >
+                                <span data-v-7285a2e4>+</span>20
+                              </span>
+                            </Link>
+                          </div>
+                          <div data-v-7285a2e4 className="col-4 amountItem">
+                            <Link data-v-7285a2e4 href="#">
+                              <span
+                                data-v-7285a2e4
+                                className="bagItem colorSecondary primary-hover"
+                                style={{ borderRadius: "10px" }}
+                              >
+                                <span data-v-7285a2e4>+</span>50
+                              </span>
+                            </Link>
+                          </div>
+                          <div data-v-7285a2e4 className="col-4 amountItem">
+                            <Link data-v-7285a2e4 href="#">
+                              <span
+                                data-v-7285a2e4
+                                className="bagItem colorSecondary primary-hover"
+                                style={{ borderRadius: "10px" }}
+                              >
+                                <span data-v-7285a2e4>+</span>100
+                              </span>
+                            </Link>
+                          </div>
+                          <div data-v-7285a2e4 className="col-4 amountItem">
+                            <Link data-v-7285a2e4 href="#">
+                              <span
+                                data-v-7285a2e4
+                                className="bagItem colorSecondary primary-hover all"
+                                style={{ borderRadius: "10px" }}
+                              >
+                                {/**/}All
+                              </span>
+                            </Link>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
+                )}
               </div>
-              <div data-v-2860c586>
-                <div data-v-0bab5d8e>
+              <div data-v-2860c586 >
+                <div data-v-0bab5d8e data-v-2860c586>
                   <div data-v-0bab5d8e className="profit my-lg-3">
-                    <div
-                      data-v-0bab5d8e
-                      className="d-flex justify-content-center mb-lg-2"
-                    >
-                      <p data-v-0bab5d8e className="m-2 mr-2 profit">
-                        Profit
-                      </p>
-                      <p
+                    {isDesktopScreen && (
+                      <div
                         data-v-0bab5d8e
-                        className="profitPercent my-auto"
-                        // style={{ color: "rgb(255, 255, 255)" }}
+                        className="d-flex justify-content-center mb-lg-2"
                       >
-                        {profitPercent}%
-                      </p>
-                    </div>
+                        <p data-v-0bab5d8e className="">
+                          Profit
+                        </p>
+                        <p
+                          data-v-0bab5d8e
+                          className="profitPercent my-auto"
+                          // style={{ color: "rgb(255, 255, 255)" }}
+                        >
+                          {profitPercent}%
+                        </p>
+                      </div>
+                    )}
+                    {
+                      isDesktopScreen &&
+                      <div
+                        data-v-0bab5d8e
+                        className="color-green font-30 font-weight-700 text-center"
+                        style={{ color: "rgb(1, 181, 140)" }}
+                      >
+                        +${profit}
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+              {
+                isDesktopScreen &&
+                <div data-v-2860c586>
+                  <div data-v-4708bf56>
                     <div
-                      data-v-0bab5d8e
-                      className="color-green font-30 font-weight-700 text-center"
-                      style={{ color: "rgb(1, 181, 140)" }}
-                    >
-                      +${profit}
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div data-v-2860c586>
-                <div data-v-4708bf56>
-                  <div
-                    data-v-4708bf56
-                    className="slider mb-4"
-                    style={{ backgroundColor: "transparent" }}
-                  >
-                    <p
                       data-v-4708bf56
-                      className="mt-3 pb-1"
-                      style={{ color: "rgb(255, 255, 255)" }}
+                      className="slider mb-4"
+                      style={{ backgroundColor: "transparent" }}
                     >
-                      Traders sentiments
-                    </p>
-                    <div data-v-4708bf56>
-                      <div
+                      <p
                         data-v-4708bf56
-                        className="progress active mb-2"
-                        style={{ backgroundColor: "rgb(1, 181, 140)" }}
+                        className="mt-3 pb-1"
+                        style={{ color: "rgb(255, 255, 255)" }}
                       >
+                        Traders sentiments
+                      </p>
+                      <div data-v-4708bf56>
                         <div
-                          ref={percentSellRef}
                           data-v-4708bf56
-                          role="progressbar"
-                          aria-valuenow={0}
-                          aria-valuemin={0}
-                          aria-valuemax={100}
-                          className="progress-bar"
-                          style={{
-                            backgroundColor: "rgb(250, 40, 67)",
-                          }}
-                        />
-                      </div>
-                      <div
-                        data-v-4708bf56
-                        className="d-flex justify-content-between"
-                      >
-                        <span
-                          ref={percentSellTextRef}
-                          data-v-4708bf56
-                          style={{ color: "rgb(250, 40, 67)" }}
+                          className="progress active mb-2"
+                          style={{ backgroundColor: "rgb(1, 181, 140)" }}
                         >
-                          0%
-                        </span>
-                        <span
-                          ref={percentBuyTextRef}
+                          <div
+                            ref={percentSellRef}
+                            data-v-4708bf56
+                            role="progressbar"
+                            aria-valuenow={0}
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                            className="progress-bar"
+                            style={{
+                              backgroundColor: "rgb(250, 40, 67)",
+                            }}
+                          />
+                        </div>
+                        <div
                           data-v-4708bf56
-                          style={{ color: "rgb(1, 181, 140)" }}
+                          className="d-flex justify-content-between"
                         >
-                          100%
-                        </span>
+                          <span
+                            ref={percentSellTextRef}
+                            data-v-4708bf56
+                            style={{ color: "rgb(250, 40, 67)" }}
+                          >
+                            0%
+                          </span>
+                          <span
+                            ref={percentBuyTextRef}
+                            data-v-4708bf56
+                            style={{ color: "rgb(1, 181, 140)" }}
+                          >
+                            100%
+                          </span>
+                        </div>
                       </div>
                     </div>
+                    {/**/}
                   </div>
-                  {/**/}
                 </div>
-              </div>
+              }
               {/**/}
               {/**/}
               {/**/}
               <div data-v-2860c586>
-                <div data-v-76861cc0 className="groupButton mt-lg-2 row">
+                <div data-v-76861cc0 className="groupButton mt-lg-2 row" style={{display: "flex", alignItems: "center"}}>
                   <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
                     <button
-                      onClick={()=> betBinary("UP")}
+                      onClick={() => betBinary("UP")}
                       ref={buttonBuyRef}
                       data-v-76861cc0
                       type="button"
@@ -413,7 +485,7 @@ const Analys = () => {
                   </div>
                   <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
                     <button
-                      onClick={()=> betBinary("DOWN")}
+                      onClick={() => betBinary("DOWN")}
                       ref={buttonSellRef}
                       data-v-76861cc0
                       type="button"
@@ -646,134 +718,7 @@ const Analys = () => {
               </div>
             </div>
           </div>
-          {
-            openHistoryBet=== true &&
-            <div data-v-0dc9f329 className="flex-50 col-history">
-              <div data-v-35bea3d4 data-v-0dc9f329 id="binaryTransaction">
-                <ul
-                  data-v-35bea3d4
-                  id="myTab"
-                  role="tablist"
-                  className="nav nav-tabs"
-                >
-                  <li data-v-35bea3d4 className="nav-item">
-                    <a
-                      data-v-35bea3d4
-                      id="home-tab"
-                      data-toggle="tab"
-                      href="#home"
-                      role="tab"
-                      aria-controls="home"
-                      aria-selected="true"
-                      className="nav-link active"
-                    >
-                      <span data-v-35bea3d4 className="text-uppercase">
-                        Open
-                      </span>
-                      <span
-                        data-v-35bea3d4
-                        className="totalCount text-uppercase"
-                        style={{ display: "none" }}
-                      >
-                        0
-                      </span>
-                    </a>
-                  </li>
-                  <li data-v-35bea3d4 className="nav-item">
-                    <a
-                      data-v-35bea3d4
-                      id="profile-tab"
-                      data-toggle="tab"
-                      href="#profile"
-                      role="tab"
-                      aria-controls="profile"
-                      aria-selected="false"
-                      className="nav-link"
-                    >
-                      <span data-v-35bea3d4 className="text-uppercase">
-                        Closed
-                      </span>
-                    </a>
-                  </li>
-                </ul>
-                <section
-                  data-v-35bea3d4
-                  className="ps-container scroll-area ps ps--theme_default"
-                  data-ps-id="97bec2bc-170e-856c-904b-ec8f98a997d5"
-                >
-                  <div
-                    data-v-35bea3d4
-                    id="myTabContent"
-                    className="tab-content h-100"
-                  >
-                    <div
-                      data-v-64e012c6
-                      data-v-35bea3d4
-                      className="d-flex flex-column align-items-center justify-content-center h-100"
-                    >
-                      <svg
-                        data-v-64e012c6
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="82.083"
-                        height="82.104"
-                        viewBox="0 0 82.083 82.104"
-                      >
-                        <g
-                          data-v-64e012c6
-                          id="conversion"
-                          transform="translate(82.091 41.045) rotate(135)"
-                          opacity="0.2"
-                        >
-                          <path
-                            data-v-64e012c6
-                            id="Path_26243"
-                            data-name="Path 26243"
-                            d="M54.414,25.393H3.628A3.427,3.427,0,0,1,0,21.766a3.427,3.427,0,0,1,3.628-3.628h42.08L33.737,6.167a3.507,3.507,0,0,1,0-5.079,3.507,3.507,0,0,1,5.079,0L56.953,19.226a3.311,3.311,0,0,1,.726,3.99A3.486,3.486,0,0,1,54.414,25.393Z"
-                            transform="translate(0.011 0)"
-                            fill="#fff"
-                          />
-                          <path
-                            data-v-64e012c6
-                            id="Path_26244"
-                            data-name="Path 26244"
-                            d="M21.776,34.393A3.293,3.293,0,0,1,19.237,33.3L1.1,15.167a3.311,3.311,0,0,1-.726-3.99A3.486,3.486,0,0,1,3.638,9H54.425a3.427,3.427,0,0,1,3.628,3.628,3.427,3.427,0,0,1-3.628,3.628H12.345L24.316,28.226a3.507,3.507,0,0,1,0,5.079A3.293,3.293,0,0,1,21.776,34.393Z"
-                            transform="translate(0 23.649)"
-                            fill="#fff"
-                          />
-                        </g>
-                      </svg>
-                      <p
-                        data-v-64e012c6
-                        className="font-14 font-8m mt-3 color-grey text-center"
-                      >
-                        You have not made any open order
-                      </p>
-                    </div>
-                  </div>
-                  <div
-                    className="ps__scrollbar-x-rail"
-                    style={{ left: "0px", bottom: "0px" }}
-                  >
-                    <div
-                      className="ps__scrollbar-x"
-                      tabIndex={0}
-                      style={{ left: "0px", width: "0px" }}
-                    />
-                  </div>
-                  <div
-                    className="ps__scrollbar-y-rail"
-                    style={{ top: "0px", right: "0px" }}
-                  >
-                    <div
-                      className="ps__scrollbar-y"
-                      tabIndex={0}
-                      style={{ top: "0px", height: "0px" }}
-                    />
-                  </div>
-                </section>
-              </div>
-            </div>
-          }
+          {openHistoryBet === true && <HistoryBet />}
           {/**/}
         </div>
       </div>

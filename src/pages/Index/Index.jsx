@@ -16,6 +16,7 @@ import { UserProviderContext } from "../../components/UserProvider/UserProvider"
 import AffiliateForVip from "../Affiliate/AffiliateForVip/AffiliateForVip";
 import UpgradeVip from "../UpgradeVip/UpgradeVip";
 import { useMediaQuery  } from 'react-responsive';
+import LeftSidebarMobile from "../../components/Index/LeftSidebar/LeftSidebarMobile";
 // function roundDownToNearest(value, nearest) {
 //   return Math.floor(value / nearest) * nearest;
 // }
@@ -29,19 +30,26 @@ export const MainContext= createContext()
 
 function Index() {
   const isDesktopScreen = useMediaQuery({ query: '(min-width: 1025px)' })
+  const isMobileScreeen= useMediaQuery({query: "(max-width: 1025px)"})
   const [openHistoryBet, setOpenHistoryBet]= useState(false)
   const {userOverview }= useContext(UserProviderContext)
   const [classIndex, setClassIndex]= useState("index")
+  const [openMenuMobile, setOpenMenuMobile]= useState(false)
+
   return (
     <MainContext.Provider value={{openHistoryBet, setOpenHistoryBet, classIndex, setClassIndex}}>
       <div data-v-049fb53f></div>
       <div data-v-2120bbd4 className={`wrapper ${classIndex}`}>
         <div data-v-2120bbd4="" className="spaceTop"></div>
-        <Header />
+        <Header setOpenMenuMobile={setOpenMenuMobile} />
         <main data-v-2120bbd4 className={"wrapper-main-content primary1"}>
             {
               isDesktopScreen && 
               <LeftSidebar />
+            }
+            {
+              isMobileScreeen &&
+              <LeftSidebarMobile openMenuMobile={openMenuMobile} setOpenMenuMobile={setOpenMenuMobile} />
             }
           <div data-v-2120bbd4 id="main-content" className="hasSidebar">
             <Routes>

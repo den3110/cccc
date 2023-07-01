@@ -1,0 +1,175 @@
+.scroll-area[data-v-35bea3d4] {
+    position: relative;
+    height: calc(100% - 45px);
+}
+.ps[data-v-35bea3d4] {
+    /* overflow: hidden!important; */
+    overflow: auto;
+    overflow-anchor: none;
+    -ms-overflow-style: none;
+    touch-action: auto;
+    -ms-touch-action: auto;
+}
+
+.font-16[data-v-64e012c6] {
+    font-size: 16px;
+}
+
+#main-content #binaryPage #rightContent #binaryTransaction .transactionBox[data-v-64e012c6] {
+    background-color: #1d233b;
+}
+
+.transactionBox[data-v-64e012c6] {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: #02142b;
+}
+
+.font-14[data-v-64e012c6] {
+    font-size: 14px;
+}
+
+.font-weight-700[data-v-64e012c6] {
+    font-weight: 700;
+}
+.font-14[data-v-64e012c6] {
+    font-size: 14px;
+}
+
+#main-content #binaryPage #rightContent #binaryTransaction .transactionBox .accType[data-v-64e012c6] {
+    border-radius: 4px!important;
+}
+
+.transactionBox .accType[data-v-64e012c6] {
+    background-color: #5dc1b9;
+    border-radius: 5px;
+    font-size: 14px;
+    padding: 3px 5px;
+    line-height: 20px;
+    vertical-align: middle;
+}
+
+.text-primary[data-v-64e012c6], a .primary-hover[data-v-64e012c6]:hover {
+    color: #fff!important;
+}
+.font-10[data-v-64e012c6] {
+    font-size: .6rem!important;
+}
+
+.transactionBox .icon.iconBitcoin[data-v-64e012c6] {
+    background-image: url(  https://starisa2.net/img/bitcoin.63c77750.svg);
+}
+
+.icon[data-v-64e012c6] {
+    display: inline-block;
+    width: 19px;
+    height: 18px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#main-content #binaryPage #rightContent #binaryTransaction .trendGroup[data-v-64e012c6] {
+    font-weight: 700;
+}
+
+#main-content #binaryPage .transactionBox .trendGroup .trendIcon.trendUp[data-v-64e012c6], #main-content #binaryPage .transactionBox .trendGroup .trendIcon.UP[data-v-64e012c6] {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAABHNCSVQICAgIfAhkiAAAAbdJREFUOE+tlD1PwlAUht9DSYwMwuLmgLOJoC6uLEaDiTo5IrtDiTCrMyToLwBHN5pIdFMn3awmTjpowmJMFBl0oV7PKWkopRSJnqRJe2/vc8/nS/Cz03Ic39YabyUBlSRQUkGZAPEDEyHNwEruyXuU+lgnRZ0P7RIh5nsRLyqFJgh7SOcP3f90YeflGD6tCi+sD4J41xVQQ0TLIpVryl4XVi/WOBwJbSSzgen8RhfGoRFReSSK62elVA6rhQOCJNuybgblKBoeQ2Jisuee568W5HHMzqGmzRGGeCWgi8VNCNSxy7cGUtfHPReIdwwrVdmrTFCIXqA/DEcCMxmWCIJlpmZQmV0O9oz7kKhe4oIMNjdo/+EK+vQ8zNZrX5idagZ45gZl785w1Li3i6HHFyDfbuMi3A7MmR8oKAKGSc78e+x9aduuoOPRsB7sVNMe6rbJ3R91H5Bw4uNRGC+PwzhgEfhAKMyCIPbXCQBlkd6p/sNsKgPpgi0OHtVoM/33w87hGYiEt/pVw8mM6BlrlTeHPW0gOUJIl9Dc6/3iKLv28LfZdWKlRVImRPqI31lpWXG1cM1PaX8AxAC3Xowkh3gAAAAASUVORK5CYII=)!important;
+    background-color: #01b58c!important;
+}   
+
+.transactionBox .trendGroup .trendIcon[data-v-64e012c6] {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.transactionBox .trendGroup .trendIcon[data-v-64e012c6] {
+    border-radius: 10px;
+}
+
+.text-uppercase {
+    text-transform: uppercase!important;
+}
+
+#main-content #binaryPage #rightContent #binaryTransaction .transactionBox .time[data-v-64e012c6] {
+    color: #8b8d96;
+}
+
+.font-12[data-v-64e012c6] {
+    font-size: 12px;
+}
+
+.transactionBox .totalWin.winDown[data-v-64e012c6] {
+    color: #fa2843;
+}
+.font-weight-700[data-v-64e012c6] {
+    font-weight: 700;
+}
+
+#main-content #binaryPage #rightContent #binaryTransaction .transactionBox[data-v-64e012c6] {
+    background-color: #1d233b;
+}
+#main-content #binaryPage #rightContent #binaryTransaction .transactionBox {
+    background-color: #1d233b;
+}
+#main-content #binaryPage #rightContent #binaryTransaction .transactionBox {
+    background-color: #1d233b;
+}
+.transactionBox[data-v-64e012c6] {
+    padding: 0.5rem;
+    border-radius: 6px;
+    background-color: #02142b;
+}
+.font-14[data-v-64e012c6] {
+    font-size: 14px;
+}
+
+.h-100 {
+    height: 100%!important;
+}
+.justify-content-between {
+    -webkit-box-pack: justify!important;
+    -ms-flex-pack: justify!important;
+    justify-content: space-between!important;
+}
+.flex-column {
+    -webkit-box-orient: vertical!important;
+    -ms-flex-direction: column!important;
+    flex-direction: column!important;
+}
+
+.h-100 {
+    height: 100%!important;
+}
+
+.justify-content-between {
+    -webkit-box-pack: justify!important;
+    -ms-flex-pack: justify!important;
+    justify-content: space-between!important;
+}
+
+.flex-column {
+    -webkit-box-orient: vertical!important;
+    -ms-flex-direction: column!important;
+    flex-direction: column!important;
+}
+
+.flex-column, .flex-row {
+    -webkit-box-direction: normal!important;
+}
+.d-flex {
+    display: -webkit-box!important;
+    display: -ms-flexbox!important;
+    display: flex!important;
+}
+
+#main-content #binaryPage .transactionBox .trendGroup .trendIcon.trendDown[data-v-64e012c6] {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAAABHNCSVQICAgIfAhkiAAAAbZJREFUOE+tVD1PAkEQneHkKPziJ5BgAlTiPyCS2AKhB/kHEBMTbaSyIDFqYi/8ArnWBEKthdBxhQkNiXZSgh7j3MIhd+wdR+I1m5vdfTPzdt5DkHwUT0W+SckAUhIIk4DAK3T5v8v/3SAaGvY7A+dVdAYmseMyx64AMSxLJGJEXwBYVfXW/fKZBRhFUuFJSHlEhKwriGODCJrq2CjhoMPgDG/tj2PpJgNl/AJZ50zAkN7KLcBEa4i3mwItzhNVVL19hzOyA29OjjAeBUxEYfr0vD4HcxjE6RG6VRV80QB2t8G4rPkFrOAknq5z6qIzfSB3Asr1uQj7BGyYlfH84KGsFxmg2X6gmAfjoma/wnNoVkZepNgAHxqgFPJA+jv8FM5WrnlWZp1eBhQz+9pbBSPquXJmm2xubatxA7C3MxOADAxAcOY5YyZHy0AelVXmc6bwI8C+lDseD0wc2LZo+AEw/PyLEYxY/Ekhp3XV+Zjaktpv1/9DmxprU5iD0zXqm4idRa6xa5yuuIbVyszPsOrKoXgBGLFRls3WbK8u42Mu/iwrgx2W3dZUCM8Rr+y0xE47bcqc9hc3mMWcj7ApqAAAAABJRU5ErkJggg==)!important;
+    background-color: #fa2843!important;
+}
+
+.scroll-y-history {
+    overflow: auto
+}

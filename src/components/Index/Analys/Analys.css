@@ -799,3 +799,67 @@ a:not(.md-button) {
 .nav-tabs {
     border-bottom: 1px solid #dee2e6;
 }
+
+#main-content #binaryPage #analysis-wrapper[data-v-0dc9f329] {
+    background-color: #011022!important;
+}
+
+#binaryPage #analysis-wrapper[data-v-0dc9f329] {
+    /* height: calc(25vh - 16.25px); */
+    position: relative;
+    padding-top: 28px;
+}
+
+@media screen and (max-width: 1024px) {
+    #binaryPage #analysis-wrapper[data-v-0dc9f329] {
+        min-height: 145px;
+        height: auto;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #binaryPage #analysis-wrapper[data-v-0dc9f329] {
+        min-height: 120px;
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .mobile-version .profit[data-v-0bab5d8e] {
+        padding-bottom: 0!important;
+    }
+}
+
+.profitPercent[data-v-0bab5d8e] {
+    font-size: 1.25rem;
+}
+
+@media (max-width: 1024.98px) {
+    .btnTransparent[data-v-2860c586] {
+        height: 40px;
+        line-height: 40px;
+    }
+}
+.btnTransparent[data-v-2860c586] {
+    position: relative;
+    background-color: #02142b;
+    height: 38px;
+    line-height: 38px;
+    width: 73px
+}
+.colorSecondary[data-v-2860c586] {
+    color: #fff!important;
+}
+
+.groupButtonMobile {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 0;
+}
+
+@media (max-width: 1024.98px) {
+    .groupButton.row [class*=col-][data-v-76861cc0] {
+        padding-left: 4px;
+        padding-right: 4px;
+    }
+}
+

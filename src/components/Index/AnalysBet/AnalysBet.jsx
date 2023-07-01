@@ -7,6 +7,8 @@ import { TradingContext } from "../../../pages/Index/Trading/Trading";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
 import UpBetIcons from "../../../assets/icons/UpBetIcons";
 import DownBetIcons from "../../../assets/icons/DownBetIcons";
+import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
 
 function convertTextValueMeter(t) {
   return t >= -90 && t <= -54
@@ -22,6 +24,8 @@ function convertTextValueMeter(t) {
     : void 0;
 }
 const AnalysBet = () => {
+  const isDesktopScreen = useMediaQuery({ query: "(min-width: 768px)" });
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 768px)" });
   const gaugeMeterSu = {
     chart: {
       type: "gauge",
@@ -674,13 +678,13 @@ const AnalysBet = () => {
   };
 
   return (
-    <div id="analysis-wrapper" className="analysis-wrapper relative">
+    <div data-v-3162dcc5 data-v-0dc9f329 id="analysis-wrapper" className="analysis-wrapper relative">
       <ul
         data-v-0dc9f329
         className="nav nav-pills tab-last-result d-flex w-100"
       >
         <li data-v-0dc9f329 id="community" className="nav-item">
-          <a
+          <Link
             onClick={() => setActiveTab(true)}
             data-v-0dc9f329
             className={`nav-link text-capitalize ${
@@ -688,10 +692,10 @@ const AnalysBet = () => {
             }`}
           >
             Indicators
-          </a>
+          </Link>
         </li>
         <li data-v-0dc9f329 id="community" className="nav-item">
-          <a
+          <Link
             onClick={() => setActiveTab(false)}
             data-v-0dc9f329
             className={`nav-link text-capitalize ${
@@ -699,16 +703,16 @@ const AnalysBet = () => {
             }`}
           >
             Last results
-          </a>
+          </Link>
         </li>
-        <li data-v-0dc9f329 className="navOverview" style={{ display: "none" }}>
-          <div data-v-24a935a7 data-v-0dc9f329 className="ml-3">
-            <div data-v-24a935a7>
+        <li data-v-0dc9f329 className="navOverview" style={{ display: activeTab ? "none" : "block" }}>
+          <div data-v-3162dcc5 data-v-24a935a7 data-v-0dc9f329 className="ml-3">
+            <div data-v-3162dcc5 data-v-24a935a7>
               <div
                 data-v-03d91928
                 className="overviewInfo d-flex align-items-center my-auto"
               >
-                <div data-v-03d91928 className="badgeItem">
+                <div data-v-3162dcc5 data-v-03d91928 className="badgeItem">
                   <svg
                     data-v-03d91928
                     xmlns="http://www.w3.org/2000/svg"
@@ -735,7 +739,7 @@ const AnalysBet = () => {
                     36
                   </span>
                 </div>
-                <div data-v-03d91928 className="badgeItem ml-2">
+                <div data-v-3162dcc5 data-v-03d91928 className="badgeItem ml-2">
                   <svg
                     data-v-03d91928
                     xmlns="http://www.w3.org/2000/svg"
@@ -767,26 +771,26 @@ const AnalysBet = () => {
         </li>
       </ul>
       {activeTab === true && (
-        <div className="wrap-gauge-meter b-desktop">
-          <div className="wrap-gauge-meter-inner">
+        <div data-v-3162dcc5 className="wrap-gauge-meter b-desktop">
+          <div data-v-3162dcc5 className="wrap-gauge-meter-inner">
             <div data-v-3162dcc5 className="gauge-meter">
-              <div className="gauge-meter-sub gauge-meter--os">
-                <div className="v-popover gauge-meter-popover">
-                  <div className="trigger inline-block">
-                    <h3 className="gauge-meter-title">
+              <div data-v-3162dcc5 className="gauge-meter-sub gauge-meter--os">
+                <div data-v-3162dcc5 className="v-popover gauge-meter-popover">
+                  <div data-v-3162dcc5 className="trigger inline-block">
+                    <h3 data-v-3162dcc5 className="gauge-meter-title">
                       Oscillators
-                      <span className="gauge-meter-title-icon">
-                        <svg
+                      <span data-v-3162dcc5 className="gauge-meter-title-icon">
+                        <svg data-v-3162dcc5
                           xmlns="http://www.w3.org/2000/svg"
                           width="22"
                           height="22"
                           viewBox="0 0 22 22"
                         >
-                          <g
+                          <g data-v-3162dcc5
                             id="c-question"
                             transform="translate(3.068 -8.774)"
                           >
-                            <g
+                            <g data-v-3162dcc5
                               id="Ellipse_1825"
                               data-name="Ellipse 1825"
                               transform="translate(-2.068 9.774)"
@@ -836,7 +840,7 @@ const AnalysBet = () => {
                 </div>
                 <h4 className="gauge-meter-sub-title">{textTitleOs}</h4>
                 <div data-v-3162dcc5 className="gauge-meter-border">
-                  <div className="gauge-meter-background rank-2"></div>
+                  <div data-v-3162dcc5 className="gauge-meter-background rank-2"></div>
                   <ul className="gauge-meter-label-list">
                     <li className="gauge-meter-label-item gauge-meter-label-item--strong-sell">
                       strong
@@ -879,15 +883,16 @@ const AnalysBet = () => {
                     </li>
                   </ul>
                   <Chart
+                    data-v-3162dcc5
                     ref={chartOs}
                     className="gauge-meter-pane"
                     options={optionsOs}
                   ></Chart>
                 </div>
               </div>
-              <div className="gauge-meter-sub gauge-meter--su">
-                <div className="v-popover gauge-meter-popover">
-                  <div className="trigger" style={{ display: "inlineBlock" }}>
+              <div data-v-3162dcc5 className="gauge-meter-sub gauge-meter--su">
+                <div data-v-3162dcc5 className="v-popover gauge-meter-popover">
+                  <div data-v-3162dcc5 className="trigger" style={{ display: "inlineBlock" }}>
                     <h3 className="gauge-meter-title">
                       Summary
                       <span className="gauge-meter-title-icon">
@@ -950,8 +955,8 @@ const AnalysBet = () => {
                   </div>
                 </div>
                 <h4 className="gauge-meter-sub-title">{textTitleSu}</h4>
-                <div className="gauge-meter-border">
-                  <div className="gauge-meter-background rank-3"></div>
+                <div data-v-3162dcc5 className="gauge-meter-border">
+                  <div data-v-3162dcc5 className="gauge-meter-background rank-3"></div>
                   <ul className="gauge-meter-label-list">
                     <li className="gauge-meter-label-item gauge-meter-label-item--strong-sell">
                       strong
@@ -994,15 +999,16 @@ const AnalysBet = () => {
                     </li>
                   </ul>
                   <Chart
+                    data-v-3162dcc5
                     className="gauge-meter-pane"
                     options={optionsSu}
                     ref={chartSu}
                   ></Chart>
                 </div>
               </div>
-              <div className="gauge-meter-sub gauge-meter--ma">
-                <div className="v-popover gauge-meter-popover">
-                  <div className="trigger" style={{ display: "inlineBlock" }}>
+              <div data-v-3162dcc5 className="gauge-meter-sub gauge-meter--ma">
+                <div data-v-3162dcc5 className="v-popover gauge-meter-popover">
+                  <div data-v-3162dcc5 className="trigger" style={{ display: "inlineBlock" }}>
                     <h3 className="gauge-meter-title">
                       Moving Averages
                       <span className="gauge-meter-title-icon">
@@ -1065,8 +1071,8 @@ const AnalysBet = () => {
                   </div>
                 </div>
                 <h4 className="gauge-meter-sub-title">{textTitleMa}</h4>
-                <div className="gauge-meter-border">
-                  <div className="gauge-meter-background rank-3"></div>
+                <div data-v-3162dcc5 className="gauge-meter-border">
+                  <div data-v-3162dcc5 className="gauge-meter-background rank-3"></div>
                   <ul className="gauge-meter-label-list">
                     <li className="gauge-meter-label-item gauge-meter-label-item--strong-sell">
                       strong
@@ -1109,6 +1115,7 @@ const AnalysBet = () => {
                     </li>
                   </ul>
                   <Chart
+                    data-v-3162dcc5
                     className="gauge-meter-pane"
                     options={optionsMa}
                     ref={chartMa}
@@ -1119,20 +1126,23 @@ const AnalysBet = () => {
           </div>
         </div>
       )}
-        <div style={{display: activeTab=== false ? "block" : "none" }} className="historyBox a-desktop">
-          <div className="overviewInfo flex items-center">
-            <span className="badgeItem" style={{padding: 5, display: "flex", alignItems: "center", justifyContent: 'center', gap: 16}}>
-              <UpBetIcons />
-              <span style={{fontWeight: 700}}> {totalBuyStatic} </span>
-            </span>
-            <span className="badgeItem ml-2" style={{padding: 5, display: "flex", alignItems: "center", justifyContent: 'center', gap: 16}}>
-              <DownBetIcons />
-              <span style={{fontWeight: 700}}> {totalSellStatic} </span>
-            </span>
-          </div>
-          <div className="ct flex justify-center" style={{ marginTop: 6 }}>
-            <div className="row fix-list-mobile result-bet" style={{flexWrap: "nowrap"}}>
-              <div ref={bet1Ref} className="col w-18 list1">
+        <div data-v-3162dcc5 style={{display: activeTab=== false ? "block" : "none" }} className="historyBox a-desktop">
+          {
+            isDesktopScreen && 
+            <div data-v-3162dcc5 className="overviewInfo flex items-center">
+              <span className="badgeItem" style={{padding: 5, display: "flex", alignItems: "center", justifyContent: 'center', gap: 16}}>
+                <UpBetIcons />
+                <span style={{fontWeight: 700}}> {totalBuyStatic} </span>
+              </span>
+              <span className="badgeItem ml-2" style={{padding: 5, display: "flex", alignItems: "center", justifyContent: 'center', gap: 16}}>
+                <DownBetIcons />
+                <span style={{fontWeight: 700}}> {totalSellStatic} </span>
+              </span>
+            </div>
+          }
+          <div data-v-3162dcc5 className="ct flex justify-center" style={{ marginTop: 6 }}>
+            <div data-v-3162dcc5 className={isDesktopScreen ? "row fix-list-mobile result-bet" : "row fix-list-mobile result-bet list-r-mobile"} style={{flexWrap: "nowrap"}}>
+              <div data-v-3162dcc5 ref={bet1Ref} className="col w-18 list1">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1154,7 +1164,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div ref={bet2Ref} className="col w-18 list2">
+              <div data-v-3162dcc5 ref={bet2Ref} className="col w-18 list2">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1176,7 +1186,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div ref={bet3Ref} className="col w-18 list3">
+              <div data-v-3162dcc5 ref={bet3Ref} className="col w-18 list3">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1198,7 +1208,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div ref={bet4Ref} className="col w-18 list4">
+              <div data-v-3162dcc5 ref={bet4Ref} className="col w-18 list4">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
@@ -1220,7 +1230,7 @@ const AnalysBet = () => {
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-5 inline-flex m-1 item rounded-full empty"></span>
               </div>
-              <div ref={bet5Ref} className="col w-18 list5">
+              <div data-v-3162dcc5 ref={bet5Ref} className="col w-18 list5">
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>
                 <span className="gridcs-1 inline-flex m-1 item rounded-full empty"></span>

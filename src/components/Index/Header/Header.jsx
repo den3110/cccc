@@ -16,13 +16,14 @@ import numberWithCommas from "../../../function/number_separators";
 import { useMediaQuery } from "react-responsive";
 import MenuMobileIcons from "../../../assets/icons/MenuMobileIcons";
 
-const Header = () => {
+const Header = (props) => {
   const isDesktopScreen = useMediaQuery({ query: "(min-width: 1025px)" });
   const isMobileScreen = useMediaQuery({ query: "(max-width: 1025px)" });
   const [openSetting, setOpenSetting] = useState(false);
   const [openBalance, setOpenBalance] = useState(false);
   const { setOpenHistoryBet } = useContext(MainContext);
   const { userBalance } = useContext(UserProviderContext);
+  const { setOpenMenuMobile } = props;
 
   const location = useLocation();
 
@@ -55,14 +56,18 @@ const Header = () => {
                     width={162}
                     height={50}
                     alt=""
-                    src="https://starisa.net/img/logo-footer.2b873662.svg"
+                    src="	https://starisa2.net/img/logo-footer.2b873662.svg"
                   />
                   {/**/}
                   {/**/}
                 </Link>
               )}
               {isMobileScreen && (
-                <div data-v-03c925ae className="mobile menuMobileIcon">
+                <div
+                  onClick={() => setOpenMenuMobile((prev) => !prev)}
+                  data-v-03c925ae
+                  className="mobile menuMobileIcon"
+                >
                   <span data-v-03c925ae className="mobileIcon hide">
                     <MenuMobileIcons />
                   </span>
@@ -151,22 +156,24 @@ const Header = () => {
                       </div>
                     </OutsideClickHandler>
                   </li>
-
-                  <li
-                    data-v-03c925ae
-                    className="mr-2 qDeposit position-relative"
-                  >
-                    <button
+                  {
+                    isDesktopScreen && 
+                    <li
                       data-v-03c925ae
-                      className="px-4 btn button btn-border btn-qDeposit primary"
-                      style={{ borderRadius: "10px" }}
+                      className="mr-2 qDeposit position-relative"
                     >
-                      <span data-v-03c925ae className="colorSecondary">
-                        Quick Deposit
-                      </span>
-                    </button>
-                    {/**/}
-                  </li>
+                      <button
+                        data-v-03c925ae
+                        className="px-4 btn button btn-border btn-qDeposit primary"
+                        style={{ borderRadius: "10px" }}
+                      >
+                        <span data-v-03c925ae className="colorSecondary">
+                          Quick Deposit
+                        </span>
+                      </button>
+                      {/**/}
+                    </li>
+                  }
                   {isDesktopScreen && (
                     <li data-v-03c925ae className="settings position-relative">
                       {
@@ -223,14 +230,17 @@ const Header = () => {
                     </li>
                   )}
                   <li data-v-03c925ae className="settings  px-md-2 px-0 pl-2">
-                    <div data-v-03c925ae className="notification-dropdown">
+                    <div data-v-03c925ae className={isDesktopScreen ? "notification-dropdown" : "notification-dropdown-button mobile"}>
                       <div className="notification-dropdown-button">
                         <span className="notification-dropdown-button-icon">
                           <NotificationsIcons />
                         </span>
-                        <span className="notification-dropdown-button-text colorSecondary2">
-                          Notification
-                        </span>
+                        {
+                          isDesktopScreen && 
+                          <span className="notification-dropdown-button-text colorSecondary2">
+                            Notification
+                          </span>
+                        }
                         <span className="notification-dropdown-button-number">
                           34
                         </span>

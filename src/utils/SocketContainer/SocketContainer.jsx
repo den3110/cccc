@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import io from "socket.io-client";
+// import io from "socket.io-client";
 import { UserProviderContext } from "../../components/UserProvider/UserProvider";
 import Cookies from "js-cookie";
 
@@ -13,7 +13,7 @@ const SocketContainer = ({ chidren }) => {
     if (userData?.d?.uid) {
       //   const url = `wss://ws.central.vip/socket.io/?uid=${userId}&ssid=${access_token}&EIO=3&transport=websocket`
       const socket = new WebSocket(
-        `wss://ws.starisa.net/socket.io/?uid=${
+        `wss://ws.starisa2.net/socket.io/?uid=${
           userData?.d?.uid
         }&ssid=${Cookies.get("accessToken")}&EIO=3&transport=websocket`
       );

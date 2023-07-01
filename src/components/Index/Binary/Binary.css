@@ -150,3 +150,56 @@ button {
     -webkit-transition: all .2s linear;
     transition: all .2s linear;
 }
+
+#main-content #binaryPage #leftContent[data-v-0dc9f329] {
+    padding: 0 2px;
+}
+
+.page-trade #leftContent {
+    overflow: hidden;
+}
+
+@media (max-width: 1024.98px) {
+    .mobile-version .hideTransaction[data-v-0dc9f329] {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .leftContent .flex-50[data-v-0dc9f329], .leftContent[data-v-0dc9f329], .rightContent .flex-50[data-v-0dc9f329], .rightContent[data-v-0dc9f329] {
+        -webkit-box-flex: 1!important;
+        -moz-flex: 1!important;
+        -ms-flex: 1!important;
+        flex: 1!important;
+        max-width: 100%!important;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    #binaryPage .wrap[data-v-0dc9f329] {
+        height: 274px;
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    #binaryPage .wrap[data-v-0dc9f329] {
+        height: 291px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #binaryPage .wrap[data-v-0dc9f329] {
+        height: 310px;
+        padding-top: 10px;
+    }
+}
+
+@media (max-width: 1024px) {
+    #analysis-bet-wrapper.wrap.bgSecondary8[data-v-0dc9f329] {
+        background-color: #080d1f!important;
+    }
+}
+
+#main-content #binaryPage #leftContent[data-v-0dc9f329] {
+    padding: 0 2px;
+}
