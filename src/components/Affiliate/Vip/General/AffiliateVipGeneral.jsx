@@ -8,7 +8,7 @@ const AffiliateVipGeneral = () => {
         <div data-v-94088026>
           <div data-v-9b54ed4a data-v-94088026 className="backgroundDark">
             <div data-v-9b54ed4a className="container">
-             <NavigationAffiliateVip />
+              <NavigationAffiliateVip />
             </div>
           </div>
           <div data-v-94088026 className="mainLeaderboard mt-4">
@@ -1383,7 +1383,7 @@ const AffiliateVipGeneral = () => {
                         <div data-v-ae4f0884 className="col-4 text-center">
                           <img
                             data-v-ae4f0884
-                            src="https://starisa.net/img/bot.d558e5a7.svg"
+                            src="https://starisa2.net/img/bot.d558e5a7.svg"
                             alt=""
                             className="mb-3"
                           />

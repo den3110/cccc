@@ -12,7 +12,6 @@ import RegisterWithEmail from "./pages/RegisterWithEmail/RegisterWithEmail";
 import { SnackbarProvider } from "notistack";
 import ErrorToast from "./custom/ErrorToast";
 import { useEffect, useState } from "react";
-import Index from "./pages/Index/Index";
 import AuthRoute from "./components/AuthRoute/AuthRoute";
 import UserProvider from "./components/UserProvider/UserProvider";
 import SocketContainer from "./utils/SocketContainer/SocketContainer";
@@ -21,9 +20,17 @@ import Cookies from "js-cookie";
 import refresh from "./api/auth/refresh";
 import UserProfile from "./pages/UserProfile/UserProfile";
 import SuccessToast from "./custom/SuccessToast";
+import "./responsive.css"
+// import Index from "./pages/Index/Index";
+import { lazy } from "react";
+import { Suspense } from "react";
+import { useMediaQuery } from "react-responsive";
+const Index= lazy(()=> import("./pages/Index/Index"))
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState();
+  // const isDesktopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 1024px)" });
   const refreshToken= async () => {
     if (Cookies.get("accessToken")) {
       const result = await refresh({
@@ -76,7 +83,7 @@ const App = () => {
       maxSnack={3}
       autoHideDuration={2000}
     >
-      <div className={styles["wrap__app"]}>
+      <div className={`${styles["wrap__app"]} ${isMobileScreen ? "mobile-version" : ""} vi`}>
         <Router>
           {isAuthenticated === true && (
             <UserProvider>
@@ -88,11 +95,12 @@ const App = () => {
                       element={
                         <AuthRoute
                           isAuthenticated={isAuthenticated}
-                          element={Index}
+                          element={LoadIndex}
                         />
                       }
                     />
-                    <Route
+                    
+                    {/* <Route
                       path="/user/profile"
                       element={
                         <AuthRoute
@@ -100,7 +108,7 @@ const App = () => {
                           element={UserProfile}
                         />
                       }
-                    />
+                    /> */}
                     <Route
                       path={"/login"}
                       element={<Navigate to={"/index"} replace />}
@@ -138,5 +146,13 @@ const App = () => {
     </SnackbarProvider>
   );
 };
+
+const LoadIndex= ()=> {
+  return (
+    <Suspense fallback={<div></div>}>
+      <Index />
+    </Suspense>
+  )
+}
 
 export default App;

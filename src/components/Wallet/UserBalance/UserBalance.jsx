@@ -94,7 +94,7 @@ const UserBalance = () => {
                       <span data-v-b4549eec className="mr-2">
                         <img
                           data-v-b4549eec
-                          src="https://starisa.net/img/icon-usdt.f667059b.svg"
+                          src="https://starisa2.net/img/icon-usdt.f667059b.svg"
                           width={44}
                           height={44}
                           alt=""
@@ -142,7 +142,7 @@ const UserBalance = () => {
                   <div data-v-b4549eec>
                     <img
                       data-v-b4549eec
-                      src="https://starisa.net/img/icon-deposit.afd6195e.svg"
+                      src="https://starisa2.net/img/icon-deposit.afd6195e.svg"
                       alt=""
                       className="mr-1"
                     />
@@ -157,7 +157,7 @@ const UserBalance = () => {
                   <div data-v-b4549eec>
                     <img
                       data-v-b4549eec
-                      src="https://starisa.net/img/icon-withdraw.bc763a24.svg"
+                      src="https://starisa2.net/img/icon-withdraw.bc763a24.svg"
                       alt=""
                       className="mr-1"
                     />

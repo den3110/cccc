@@ -17,6 +17,9 @@ import AffiliateForVip from "../Affiliate/AffiliateForVip/AffiliateForVip";
 import UpgradeVip from "../UpgradeVip/UpgradeVip";
 import { useMediaQuery  } from 'react-responsive';
 import LeftSidebarMobile from "../../components/Index/LeftSidebar/LeftSidebarMobile";
+import { memo } from "react";
+import StreakChanllenge from "../StreakChallenge/StreakChanllenge";
+// import UserPage from "../UserPage/UserPage";
 // function roundDownToNearest(value, nearest) {
 //   return Math.floor(value / nearest) * nearest;
 // }
@@ -54,10 +57,18 @@ function Index() {
           <div data-v-2120bbd4 id="main-content" className="hasSidebar">
             <Routes>
               <Route path={"/index"} element={<Trading />} />
+              
+
               <Route path={"/user/*"} element={<Wallet />} />
               <Route path={"/affiliate/*"} element={userOverview?.d?.rank && userOverview?.d?.rank > 0 ? <AffiliateForVip /> : <Affiliate />} />
               <Route path={"/trade-history"} element={<TradeHistory />} />
               <Route path={"/upgrade-vip"} element={<UpgradeVip />} />
+              <Route
+                      path={"/streak-challenge"}
+                      element={
+                        <StreakChanllenge />
+                      }
+                    />
             </Routes>
           </div>
         </main>
@@ -66,4 +77,4 @@ function Index() {
   );
 }
 
-export default Index;
+export default memo(Index);

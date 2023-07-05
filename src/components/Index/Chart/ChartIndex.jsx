@@ -476,7 +476,7 @@ const ChartIndex = () => {
         };
         if (lastCandle?.x === data.createDateTime) {
           lastCandle.update(o, true);
-          console.log(lastCandle.x, data.createDateTime)
+          // console.log(lastCandle.x, data.createDateTime)
         } else {
           chartInstance.series[0].addPoint(o, true, true);
           // console.log(chartInstance.series);

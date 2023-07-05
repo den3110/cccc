@@ -1,0 +1,724 @@
+.community-jackpot {
+    padding-top: 95px;
+    background: #090b0d url(https://starisa2.net/img/bg-1.bb570abf.png) top no-repeat;
+    background-size: 100% auto;
+    overflow: hidden;
+    position: relative;
+}
+
+.community-jackpot:before {
+    content: "";
+    display: block;
+    width: 374px;
+    height: 356px;
+    background: url(https://starisa2.net/img/img-1.71d8078d.png);
+    background-size: cover;
+    position: absolute;
+    left: -60px;
+    top: 275px;
+    z-index: 1;
+}
+
+.community-jackpot-title {
+    font-family: Frizon;
+    font-size: 50px;
+    line-height: 1;
+    margin-bottom: 95px;
+    color: #fff;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.community-jackpot .prize-pool {
+    font-family: Frizon;
+    color: #f7a62f;
+    width: 520px;
+    max-width: 90%;
+    height: 116px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid #592ae6;
+    border-radius: 25px;
+    background: rgba(41,12,126,.44);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+.community-jackpot .go-trade {
+    width: 300px;
+    height: 50px;
+    margin: 90px auto 25px;
+    padding: 0 10px;
+    line-height: 50px;
+    background: #2a74f9;
+    border-radius: 10px;
+    font-family: Lato;
+    font-size: 14px;
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+}
+
+.community-jackpot .link-to-info {
+    text-decoration: underline;
+    color: #f7a62f;
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    z-index: 3;
+}
+
+.community-jackpot .bg {
+    background: url(https://starisa2.net/img/bg-2.b876c51a.png) top no-repeat;
+    background-size: 100% auto;
+    position: relative;
+    z-index: 2;
+    padding-top: 95px;
+    margin-top: 70px;
+}
+
+.latest-winner[data-v-d4cd400a] {
+    padding-bottom: 75px;
+}
+
+.community-jackpot .info-guide {
+    color: #fff;
+    padding-bottom: 30px;
+    background: url(https://starisa2.net/img/bg-3.805f565a.png) top no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.community-jackpot .info-guide:before {
+    content: "";
+    display: block;
+    width: 186px;
+    height: 186px;
+    background: url(https://starisa2.net/img/streak-icon-2.accaafab.png);
+    background-size: cover;
+    position: absolute;
+    top: -90px;
+    left: -40px;
+}
+
+.community-jackpot .info-guide:after {
+    content: "";
+    display: block;
+    width: 318px;
+    height: 318px;
+    background: url(https://starisa2.net/img/streak-icon-3.7d63b463.png);
+    background-size: cover;
+    position: absolute;
+    top: 70px;
+    right: -70px;
+}
+
+.community-jackpot .info-guide-inner {
+    padding-top: 100px;
+}
+
+.community-jackpot .info-guide-subtitle {
+    color: #f7a62f;
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.community-jackpot .info-guide-title {
+    font-size: 40px;
+    font-weight: 700;
+    font-family: Frizon;
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.community-jackpot .info-guide .info-guide-slider {
+    width: 620px;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .community-jackpot .info-guide .info-guide-slider {
+        position: relative;
+    }
+}
+
+.swiper-container {
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+    list-style: none;
+    padding: 0;
+    z-index: 1;
+}
+.swiper-container {
+    margin: 0 auto;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-wrapper {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+}
+
+.swiper-wrapper {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
+
+.swiper-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-inner {
+    padding: 35px 20px 20px;
+    background: #2a1c52;
+    border-radius: 5px;
+    text-align: center;
+    height: 100%;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-icon {
+    margin-bottom: 10px;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-label {
+    font-size: 16px;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-label {
+    color: #fff;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-text {
+    color: rgba(128,134,177,.7);
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.community-jackpot .prize-pool:before {
+    content: "";
+    width: 108px;
+    height: 108px;
+    display: block;
+    background: url(https://starisa2.net/img/box-2.cca970d1.png) 0 0 no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    left: -54px;
+}
+
+.community-jackpot .prize-pool:after {
+    content: "";
+    width: 148px;
+    height: 148px;
+    display: block;
+    background: url(https://starisa2.net/img/box-3.892cbd71.png) 0 0 no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: -74px;
+}
+
+.community-jackpot .prize-pool-value {
+    font-size: 48px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.community-jackpot .prize-pool-mega-fund {
+    position: absolute;
+    width: 370px;
+    height: 77px;
+    background: url(https://starisa2.net/img/mega-fund.9f6d81da.png) 0 0 no-repeat;
+    background-size: cover;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: -60px;
+    color: #b100ff;
+    font-size: 26px;
+    font-weight: 700;
+    text-align: center;
+    padding-top: 18px;
+}
+
+.community-jackpot .prize-pool-label span {
+    border-radius: 35px;
+    border: 2px solid #592ae6;
+    background: #290c7e;
+    position: relative;
+    z-index: 2;
+    padding: 0 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.community-jackpot .info-guide-content h4 {
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.community-jackpot .info-guide-content p {
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 30px;
+    margin-top: 0
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-text {
+    color: rgba(128,134,177,.7);
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-label {
+    font-size: 16px;
+}
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide-label {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.community-jackpot .info-guide .swiper-community-jackpot .swiper-slide {
+    padding-right: 20px;
+    cursor: pointer;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: auto;
+    width: 33.33%;
+}
+.swiper-slide {
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    -webkit-transition-property: -webkit-transform;
+    transition-property: -webkit-transform;
+    transition-property: transform;
+    transition-property: transform,-webkit-transform;
+}
+
+.latest-winner-subtitle[data-v-d4cd400a] {
+    color: hsla(0,0%,100%,.3);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.latest-winner-title[data-v-d4cd400a] {
+    font-family: Frizon;
+    margin-bottom: 45px;
+    color: #fff;
+    font-size: 40px;
+    line-height: 42px;
+    height: 48px;
+    text-align: center;
+}
+
+.latest-winner-mega[data-v-d4cd400a] {
+    width: 458px;
+    max-width: 90%;
+    height: 104px;
+    margin: 0 auto 90px;
+    padding-top: 28px;
+    position: relative;
+    border: 2px solid #f7a62f;
+    border-radius: 27px;
+    background: #020024;
+    background: -webkit-gradient(linear,left top,left bottom,from(#020024),color-stop(0,#7a4900),to(#342500));
+    background: linear-gradient(180deg,#020024,#7a4900 0,#342500);
+    text-align: center;
+}
+
+.latest-winner-table[data-v-d4cd400a] {
+    margin-bottom: 25px;
+    border: 1px solid #1f1049;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.latest-winner-mega[data-v-d4cd400a]:before {
+    content: "";
+    width: 99px;
+    height: 99px;
+    background: url(https://starisa2.net/img/box-8.b7415b73.png) 0 0 no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.latest-winner-mega-title[data-v-d4cd400a] {
+    height: 24px;
+    line-height: 22px;
+    padding: 0 15px;
+    margin: 0;
+    font-size: 10px;
+    font-weight: 700;
+    color: #f7a62f;
+    text-transform: uppercase;
+    background: linear-gradient(45deg,#020024,#2c1d01 0,#2b1c01);
+    border-radius: 7px;
+    border: 1px solid #f7a62f;
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.latest-winner-mega-prize[data-v-d4cd400a] {
+    width: 298px;
+    height: 66px;
+    padding-top: 15px;
+    background: url(https://starisa2.net/img/mega-fund-2.bf69f480.png) 0 0 no-repeat;
+    background-size: cover;
+    font-size: 19px;
+    font-weight: 700;
+    color: #b100ff;
+    position: absolute;
+    bottom: -57px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.latest-winner-mega[data-v-d4cd400a]:after {
+    content: "";
+    width: 93px;
+    height: 93px;
+    background: url(https://starisa2.net/img/box-9.a5494ca0.png) 0 0 no-repeat;
+    background-size: cover;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -webkit-transform: translate(50%,-50%);
+    transform: translate(50%,-50%);
+}
+
+.latest-winner-mega-name[data-v-d4cd400a] {
+    font-size: 24px;
+    font-weight: 700;
+    color: #f7a62f;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.latest-winner-mega-text[data-v-d4cd400a] {
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 0;
+}
+
+.latest-winner-mega-prize[data-v-d4cd400a] {
+    width: 298px;
+    height: 66px;
+    padding-top: 15px;
+    background: url(https://starisa2.net/img/mega-fund-2.bf69f480.png) 0 0 no-repeat;
+    background-size: cover;
+    font-size: 19px;
+    font-weight: 700;
+    color: #b100ff;
+    position: absolute;
+    bottom: -57px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.nav-tabs[data-v-d4cd400a] {
+    border-radius: 10px 10px 0 0;
+    background: #12023e;
+    border-bottom: none;
+}
+
+ul[data-v-d4cd400a] {
+    list-style: none;
+    padding-left: 0;
+}
+
+.latest-winner-list[data-v-d4cd400a] {
+    display: table;
+    width: 100%;
+}
+
+.nav-tabs .nav-link.active[data-v-d4cd400a] {
+    background: none;
+    border: none;
+}
+
+.nav-tabs .nav-link[data-v-d4cd400a] {
+    padding: 16px 44px;
+    position: relative;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}
+
+.nav-tabs .nav-link.active[data-v-d4cd400a]:before {
+    content: "";
+    height: 4px;
+    width: 160px;
+    border-radius: 2px;
+    background: #00b6ff;
+    position: absolute;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    bottom: 5px;
+}
+
+.nav-tabs .nav-link[data-v-d4cd400a] {
+    padding: 16px 44px;
+    position: relative;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}
+
+.latest-winner-item--header[data-v-d4cd400a] {
+    background: #1f1049;
+    color: hsla(0,0%,100%,.3);
+}
+.latest-winner-item[data-v-d4cd400a] {
+    display: table-row;
+}
+
+.latest-winner-item-col[data-v-d4cd400a]:first-child {
+    padding-left: 44px;
+}
+.latest-winner-item--header .latest-winner-item-col[data-v-d4cd400a] {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-top: none;
+}
+.latest-winner-item-col[data-v-d4cd400a] {
+    display: table-cell;
+    padding: 16px 20px;
+}
+
+.latest-winner-item[data-v-d4cd400a] {
+    display: table-row;
+    background: #12023e;
+    color: #fff;
+}
+
+.latest-winner-item:nth-child(3) .latest-winner-item-col[data-v-d4cd400a] {
+    border-top: none;
+}
+.latest-winner-item-col[data-v-d4cd400a]:first-child {
+    padding-left: 44px;
+}
+.latest-winner-item-col[data-v-d4cd400a] {
+    display: table-cell;
+    padding: 16px 20px;
+}
+
+.latest-winner-item .win[data-v-d4cd400a] {
+    color: #18c67a;
+}
+
+.paging[data-v-6169587e] {
+    padding: 15px 0;
+}
+
+.paging ul[data-v-6169587e] {
+    height: 30px;
+}
+
+ul[data-v-6169587e] {
+    list-style: none;
+    padding-left: 0;
+}
+
+#main-content #paging .btn-active-paging[data-v-6169587e] {
+    color: #080d1f!important;
+}
+
+.paging ul li a.active[data-v-6169587e] {
+    border-radius: 50%;
+    background: #5dc1b9;
+}
+
+.paging ul li a[data-v-6169587e] {
+    /* color: #fff; */
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+paging ul li a[data-v-6169587e] {
+    color: #fff;
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.paging ul li[data-v-6169587e] {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.paging ul li a.text[data-v-6169587e] {
+    cursor: default;
+}
+
+.paging ul li a[data-v-6169587e] {
+    color: #fff;
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.paging ul li a[data-v-6169587e] {
+    color: #fff;
+    display: block;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-decoration: none;
+}
+
+.paging ul li a .btnNext[data-v-6169587e]{
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    stroke-width: 1.25px;
+}
+
+.paging ul li a .btnNext[data-v-6169587e]{
+    stroke: #fff;
+}
+
+.community-jackpot .prize-pool {
+    font-family: Frizon;
+    color: #f7a62f;
+    width: 520px;
+    max-width: 90%;
+    height: 116px;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid #592ae6;
+    border-radius: 25px;
+    background: rgba(41,12,126,.44);
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.community-jackpot .prize-pool-label:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 75px;
+    background: url(https://starisa2.net/img/fire_2.0bb9224e.png) 0 0 no-repeat;
+    background-size: 100% auto;
+    position: absolute;
+    left: 0;
+    top: -35px;
+    z-index: -1;
+}
+
+.community-jackpot .prize-pool-label {
+    height: 48px;
+    position: absolute;
+    top: -32px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    font-size: 20px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.latest-winner-item .lose[data-v-d4cd400a] {
+    color: #fc5f5f;
+}
+
+.paging ul li a .btnPrev[data-v-6169587e] {
+    stroke: #fff;
+    display: inline-block
+}
+
+.paging ul li a .btnPrev[data-v-6169587e] {
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    stroke-width: 1.25px;
+}
+
+.latest-winner-item--header[data-v-d4cd400a] {
+    background: #1f1049;
+    color: hsla(0,0%,100%,.3);
+}
+
+.latest-winner-item:nth-child(3) .latest-winner-item-col[data-v-d4cd400a] {
+    border-top: none;
+}
+.latest-winner-item-col[data-v-d4cd400a]:first-child {
+    padding-left: 44px;
+}
+.latest-winner-item-col[data-v-d4cd400a] {
+    display: table-cell;
+    padding: 16px 20px;
+    border-top: 1px solid rgba(170,176,187,.27);
+}

@@ -9,8 +9,8 @@ import { useMediaQuery } from "react-responsive";
 
 export const TradingContext= createContext()
 const Trading = () => {
-  const isDesktopScreen = useMediaQuery({ query: "(min-width: 768px)" });
-  const isMobileScreen = useMediaQuery({ query: "(max-width: 768px)" });
+  const isDesktopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
+  // const isMobileScreen = useMediaQuery({ query: "(max-width: 1024px)" });
   const {setClassIndex }= useContext(MainContext)
   const [data, setData]= useState()
   useEffect(()=> {

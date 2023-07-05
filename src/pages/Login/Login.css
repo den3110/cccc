@@ -416,3 +416,62 @@ form .md-field label[data-v-0bf909cc] {
     font-weight: 700!important;
     text-decoration: none;
 }
+
+.boxFix .boxAuthentication.show[data-v-14042e34] {
+    right: 0;
+}
+
+.Starisa .homepage {
+    overflow: hidden;
+    background-color: #efefef!important;
+}
+
+
+@media (max-width: 1024.98px) {
+    .mobile-version .wrapper {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .mobile-version .wrapper {
+        padding-top: 0;
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .wrapper[data-v-2120bbd4] {
+        padding-top: 56px;
+    }
+}
+
+@media (max-width: 1024.98px) {
+    .mobile-version .wrapper[data-v-2120bbd4] {
+        padding-top: 0;
+    }
+}
+
+.wrapper-main-content[data-v-2120bbd4] {
+    margin: 0 auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    overflow: hidden;
+    min-height: calc(100vh - 65px);
+}
+
+#main-content[data-v-2120bbd4] {
+    width: 100%;
+}
+
+.boxFix[data-v-14042e34] {
+    height: 100vh!important;
+    overflow: hidden;
+}
+
+.Starisa .homepage {
+    overflow: hidden;
+    background-color: #efefef!important;
+}
+
+

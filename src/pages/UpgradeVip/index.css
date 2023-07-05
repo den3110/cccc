@@ -1,5 +1,5 @@
 .upgrade-angency {
-    background-image: url(https://starisa.net/img/BG-Upgrade.a2426fde.png);
+    background-image: url(https://starisa2.net/img/BG-Upgrade.a2426fde.png);
     min-height: calc(100vh - 65px);
     background-size: cover;
     background-position: top 20px center;
@@ -16,7 +16,12 @@
 }
 
 @media (min-width: 1200px) {
-    .container, .container-lg, .container-md, .container-sm, .container-xl {
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl {
         max-width: 1140px;
     }
 }
@@ -24,21 +29,35 @@
 .upgrade-angency .header-image {
     padding-top: 40px;
 }
+
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
 }
 
-audio:not(.md-image), canvas:not(.md-image), embed:not(.md-image), iframe:not(.md-image), img:not(.md-image), object:not(.md-image), video:not(.md-image) {
+audio:not(.md-image),
+canvas:not(.md-image),
+embed:not(.md-image),
+iframe:not(.md-image),
+img:not(.md-image),
+object:not(.md-image),
+video:not(.md-image) {
     height: auto;
 }
-audio, canvas, embed, iframe, img, object, video {
+
+audio,
+canvas,
+embed,
+iframe,
+img,
+object,
+video {
     max-width: 100%;
     font-style: italic;
     vertical-align: middle;
 }
 
 .upgrade-angency .upgrade-process-2 {
-    padding: 0!important;
+    padding: 0 !important;
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
@@ -63,10 +82,11 @@ audio, canvas, embed, iframe, img, object, video {
 }
 
 .upgrade-angency .upgrade-process-2 .header .box-header {
-    background-color: hsla(0,0%,100%,.1);
+    background-color: hsla(0, 0%, 100%, .1);
     padding: 5px 10px;
     border-radius: 10px;
 }
+
 .media {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -76,8 +96,9 @@ audio, canvas, embed, iframe, img, object, video {
     align-items: flex-start;
 }
 
-.ml-2, .mx-2 {
-    margin-left: 0.5rem!important;
+.ml-2,
+.mx-2 {
+    margin-left: 0.5rem !important;
 }
 
 .upgrade-angency .upgrade-process-2 .header .box-header h2 {
@@ -90,7 +111,7 @@ audio, canvas, embed, iframe, img, object, video {
 .upgrade-angency .upgrade-process-2 .header .box-header p {
     margin-bottom: 0;
     font-size: 12px;
-    color: hsla(0,0%,100%,.5);
+    color: hsla(0, 0%, 100%, .5);
 }
 
 .upgrade-angency .upgrade-process-2 .content {
@@ -101,7 +122,7 @@ audio, canvas, embed, iframe, img, object, video {
 }
 
 .upgrade-angency .upgrade-process-2 .content .label {
-    color: hsla(0,0%,100%,.5);
+    color: hsla(0, 0%, 100%, .5);
 }
 
 .media {
@@ -115,11 +136,13 @@ audio, canvas, embed, iframe, img, object, video {
 
 .upgrade-angency .upgrade-process-2 .content .disabled {
     color: #fff;
-    background-color: hsla(0,0%,100%,.2);
+    background-color: hsla(0, 0%, 100%, .2);
     opacity: 1;
 }
 
-.upgrade-angency .upgrade-process-2 .content .level, .upgrade-angency .upgrade-process-2 .content .minus, .upgrade-angency .upgrade-process-2 .content .plus {
+.upgrade-angency .upgrade-process-2 .content .level,
+.upgrade-angency .upgrade-process-2 .content .minus,
+.upgrade-angency .upgrade-process-2 .content .plus {
     color: #fff;
     text-align: center;
     border-radius: 4px;
@@ -131,6 +154,7 @@ audio, canvas, embed, iframe, img, object, video {
     height: 33px;
     line-height: 33px;
 }
+
 .pointer[data-v-6df7537c] {
     cursor: pointer;
 }
@@ -142,7 +166,10 @@ audio, canvas, embed, iframe, img, object, video {
     background-color: #fff;
     color: #242424;
 }
-.upgrade-angency .upgrade-process-2 .content .level, .upgrade-angency .upgrade-process-2 .content .minus, .upgrade-angency .upgrade-process-2 .content .plus {
+
+.upgrade-angency .upgrade-process-2 .content .level,
+.upgrade-angency .upgrade-process-2 .content .minus,
+.upgrade-angency .upgrade-process-2 .content .plus {
     color: #fff;
     text-align: center;
     border-radius: 4px;
@@ -154,13 +181,16 @@ audio, canvas, embed, iframe, img, object, video {
     height: 33px;
     line-height: 33px;
 }
+
 .media-body {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
 }
 
-.upgrade-angency .upgrade-process-2 .content .level, .upgrade-angency .upgrade-process-2 .content .minus, .upgrade-angency .upgrade-process-2 .content .plus {
+.upgrade-angency .upgrade-process-2 .content .level,
+.upgrade-angency .upgrade-process-2 .content .minus,
+.upgrade-angency .upgrade-process-2 .content .plus {
     color: #fff;
     text-align: center;
     border-radius: 4px;
@@ -172,8 +202,9 @@ audio, canvas, embed, iframe, img, object, video {
     height: 33px;
     line-height: 33px;
 }
-span.plus.pointer.noselect {
-}
+
+span.plus.pointer.noselect {}
+
 .pointer[data-v-6df7537c] {
     cursor: pointer;
 }
@@ -181,7 +212,11 @@ span.plus.pointer.noselect {
 .dropdown[data-v-6df7537c] {
     display: inline;
 }
-.dropdown, .dropleft, .dropright, .dropup {
+
+.dropdown,
+.dropleft,
+.dropright,
+.dropup {
     position: relative;
 }
 
@@ -190,26 +225,28 @@ span.plus.pointer.noselect {
 }
 
 .upgrade-angency .upgrade-process-2 .content .label {
-    color: hsla(0,0%,100%,.5);
+    color: hsla(0, 0%, 100%, .5);
 }
 
 .dropdown .dropdown-menu[data-v-6df7537c] {
-    -webkit-transform: translate3d(-21%,-100%,0)!important;
-    transform: translate3d(-21%,-100%,0)!important;
+    -webkit-transform: translate3d(-21%, -100%, 0) !important;
+    transform: translate3d(-21%, -100%, 0) !important;
     width: 290px;
     padding: 10px;
     background: #fff;
     color: #060642;
     font-size: 14px;
-    top: -15px!important;
+    top: -15px !important;
     border-radius: 16px;
 }
+
 .dropup .dropdown-menu {
     top: auto;
     bottom: 100%;
     margin-top: 0;
     margin-bottom: 0.125rem;
 }
+
 .dropdown-menu {
     position: absolute;
     top: 100%;
@@ -226,37 +263,38 @@ span.plus.pointer.noselect {
     list-style: none;
     background-color: #fff;
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.15);
+    border: 1px solid rgba(0, 0, 0, .15);
     border-radius: 0.25rem;
 }
 
 .m-1 {
-    margin: 0.25rem!important;
+    margin: 0.25rem !important;
 }
 
 .text-right {
-    text-align: right!important;
+    text-align: right !important;
 }
 
 .upgrade-angency .upgrade-process-2 .content .txtUsdt {
-    color: hsla(0,0%,99.2%,.34);
+    color: hsla(0, 0%, 99.2%, .34);
     font-size: 14px;
     display: block;
 }
 
 .justify-content-between {
-    -webkit-box-pack: justify!important;
-    -ms-flex-pack: justify!important;
-    justify-content: space-between!important;
+    -webkit-box-pack: justify !important;
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
 }
+
 .d-flex {
-    display: -webkit-box!important;
-    display: -ms-flexbox!important;
-    display: flex!important;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
 }
 
 .upgrade-angency .upgrade-process-2 .content .label {
-    color: hsla(0,0%,100%,.5);
+    color: hsla(0, 0%, 100%, .5);
 }
 
 .upgrade-angency .upgrade-process-2 .content .txtAli {
@@ -266,7 +304,7 @@ span.plus.pointer.noselect {
 }
 
 .upgrade-angency .upgrade-process-2 .content .label {
-    color: hsla(0,0%,100%,.5);
+    color: hsla(0, 0%, 100%, .5);
 }
 
 .upgrade-angency .upgrade-process-2 .footer {
@@ -284,7 +322,7 @@ span.plus.pointer.noselect {
 }
 
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
 }
 
 .upgrade-angency .buy-vip-container .checkboxInput {
@@ -293,7 +331,10 @@ span.plus.pointer.noselect {
     height: 16px;
 }
 
-input.form-control[data-v-6df7537c], input[data-v-6df7537c], select.form-control[data-v-6df7537c], select[data-v-6df7537c] {
+input.form-control[data-v-6df7537c],
+input[data-v-6df7537c],
+select.form-control[data-v-6df7537c],
+select[data-v-6df7537c] {
     padding: 5px 11px;
     background: none;
     border: none;
@@ -301,7 +342,8 @@ input.form-control[data-v-6df7537c], input[data-v-6df7537c], select.form-control
     border-radius: 0;
 }
 
-input[type=checkbox], input[type=radio] {
+input[type=checkbox],
+input[type=radio] {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     padding: 0;
@@ -313,12 +355,12 @@ input[type=checkbox], input[type=radio] {
 }
 
 .upgrade-angency .buy-vip-container .text-checkbox .term {
-    color: #ffe1b0!important;
+    color: #ffe1b0 !important;
     text-decoration: underline;
 }
 
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
 }
 
 .upgrade-angency .buy-vip-container .button-buy {
@@ -331,13 +373,16 @@ input[type=checkbox], input[type=radio] {
     font-weight: 700;
     margin: 0 auto;
 }
+
 button[data-v-6df7537c]:disabled {
-    color: -internal-light-dark(rgba(16,16,16,.3),#aaa);
-    background-color: -internal-light-dark(hsla(0,0%,93.7%,.3),rgba(19,1,1,.3));
-    border-color: -internal-light-dark(hsla(0,0%,46.3%,.3),hsla(0,0%,76.5%,.3));
+    color: -internal-light-dark(rgba(16, 16, 16, .3), #aaa);
+    background-color: -internal-light-dark(hsla(0, 0%, 93.7%, .3), rgba(19, 1, 1, .3));
+    border-color: -internal-light-dark(hsla(0, 0%, 46.3%, .3), hsla(0, 0%, 76.5%, .3));
     cursor: no-drop;
 }
-.btn.disabled, .btn:disabled {
+
+.btn.disabled,
+.btn:disabled {
     opacity: .65;
 }
 
@@ -362,10 +407,10 @@ button[data-v-6df7537c] {
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0.25rem;
-    -webkit-transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    -webkit-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
 }
 
 .upgrade-angency .main-text {
@@ -392,6 +437,7 @@ button[data-v-6df7537c] {
     justify-content: center;
     align-items: center;
 }
+
 .text-center {
-    text-align: center!important;
+    text-align: center !important;
 }

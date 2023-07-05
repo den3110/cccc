@@ -80,8 +80,9 @@ const MainLogin = (props) => {
   };
   return (
     <>
-      <div className={"boxAuthentication show"}>
+      <div data-v-14042e34 className={"boxAuthentication show"}>
         <div
+          data-v-14042e34
           style={{
             transform:
               props?.transition === true
@@ -93,13 +94,14 @@ const MainLogin = (props) => {
           }
         >
           <div
+            data-v-14042e34
             className={
               "header d-flex align-items-center justify-content-between w-100"
             }
           >
             <Link to={"/"} className="logoLogin mb-0 router-link-active">
               <img
-                src="https://fibowin4.com/img/logo.8ac7641c.svg"
+                src="https://fibowin5.com/img/logo.8ac7641c.svg"
                 alt="Botrade"
                 style={{ width: "auto", height: "34.24px" }}
               />
@@ -157,7 +159,7 @@ const MainLogin = (props) => {
             </Link>
           </div>
 
-          <div className={"formWapper w-100"}>
+          <div data-v-14042e34 className={"formWapper w-100"}>
             {twoFa === true && (
               <>
                 <form data-v-0bf909cc data-v-14042e34 id="loginForm">
@@ -169,13 +171,18 @@ const MainLogin = (props) => {
                   </h4>
                   {/**/}
                   <div
+                    data-v-14042e34
                     data-v-0bf909cc
                     className="md-field md-theme-default d-block pt-0 mt-0"
                   >
                     <label data-v-0bf909cc className="color-white-50">
                       Mã Google Authentication
                     </label>
-                    <div data-v-0bf909cc className="position-relative">
+                    <div
+                      data-v-14042e34
+                      data-v-0bf909cc
+                      className="position-relative"
+                    >
                       <input
                         value={code2fa}
                         onChange={(e) => setcode2fa(e.target.value)}
@@ -194,7 +201,11 @@ const MainLogin = (props) => {
                       </span>
                     </div>
                   </div>
-                  <div data-v-0bf909cc className="form-group text-center mt-3">
+                  <div
+                    data-v-14042e34
+                    data-v-0bf909cc
+                    className="form-group text-center mt-3"
+                  >
                     <button
                       onClick={handleSubmit2Fa}
                       data-v-0bf909cc
@@ -207,7 +218,7 @@ const MainLogin = (props) => {
               </>
             )}
             {twoFa === false && (
-              <div className={"loginForm mt-0"}>
+              <div data-v-14042e34 className={"loginForm mt-0"}>
                 <h2
                   className="
                               font-24
@@ -219,7 +230,10 @@ const MainLogin = (props) => {
                 >
                   Đăng nhập vào Tài khoản của bạn
                 </h2>
-                <div className="md-field md-theme-default md-has-value md-has-placeholder mb-2">
+                <div
+                  data-v-14042e34
+                  className="md-field md-theme-default md-has-value md-has-placeholder mb-2"
+                >
                   <label
                     className="position-static"
                     htmlFor="md-input-k0xkm4usa"
@@ -244,7 +258,10 @@ const MainLogin = (props) => {
                   />
                   <small className="md-error" />
                 </div>
-                <div className="md-field md-theme-default md-has-placeholder md-has-password mb-2 position-relative">
+                <div
+                  data-v-14042e34
+                  className="md-field md-theme-default md-has-placeholder md-has-password mb-2 position-relative"
+                >
                   <label htmlFor="md-input-ukmayd2kq">Mật khẩu *</label>
                   <input
                     value={password}
@@ -269,8 +286,8 @@ const MainLogin = (props) => {
                     className="md-button md-icon-button md-dense md-input-action md-toggle-password md-theme-default"
                     tabIndex={-1}
                   >
-                    <div className="md-ripple">
-                      <div className="md-button-content">
+                    <div data-v-14042e34 className="md-ripple">
+                      <div data-v-14042e34 className="md-button-content">
                         <i
                           onClick={() => setShowPassword((prev) => !prev)}
                           className="md-icon md-icon-font md-icon-image md-theme-default"
@@ -302,11 +319,11 @@ const MainLogin = (props) => {
                           )}
                         </i>
                       </div>{" "}
-                      <div />
+                      <div data-v-14042e34 />
                     </div>
                   </button>
                 </div>
-                <div className="form-group text-right mb-4">
+                <div data-v-14042e34 className="form-group text-right mb-4">
                   <Link
                     style={{ color: "#ffffff66" }}
                     to="/forgot-password"
@@ -315,7 +332,7 @@ const MainLogin = (props) => {
                     Quên mật khẩu?
                   </Link>
                 </div>
-                <div className="form-group text-center">
+                <div data-v-14042e34 className="form-group text-center">
                   <button
                     onClick={handleSubmit}
                     style={{ fontSize: 14 }}
@@ -443,7 +460,10 @@ const MainLogin = (props) => {
             <div data-v-14042e34 className="colorSecondary2 font-14 mb-1">
               <div data-v-14042e34 className="d-inline-block">
                 Cần tài khoản{" "}
-                <div className="text-domain d-inline-block">Fibowin</div>?
+                <div data-v-14042e34 className="text-domain d-inline-block">
+                  Fibowin
+                </div>
+                ?
               </div>
               &nbsp;
               <Link data-v-14042e34 to="/register" className="colorPrimary">

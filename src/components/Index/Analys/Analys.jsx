@@ -12,8 +12,8 @@ import { useMediaQuery } from "react-responsive";
 import AnalysBet from "../AnalysBet/AnalysBet";
 
 const Analys = () => {
-  const isDesktopScreen = useMediaQuery({ query: "(min-width: 768px)" });
-  const isMobileScreen = useMediaQuery({ query: "(max-width: 768px)" });
+  const isDesktopScreen = useMediaQuery({ query: "(min-width: 1024px)" });
+  const isMobileScreen = useMediaQuery({ query: "(max-width: 1024px)" });
   const { setUserBalance, userBalance } = useContext(UserProviderContext);
   const { enqueueSnackbar } = useSnackbar();
   const restTimeRef = useRef();
@@ -158,7 +158,7 @@ const Analys = () => {
               {isMobileScreen && (
                 <div
                   data-v-0bab5d8e
-                  className="profit d-flex align-items-center justify-content-center pt-0 my-lg-2"
+                  className="profit d-flex align-items-center justify-content-center pt-0 my-lg-2 my-1"
                   style={{margin: 0, height: 20}}
                 >
                   <p data-v-0bab5d8e style={{ margin: 0 }}>
@@ -184,8 +184,7 @@ const Analys = () => {
                   </span>
                 </div>
               )}
-              <div data-v-2860c586>
-                <div
+              <div
                   data-v-15011326
                   data-v-2860c586
                   className={isDesktopScreen ? "align-items-center wrapInputAmount d-flex" : "groupButtonMobile d-flex mb-2"}
@@ -193,11 +192,10 @@ const Analys = () => {
                   <button
                     data-v-15011326
                     data-v-2860c586
-                    className={isDesktopScreen ? "btnPrice" : "btn btnTransparent colorSecondary mr-1"}
+                    className={isDesktopScreen ? "btnPrice" : "btn btnTransparent colorSecondary mr-1 w-100"}
                     style={{
-                      backgroundColor: "rgb(29, 35, 59)",
-                      color: "rgb(255, 255, 255)",
-                      width: 73,
+                      color: isDesktopScreen ? "rgb(255, 255, 255)" : "#02142b",
+                      width: isDesktopScreen ? 73 : "auto",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center"
@@ -206,37 +204,38 @@ const Analys = () => {
                   >
                     -
                   </button>
-
-                  <div
-                    data-v-15011326
-                    className="inputGroup"
-                    style={{
-                      backgroundColor: "rgb(255, 255, 255)",
-                      color: "rgb(23, 27, 44)",
-                    }}
-                  >
-                    {/**/}
-                    <input
-                      data-v-39ad19b4
+                  <div data-v-15011326 data-v-2860c586 className="align-items-center" readOnly="readonly">
+                    <div
                       data-v-15011326
-                      value={amount}
-                      onChange={(e) => setAmount(e.target.value)}
-                      type="text"
-                      id="InputNumber"
-                      className="font-16  inputAmount"
-                      style={{ color: "rgb(23, 27, 44)", width: "100%" }}
-                    />
-                    <span data-v-15011326 className="icon font-16">
-                      $
-                    </span>
+                      className="inputGroup"
+                      style={{
+                        backgroundColor: "rgb(255, 255, 255)",
+                        color: "rgb(23, 27, 44)",
+                      }}
+                    >
+                      {/**/}
+                      <input
+                        data-v-39ad19b4
+                        data-v-15011326
+                        value={amount}
+                        onChange={(e) => setAmount(e.target.value)}
+                        type="text"
+                        id="InputNumber"
+                        className="font-16 inputAmount"
+                        style={{ color: "rgb(23, 27, 44)", width: isDesktopScreen ? "100%" : "170.4px" }}
+                      />
+                      <span data-v-15011326 className="icon font-16">
+                        $
+                      </span>
+                    </div>
                   </div>
                   <button
-                  data-v-2860c586
+                    data-v-2860c586
                     data-v-15011326
-                    className={isDesktopScreen ? "btnPrice" : "btn btnTransparent colorSecondary mr-1"}
+                    className={isDesktopScreen ? "btnPrice" : "btn btnTransparent colorSecondary mr-1 w-100"}
                     style={{
-                      backgroundColor: "rgb(29, 35, 59)",
-                      color: "rgb(255, 255, 255)",
+                      color: isDesktopScreen ? "rgb(255, 255, 255)" : "#02142b",
+                      width: isDesktopScreen ? 73 : "auto",
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center"
@@ -322,7 +321,6 @@ const Analys = () => {
                     </div>
                   </div>
                 )}
-              </div>
               <div data-v-2860c586 >
                 <div data-v-0bab5d8e data-v-2860c586>
                   <div data-v-0bab5d8e className="profit my-lg-3">
@@ -331,13 +329,13 @@ const Analys = () => {
                         data-v-0bab5d8e
                         className="d-flex justify-content-center mb-lg-2"
                       >
-                        <p data-v-0bab5d8e className="">
+                        <p data-v-0bab5d8e className="m-2 mr-2">
                           Profit
                         </p>
                         <p
                           data-v-0bab5d8e
-                          className="profitPercent my-auto"
-                          // style={{ color: "rgb(255, 255, 255)" }}
+                          className="profitPercent color-light-blue my-auto"
+                          style={{ color: "rgb(255, 255, 255)" }}
                         >
                           {profitPercent}%
                         </p>
@@ -416,12 +414,11 @@ const Analys = () => {
                   </div>
                 </div>
               }
-              {/**/}
-              {/**/}
+             
               {/**/}
               <div data-v-2860c586>
-                <div data-v-76861cc0 className="groupButton mt-lg-2 row" style={{display: "flex", alignItems: "center"}}>
-                  <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
+                <div data-v-76861cc0 className="groupButton mt-lg-2 row d-flex align-items-center">
+                  <div data-v-76861cc0 className={`pb-1 ${isDesktopScreen ? "col-md-12" : ""} col-4`}>
                     <button
                       onClick={() => betBinary("UP")}
                       ref={buttonBuyRef}
@@ -455,7 +452,7 @@ const Analys = () => {
                       </svg>
                     </button>
                   </div>
-                  <div data-v-76861cc0 className="  pb-1 col-md-12 col-4 my-2">
+                  <div data-v-76861cc0 className={`pb-1 ${isDesktopScreen ? "col-md-12" : ""} col-4 my-2`}>
                     <Link
                       data-v-76861cc0
                       className="btn btnTransparent w-100 d-flex flex-column justify-content-center align-items-center"
@@ -483,7 +480,7 @@ const Analys = () => {
                       </p>
                     </Link>
                   </div>
-                  <div data-v-76861cc0 className=" pb-1 col-md-12 col-4">
+                  <div data-v-76861cc0 className={`pb-1 ${isDesktopScreen ? "col-md-12" : ""} col-4`}>
                     <button
                       onClick={() => betBinary("DOWN")}
                       ref={buttonSellRef}

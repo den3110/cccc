@@ -8,7 +8,7 @@ import Settings from "../../Settings/Settings";
 import OutsideClickHandler from "react-outside-click-handler";
 import { useContext } from "react";
 import { MainContext } from "../../../pages/Index/Index";
-import { Link, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import ArrowDownIcons from "../../../assets/icons/ArrowDownIcons";
 import { UserProviderContext } from "../../UserProvider/UserProvider";
 import UserBalance from "../../Popup/UserBalance/UserBalance";
@@ -82,9 +82,9 @@ const Header = (props) => {
               >
                 <ul data-v-03c925ae className="nav infoMem align-items-center">
                   <li data-v-03c925ae className="nav-streak">
-                    <a
+                    <Link
                       data-v-03c925ae
-                      href="/streak-challenge"
+                      to="/streak-challenge"
                       className="nav-link p-0"
                     >
                       <div data-v-03c925ae className="nav-streak-rewards ">
@@ -101,7 +101,7 @@ const Header = (props) => {
                           $29.57K
                         </span>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                   <li
                     data-v-03c925ae
@@ -156,8 +156,7 @@ const Header = (props) => {
                       </div>
                     </OutsideClickHandler>
                   </li>
-                  {
-                    isDesktopScreen && 
+                  {isDesktopScreen && (
                     <li
                       data-v-03c925ae
                       className="mr-2 qDeposit position-relative"
@@ -173,7 +172,7 @@ const Header = (props) => {
                       </button>
                       {/**/}
                     </li>
-                  }
+                  )}
                   {isDesktopScreen && (
                     <li data-v-03c925ae className="settings position-relative">
                       {
@@ -206,10 +205,10 @@ const Header = (props) => {
                   )}
                   {isDesktopScreen && (
                     <li data-v-03c925ae className="px-2">
-                      <Link
+                      <NavLink
                         data-v-03c925ae
                         to="/user/profile"
-                        className="p-0 nav-link"
+                        className={({isActive})=> isActive ? "p-0 nav-link router-link-exact-active active" : "p-0 nav-link"}
                         id="profileLink"
                       >
                         <div
@@ -226,21 +225,27 @@ const Header = (props) => {
                             Profile
                           </span>
                         </div>
-                      </Link>
+                      </NavLink>
                     </li>
                   )}
                   <li data-v-03c925ae className="settings  px-md-2 px-0 pl-2">
-                    <div data-v-03c925ae className={isDesktopScreen ? "notification-dropdown" : "notification-dropdown-button mobile"}>
+                    <div
+                      data-v-03c925ae
+                      className={
+                        isDesktopScreen
+                          ? "notification-dropdown"
+                          : "notification-dropdown-button mobile"
+                      }
+                    >
                       <div className="notification-dropdown-button">
                         <span className="notification-dropdown-button-icon">
                           <NotificationsIcons />
                         </span>
-                        {
-                          isDesktopScreen && 
+                        {isDesktopScreen && (
                           <span className="notification-dropdown-button-text colorSecondary2">
                             Notification
                           </span>
-                        }
+                        )}
                         <span className="notification-dropdown-button-number">
                           34
                         </span>

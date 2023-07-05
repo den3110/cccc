@@ -224,3 +224,7 @@ svg {
     background-color: hsla(0,0%,100%,.3);
     cursor: pointer;
 }
+
+.go1888806478 {
+    flex-direction: row-reverse;
+}

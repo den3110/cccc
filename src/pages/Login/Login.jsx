@@ -11,7 +11,7 @@ const Login = ({setIsAuthenticated }) => {
 
   }, [])
   return (
-    <div className={"login__container"}>
+    <div className={"login__container wrapper Login"}>
       <Home setIsAuthenticated={setIsAuthenticated} transition={transition} setTransition={setTransition} is_log_in={true} />
     </div>
   )

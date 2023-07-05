@@ -15,16 +15,11 @@ const Home = (props) => {
   return (
     <div className={styles["home__container"]}>
       <Header />
-      {props?.is_sign_up === true && (
-        <MainSignUp {...props} />
-      )}
-      {props?.is_log_in === true && (
-        <MainLogin {...props} />
-      )}
-      {
-        props?.is_register_with_email=== true && 
+      {props?.is_sign_up === true && <MainSignUp {...props} />}
+      {props?.is_log_in === true && <MainLogin {...props} />}
+      {props?.is_register_with_email === true && (
         <MainRegisterWithEmail {...props} />
-      }
+      )}
       <div className={styles["bg__1__container"]}></div>
       <section className={styles["main__banner"]}>
         <div className={styles["main__banner__content"]}>
@@ -98,7 +93,7 @@ const Home = (props) => {
           className="container-fluid content aos-init aos-animate"
         >
           <img
-            src="	https://fibowin4.com/img/logo-light-footer.40788a88.svg"
+            src="	https://fibowin5.com/img/logo-light-footer.40788a88.svg"
             alt="Botrade"
             style={{ width: "auto", height: "auto" }}
           />
@@ -144,7 +139,7 @@ const Home = (props) => {
                   <img
                     width={22}
                     height={22}
-                    src="	https://fibowin4.com/img/check-icon.2312d98e.svg"
+                    src="	https://fibowin5.com/img/check-icon.2312d98e.svg"
                     className="security-item-icon"
                     style={{ marginBottom: 10 }}
                     alt={"Can't open"}
@@ -168,7 +163,7 @@ const Home = (props) => {
                   <img
                     width={22}
                     height={22}
-                    src="	https://fibowin4.com/img/check-icon.2312d98e.svg"
+                    src="	https://fibowin5.com/img/check-icon.2312d98e.svg"
                     className="security-item-icon"
                     style={{ marginBottom: 10 }}
                     alt={"Can't open"}
@@ -192,7 +187,7 @@ const Home = (props) => {
                   <img
                     width={22}
                     height={22}
-                    src="	https://fibowin4.com/img/check-icon.2312d98e.svg"
+                    src="	https://fibowin5.com/img/check-icon.2312d98e.svg"
                     className="security-item-icon"
                     style={{ marginBottom: 10 }}
                     alt={"Can't open"}
@@ -405,7 +400,7 @@ const Home = (props) => {
               <div className="block logo">
                 <p className="mb-lg-2 mb-1">
                   <img
-                    src="https://fibowin4.com/img/logo.8ac7641c.svg"
+                    src="https://fibowin5.com/img/logo.8ac7641c.svg"
                     alt="Botrade"
                     style={{ width: "242px", height: "auto" }}
                   />

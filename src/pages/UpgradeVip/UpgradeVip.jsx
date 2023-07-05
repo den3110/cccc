@@ -2,7 +2,7 @@ import React from "react";
 import { useContext } from "react";
 import { MainContext } from "../Index/Index";
 import { useEffect } from "react";
-import "./index.css"
+import "./index.css";
 import NavigationAffiliateVip from "../../components/Affiliate/Vip/Navigation/Navigation";
 
 const UpgradeVip = () => {
@@ -15,7 +15,7 @@ const UpgradeVip = () => {
     <section data-v-2120bbd4 className="upgrade-angency">
       <div data-v-9b54ed4a className="backgroundDark">
         <div data-v-9b54ed4a className="container">
-            <NavigationAffiliateVip />
+          <NavigationAffiliateVip />
         </div>
       </div>
       <div className="container">
@@ -23,7 +23,7 @@ const UpgradeVip = () => {
           <div className="col-12">
             <div className="text-center header-image">
               <img
-                src="https://starisa.net/img/UpgradeAgency.a3b236c2.svg"
+                src="https://starisa2.net/img/UpgradeAgency.a3b236c2.svg"
                 alt="title"
                 width={241}
                 height={62}
@@ -40,7 +40,7 @@ const UpgradeVip = () => {
                 <div data-v-6df7537c className="box-header media">
                   <img
                     data-v-6df7537c
-                    src="https://starisa.net/img/rank1.8341c746.png"
+                    src="https://starisa2.net/img/rank1.8341c746.png"
                     width={60}
                     alt="rank"
                   />

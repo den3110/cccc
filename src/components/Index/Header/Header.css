@@ -205,9 +205,6 @@ a:not(.md-button) {
     position: relative;
 }
 
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
 .nav-streak-rewards-label[data-v-03c925ae] {
     font-size: 9px;
     font-weight: 700;
@@ -216,9 +213,6 @@ a:not(.md-button) {
     margin-bottom: 3px;
 }
 
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
 .nav-streak-rewards-value[data-v-03c925ae] {
     font-size: 15px;
     line-height: 16px;
@@ -344,9 +338,6 @@ a:not(.md-button) {
         margin-left: 4px;
     }
 }
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
 
 .dropdown-menu {
     position: absolute;
@@ -416,9 +407,6 @@ a:not(.md-button) {
     padding-right: 30px;
 }
 
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
 .nav-streak-rewards-value[data-v-03c925ae] {
     font-size: 15px;
     line-height: 16px;
@@ -524,10 +512,7 @@ element.style {
         margin-right: 0.5rem!important;
     }
 }
-
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
+ 
 .balance .dropdown a span[data-v-03c925ae] {
     line-height: normal;
 }
@@ -716,23 +701,6 @@ a {
     color: #8b8d96;
 }
 
-
-
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
-#rightNav a span[data-v-03c925ae] {
-    white-space: nowrap;
-}
 
 .pointer[data-v-03c925ae] {
     cursor: pointer;
@@ -1091,4 +1059,12 @@ span[data-v-03c925ae] {
 
 .bgSecondary4 {
     background-color: #02142b!important;
+}
+
+#rightNav a.active[data-v-03c925ae], #rightNav a.router-link-exact-active[data-v-03c925ae] {
+    color: #5dc1b9;
+}
+
+#rightNav a.active svg[data-v-03c925ae], #rightNav a.router-link-exact-active svg[data-v-03c925ae] {
+    stroke: #5dc1b9;
 }

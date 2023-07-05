@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import register from "../../api/auth/register";
 import { useSnackbar } from "notistack";
-import "./RegisterWithEmail.css"
+import "./RegisterWithEmail.css";
 
 const MainRegisterWithEmail = (props) => {
   const [captcha, setCaptcha] = useState();
@@ -40,8 +40,8 @@ const MainRegisterWithEmail = (props) => {
         variant: "error",
       });
     }
-    if(result?.ok=== true) {
-      setToggle(true) 
+    if (result?.ok === true) {
+      setToggle(true);
     }
   };
   return (
@@ -65,7 +65,7 @@ const MainRegisterWithEmail = (props) => {
           >
             <Link to={"/"} className="logoLogin mb-0 router-link-active">
               <img
-                src="https://fibowin4.com/img/logo.8ac7641c.svg"
+                src="https://fibowin5.com/img/logo.8ac7641c.svg"
                 alt="Botrade"
                 style={{ width: "auto", height: "34.24px" }}
               />

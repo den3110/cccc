@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import OutsideClickHandler from "react-outside-click-handler";
 const AffiliateGeneral = () => {
   const [openPopup, setOpenPopup] = useState(false);
-  
+
   return (
     <div data-v-94088026 data-v-2120bbd4 className="bodyContent affiliatePage">
       <div data-v-94088026>
@@ -502,7 +502,7 @@ const AffiliateGeneral = () => {
       {/**/}
       <div
         style={{ display: openPopup === true ? "block" : "none" }}
-        class="modal-backdrop fade show"
+        className="modal-backdrop fade show"
       ></div>
     </div>
   );
