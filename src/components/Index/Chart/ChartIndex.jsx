@@ -7,16 +7,16 @@ import $ from "jquery";
 import Chart from "highcharts-react-official";
 import { useContext, useEffect, useRef, useState } from "react";
 import borderRadius from "highcharts-border-radius";
-import Exporting from 'highcharts/modules/exporting';
+import Exporting from "highcharts/modules/exporting";
 // import { SocketContainerContext } from "../../utils/SocketContainer/SocketContainer";
 // import b_price from "../../api/price/b_price";
 import getData from "../../../data.json";
 import { SocketContainerContext } from "../../../utils/SocketContainer/SocketContainer";
 // import b_price from "../../../api/price/b_price";
-import "./ChartIndex.css"
+import "./ChartIndex.css";
 import "./index.scss";
 import { TradingContext } from "../../../pages/Index/Trading/Trading";
-import { useLayoutEffect } from "react";
+import { debounce } from "lodash";
 
 // Initialize exporting module. (CommonJS only)
 Exporting(Highcharts);
@@ -46,25 +46,24 @@ var progressBar = $(".e-c-progress");
 var lengthp = Math.PI * 2 * 100;
 progressBar.css("stroke-dasharray", lengthp);
 
-
 const ChartIndex = () => {
-  const {data }= useContext(TradingContext)
-  const listData= useRef()
-  const containerRef= useRef()
-  const prevWidthContainerRef= useRef()
+  const { data } = useContext(TradingContext);
+  const listData = useRef();
+  const containerRef = useRef();
+  const prevWidthContainerRef = useRef();
   const [ohlcStock, setOhlcStock] = useState([]);
-  const [sma5, setSma5]= useState([])
-  const [sma10, setSma10]= useState([])
+  const [sma5, setSma5] = useState([]);
+  const [sma10, setSma10] = useState([]);
   const [volumeStock, setVolumeStock] = useState([]);
-  const [classLandscape, setClassLandscape]= useState("")
-  const [deviceVersion, setDeviceVersion]= useState("pc")
-  useEffect(()=> {
+  const [classLandscape, setClassLandscape] = useState("");
+  const [deviceVersion, setDeviceVersion] = useState("pc");
+  useEffect(() => {
     if (isMobile) {
-      setDeviceVersion("mobile")
+      setDeviceVersion("mobile");
     } else if (isTablet) {
-      setDeviceVersion("tablet")
+      setDeviceVersion("tablet");
     }
-  }, [])
+  }, []);
 
   const stockChart = {
     chart: {
@@ -116,7 +115,6 @@ const ChartIndex = () => {
         maxPointWidth: "pc" !== deviceVersion ? 7 : 12,
         paddingPoint: "pc" !== deviceVersion ? 7.7 : 10.5,
         // pointRange: 0.1,
-
       },
       column: {
         minPointLength: 3,
@@ -295,7 +293,7 @@ const ChartIndex = () => {
         data: volumeStock,
         yAxis: 1,
       },
-      
+
       {
         name: "sma2",
         id: "sma2",
@@ -352,11 +350,11 @@ const ChartIndex = () => {
   };
   const { socketWeb } = useContext(SocketContainerContext);
   const chartStock = useRef();
-  const chartGet= useRef()
+  const chartGet = useRef();
   useEffect(() => {
     chartGet.current = chartStock.current?.chart;
   }, []);
-  
+
   const [chartDataLoaded, setChartDataLoaded] = useState(false);
 
   const [chartOptions, setChartOptions] = useState({
@@ -387,24 +385,24 @@ const ChartIndex = () => {
   //     this.chart.reflow()
   //   }
   // }
-  const redrawChart=()=> {
+  const redrawChart = () => {
     // if (chartGet && windowWidth > 768) {
-      // if (chartStock.current?.chart?.reflow() && window.innerWidth > 768) {
-      // var chartInstance = chartGet;
-      chartStock.current?.chart?.reflow();
-      chartStock.current?.chart?.redraw();
+    // if (chartStock.current?.chart?.reflow() && window.innerWidth > 768) {
+    // var chartInstance = chartGet;
+    chartStock.current?.chart?.reflow();
+    chartStock.current?.chart?.redraw();
     // }
-  }
-  const reflowChart= ()=> {
+  };
+  const reflowChart = () => {
     if (chartStock) {
       chartStock.current.chart.reflow();
     }
-  }
-  const updateWindowDimensions= ()=> {
+  };
+  const updateWindowDimensions = () => {
     // windowWidth = window.innerWidth;
     // windowHeight = window.innerHeight;
     redrawChart();
-  }
+  };
 
   // const replaceAll= (str, find, replace)=> {
   //   return Number(str.replace(new RegExp(find, "g"), replace));
@@ -416,8 +414,7 @@ const ChartIndex = () => {
 
   const updateBarChart = (data) => {
     try {
-      if(chartStock.current) {
-
+      if (chartStock.current) {
         const chartInstance = chartStock?.current.chart;
         var lastCandle =
           chartInstance.series[1].points[
@@ -456,15 +453,15 @@ const ChartIndex = () => {
     // console.log(12345)
     const chartInstance = chartStock.current?.chart;
     try {
-      if(chartInstance?.series?.[0]) {
+      if (chartInstance?.series?.[0]) {
         var lastCandle =
           chartInstance.series[0].points[
             chartInstance.series[0].points?.length - 1
           ];
         var color = getColor(data.openPrice, data.closePrice);
-  
+
         var counter = Number(data.order);
-  
+
         var o = {
           x: data.createDateTime,
           open: data.openPrice,
@@ -482,12 +479,13 @@ const ChartIndex = () => {
           // console.log(chartInstance.series);
           listData.current.push(data);
           let begin = 0;
-          console.log("begin", begin)
-  
+          // console.log("begin", begin)
+
           const { dataMax } = chartInstance.xAxis[0].getExtremes();
           if (deviceVersion !== "pc") {
-            begin = setSizeStock(listData.current);
+            // begin = setSizeStock(listData.current);
             // console.log("begin", begin);
+            begin= 84
             chartGet.current.xAxis[0].setExtremes(
               listData.current[begin + 40][0],
               dataMax,
@@ -496,13 +494,18 @@ const ChartIndex = () => {
             chartGet.current.redraw();
           } else {
             let c = listData.current?.length;
-            chartGet.current.xAxis[0].setExtremes(listData.current[c - 90][0], dataMax, false);
+            chartGet.current.xAxis[0].setExtremes(
+              listData.current[c - 90][0],
+              dataMax,
+              false
+            );
             chartGet.current.redraw();
           }
         }
         chartInstance.xAxis[0].options.plotLines[0].value = data.createDateTime;
         chartInstance.yAxis[0].options.plotLines[0].value = data.closePrice;
         let f = chartInstance.yAxis[0].plotLinesAndBands[0];
+
         f?.label &&
           f?.label.attr({
             text:
@@ -512,20 +515,16 @@ const ChartIndex = () => {
               (counter > 9 ? counter : "0" + counter) +
               "</span></div>",
           });
-  
+
         getData.countDown = counter > 9 ? counter : "0" + counter;
-        window.addEventListener("resize", function () {
-          // if(chartInstance?.reflow()) {
-          //   chartInstance?.reflow();
-          // }
-          chartStock.current?.chart?.reflow();
+        window.addEventListener("resize", debounce(function () {
+          getDataDefaultGet(listData.current)
           chartStock.current?.chart?.redraw();
-          // chartInstance.redraw();
-          // console.log("Change Size");
-        });
+          chartStock.current?.chart?.reflow();
+        }, 500));
       }
-    } catch(e) {
-      console.log(e)
+    } catch (e) {
+      console.log(e);
     }
   };
   const onReceiveSocketData = (data) => {
@@ -538,30 +537,91 @@ const ChartIndex = () => {
     var begin = 0;
 
     if (deviceVersion !== "pc") {
-      begin = setSizeStock(data);
+      begin = 84;
       // console.log("begin", begin);
       // console.log(begin)
     } else {
       let getWidth = parseInt($("body").width());
-      // console.log(getWidth);
-      if (getWidth > 1600 ) {
+
+      if (getWidth > 1600) {
         begin = 10;
-      }
-      if (getWidth >= 1260 && getWidth <= 1500) {
-        begin = 55;
-      }
-      if (getWidth >= 1500 && getWidth <= 1600) {
+      } else if (getWidth >= 1500 && getWidth <= 1600) {
+        begin = 31;
+      }  else if (getWidth >= 1480 && getWidth < 1500) {
+        begin = 37;
+      } else if (getWidth >= 1460 && getWidth < 1480) {
+        begin = 38;
+      } else if (getWidth >= 1440 && getWidth < 1460) {
+        begin = 39;
+      } else if (getWidth >= 1420 && getWidth < 1440) {
+        begin = 40;
+      } else if (getWidth >= 1400 && getWidth < 1420) {
+        begin = 41;
+      } else if (getWidth >= 1380 && getWidth < 1400) {
+        begin = 42;
+      } else if (getWidth >= 1360 && getWidth < 1380) {
+        begin = 43;
+      } else if (getWidth >= 1340 && getWidth < 1360) {
+        begin = 44;
+      } else if (getWidth >= 1320 && getWidth < 1340) {
         begin = 45;
-      }
-      if (getWidth >= 820 && getWidth <= 1260) {
+      } else if (getWidth >= 1300 && getWidth < 1320) {
+        begin = 46;
+      } else if (getWidth >= 1280 && getWidth < 1300) {
+        begin = 47;
+      } else if (getWidth >= 1260 && getWidth < 1280) {
+        begin = 48;
+      } else if (getWidth >= 1240 && getWidth < 1260) {
+        begin = 49;
+      } else if (getWidth >= 1220 && getWidth < 1240) {
         begin = 50;
-      }
+      } else if (getWidth >= 1200 && getWidth < 1220) {
+        begin = 51;
+      } else if (getWidth >= 1180 && getWidth < 1200) {
+        begin = 52;
+      } else if (getWidth >= 1160 && getWidth < 1180) {
+        begin = 53;
+      } else if (getWidth >= 1140 && getWidth < 1160) {
+        begin = 54;
+      } else if (getWidth >= 1120 && getWidth < 1140) {
+        begin = 55;
+      } else if (getWidth >= 1100 && getWidth < 1120) {
+        begin = 56;
+      } else if (getWidth >= 1080 && getWidth < 1100) {
+        begin = 57;
+      } else if (getWidth >= 1060 && getWidth < 1080) {
+        begin = 58;
+      } else if (getWidth >= 1040 && getWidth < 1060) {
+        begin = 59;
+      } else if (getWidth >= 1020 && getWidth < 1040) {
+        begin = 60;
+      } if (getWidth >= 1000 && getWidth < 1020) {
+        begin = 61;
+      } else if (getWidth >= 980 && getWidth < 1000) {
+        begin = 62;
+      } else if (getWidth >= 960 && getWidth < 980) {
+        begin = 63;
+      } else if (getWidth >= 940 && getWidth < 960) {
+        begin = 64;
+      } else if (getWidth >= 920 && getWidth < 940) {
+        begin = 65;
+      } else if (getWidth >= 900 && getWidth < 920) {
+        begin = 66;
+      } else if (getWidth >= 880 && getWidth < 900) {
+        begin = 67;
+      } else if (getWidth >= 860 && getWidth < 880) {
+        begin = 68;
+      } else if (getWidth >= 840 && getWidth < 860) {
+        begin = 69;
+      } else if (getWidth >= 820 && getWidth < 840) {
+        begin = 70;
+      } 
     }
 
     const ohlcStockTemp = [];
     const volumeStockTemp = [];
-    const sma5Temp= []
-    const sma10Temp= []
+    const sma5Temp = [];
+    const sma10Temp = [];
     // for(let i= parseInt(begin) - 20; i < data.length; i++ ) {
     //   console.log("i", i)
     //   let _o = {
@@ -575,7 +635,7 @@ const ChartIndex = () => {
     //   sma5Temp.push(_o);
     //   setSma5(sma5Temp);
     // }
-    // 
+    //
     // for(let i= parseInt(begin) - 10; i < data.length; i++ ) {
     //   let _o = {
     //     x: data[i][0], // the date
@@ -588,9 +648,8 @@ const ChartIndex = () => {
     //   sma10Temp.push(_o);
     //   setSma10(sma10Temp);
     // }
-    // 
+    //
     for (var i = begin; i < data.length; i++) {
-
       var _o = {
         x: data[i][0], // the date
         open: data[i][1], // open
@@ -606,18 +665,18 @@ const ChartIndex = () => {
         y: data[i][5], // the volume
         color: data[i][1] < data[i][4] ? UP_COLOR : DOWN_COLOR,
       });
-      setVolumeStock(volumeStockTemp)
+      setVolumeStock(volumeStockTemp);
     }
     // console.log(sma5Temp)
     stockChart.series[0].data = ohlcStockTemp;
     stockChart.series[1].data = volumeStockTemp;
     stockChart.series[2].data = sma5Temp;
     stockChart.series[3].data = sma10Temp;
-    chartStock.current.chart.series[0].setData(ohlcStockTemp)
-    chartStock.current.chart.series[1].setData(volumeStockTemp)
-    chartStock.current.chart.series[2].setData(sma5Temp)
-    chartStock.current.chart.series[3].setData(sma10Temp)
-    chartStock.current.chart.redraw()
+    chartStock.current.chart.series[0].setData(ohlcStockTemp);
+    chartStock.current.chart.series[1].setData(volumeStockTemp);
+    chartStock.current.chart.series[2].setData(sma5Temp);
+    chartStock.current.chart.series[3].setData(sma10Temp);
+    chartStock.current.chart.redraw();
 
     setChartOptions(stockChart);
     let ao = setInterval(() => {
@@ -625,35 +684,46 @@ const ChartIndex = () => {
         clearInterval(ao);
         const { dataMax } = chartGet?.current?.xAxis?.[0].getExtremes();
         if (deviceVersion !== "pc") {
-          chartGet.current.xAxis[0].setExtremes(data?.[begin + 40]?.[0], dataMax, false);
+          chartGet.current.xAxis[0].setExtremes(
+            data?.[begin + 40]?.[0],
+            dataMax,
+            false
+          );
           chartGet.current.redraw();
         } else {
           let c = data.length;
-          chartGet?.current?.xAxis?.[0].setExtremes(data?.[c - 90]?.[0], dataMax, false);
+          chartGet?.current?.xAxis?.[0].setExtremes(
+            data?.[c - 90]?.[0],
+            dataMax,
+            false
+          );
           chartGet.current.redraw();
+          chartGet.current.reflow();
         }
       }
+      chartGet.current.redraw();
+      chartGet.current.reflow();
     }, 100);
   };
 
-  const setSizeStock = (data) => {
-    var chartWidth = parseInt($(".chartBox").width());
-
-    let numBar = Math.floor((chartWidth - 90) / 17.44); //90 17.44 13.44
-    if (numBar < data.length) {
-      return data.length - numBar - 40;
-    }
+  const setSizeStock = () => {
+    let chartWidth = parseInt($(".chartBox").width());
+    // console.log("chartWidth", chartWidth);
+    let distance= 1600 - chartWidth
+    let numBar = Math.floor(distance / 5)
+    const begin= 31 + numBar
+    return begin
   };
   const setChartHeight = () => {
     if (window.innerWidth > 768) {
-      setDeviceVersion("pc")
+      setDeviceVersion("pc");
     } else {
-      setDeviceVersion("mobile")
+      setDeviceVersion("mobile");
     }
 
     // $(".w-18").css("max-width", $("#analysis-wrapper").width() / 4);
     let setS = setInterval(() => {
-      if(chartStock?.current) {
+      if (chartStock?.current) {
         let w = $(".chartBox").width();
         let h = $(".chartBox").height();
         if (!!w && !!h) {
@@ -692,54 +762,64 @@ const ChartIndex = () => {
       setChartDataLoaded(true);
     }, 1300);
     // chartGet = chartStock.current.chart;
-    window.addEventListener("resize", redrawChart);
     updateWindowDimensions();
-    window.addEventListener("resize", updateWindowDimensions);
-    if (window.screen && window.screen.orientation && window.screen.orientation.type) {
-      setClassLandscape(window.screen.orientation.type)
-    }
 
+    window.addEventListener("resize", redrawChart);
+    window.addEventListener("resize", updateWindowDimensions);
     window.addEventListener("resize", setChartHeight);
+    if (
+      window.screen &&
+      window.screen.orientation &&
+      window.screen.orientation.type
+    ) {
+      setClassLandscape(window.screen.orientation.type);
+    }
 
     window.addEventListener(
       "orientationchange",
       () => {
-        if (window.screen && window.screen.orientation && window.screen.orientation.type) {
+        if (
+          window.screen &&
+          window.screen.orientation &&
+          window.screen.orientation.type
+        ) {
           // this.classLandscape = window.screen.orientation.type;
-          setClassLandscape(window.screen.orientation.type)
+          setClassLandscape(window.screen.orientation.type);
         }
       },
       false
     );
   }, []);
+
   useEffect(() => {
     setChartHeight();
   }, []);
-  useEffect(()=> {
-    const intervalId= setInterval(()=> {
-      const currentWidthContainerRef= containerRef.current?.offsetWidth
-      if(prevWidthContainerRef.current !== currentWidthContainerRef) {
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      const currentWidthContainerRef = containerRef.current?.offsetWidth;
+      if (prevWidthContainerRef.current !== currentWidthContainerRef) {
         setChartHeight();
-        if(chartStock?.current) {
-          chartStock.current.chart?.reflow()
+        if (chartStock?.current) {
+          chartStock.current.chart?.reflow();
         }
       }
-      prevWidthContainerRef.current= currentWidthContainerRef
-    }, 1000)
+      prevWidthContainerRef.current = currentWidthContainerRef;
+    }, 1000);
 
-    return ()=> clearInterval(intervalId)
-  }, [])
-  useEffect(()=> {
-    window.addEventListener("resize", ()=> {
-      if(chartStock?.current) {
-        chartStock.current.chart?.reflow()
+    return () => clearInterval(intervalId);
+  }, []);
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      if (chartStock?.current) {
+        chartStock.current.chart?.reflow();
+        chartStock.current.chart?.redraw();
       }
-    })
-  }, [])
+    });
+  }, []);
   useEffect(() => {
     (async () => {
       try {
-        if(data) {
+        if (data) {
           listData.current = data.d;
           getDataDefaultGet(data.d);
         }
@@ -758,17 +838,21 @@ const ChartIndex = () => {
           // lastUpdatePrice = new Date();
           let data = e.data.replace("42[", "[");
           //   handleDataWs(data);
-            const newData = JSON.parse(data);
-            if (newData[0] === "BO_PRICE") {
-              onReceiveSocketData(newData[1]);
-            }
+          const newData = JSON.parse(data);
+          if (newData[0] === "BO_PRICE") {
+            onReceiveSocketData(newData[1]);
+          }
         }
-      }) ;
+      });
     }
   }, [socketWeb]);
 
   return (
-    <div ref={containerRef} id="tradePage" className={`trade-container ${isMobile ? classLandscape : ''}`}>
+    <div
+      ref={containerRef}
+      id="tradePage"
+      className={`trade-container ${isMobile ? classLandscape : ""}`}
+    >
       <div className="relative chartBox">
         <Chart
           className="wap-chart trans"
